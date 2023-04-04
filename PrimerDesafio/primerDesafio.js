@@ -1,4 +1,4 @@
-let productos = []
+/* let productos = []
 class ProductManager{
     constructor() {
         this.products = productos
@@ -46,3 +46,4 @@ console.log(product.addProduct({
 
 console.log(product.getProducts())
 console.log(product.getProductById(1))
+ */

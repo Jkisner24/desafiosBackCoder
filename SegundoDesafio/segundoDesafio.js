@@ -1,4 +1,4 @@
-const fs = require('fs');
+/* const fs = require('fs');
 
 let productos = []
 class ProductManager{
@@ -76,7 +76,7 @@ class ProductManager{
             console.log(error);
         }
     }
-    deleteProduct = async (id) => {
+     deleteProduct = async (id) => {
         try {
             const fetchJson = await fs.promises.readFile(this.path, "utf-8")
             const jsonToObject = JSON.parse(fetchJson)
@@ -91,7 +91,7 @@ class ProductManager{
         } catch (error) {
             console.log(error)
         }
-    }
+    } 
 
 
 }
@@ -140,4 +140,4 @@ console.log(await product.addProduct({
 console.log(await product.getProducts()) 
 console.log(await product.getProductById(1))
 console.log(await product.updateProduct(1, testProduct))
-console.log(await product.deleteProduct(1))
+console.log(await product.deleteProduct(1)) */

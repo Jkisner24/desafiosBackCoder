@@ -1,5 +1,14 @@
 [
    {
+      "id": 1,
+      "title": "Product 1",
+      "description": "This is a description",
+      "price": 123,
+      "thumbnail": "This is a link",
+      "code": 1,
+      "stock": 9
+   },
+   {
       "id": 2,
       "title": "Product 2",
       "description": "This is a description",
