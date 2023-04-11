@@ -1,29 +1,46 @@
 [
    {
-      "id": 1,
-      "title": "Product 1",
+      "id": 4,
+      "title": "Product test",
       "description": "This is a description",
-      "price": 123,
+      "price": 656,
       "thumbnail": "This is a link",
-      "code": 1,
-      "stock": 9
+      "code": 1003,
+      "stock": 5,
+      "status": true,
+      "category": "asdasd"
    },
    {
-      "id": 2,
-      "title": "Product 2",
+      "id": 5,
+      "title": "Product test",
       "description": "This is a description",
-      "price": 321,
+      "price": 656,
       "thumbnail": "This is a link",
-      "code": 2,
-      "stock": 10
+      "code": 1004,
+      "stock": 5,
+      "status": true,
+      "category": "asdasd"
    },
    {
-      "id": 3,
-      "title": "Product 3",
+      "id": 6,
+      "title": "Product test",
       "description": "This is a description",
-      "price": 589,
+      "price": 656,
       "thumbnail": "This is a link",
-      "code": 5,
-      "stock": 10
+      "code": 1005,
+      "stock": 5,
+      "status": true,
+      "category": "asdasd"
+   },
+   {
+      "id": 7,
+      "title": "Product test",
+      "description": "This is a description",
+      "price": 656,
+      "thumbnail": "This is a link",
+      "code": 1006,
+      "stock": 5,
+      "status": true,
+      "category": "asdasd"
    }
 ]

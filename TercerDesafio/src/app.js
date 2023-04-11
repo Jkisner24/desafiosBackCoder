@@ -1,19 +1,20 @@
 const express = require ("express")
-const ProductManager = require("./ProductManager")
+const welcomeRouter = require("./routes/welcomeRouter")
+const productsRouter = require("./routes/productsRouter")
+const cartsRouter = require("./routes/cartsRouter")
 
-const port = 8080
-const app = express()
-const product = new ProductManager("./products.json")
 
+const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-app.get('/', (req, res) => {
-    res.status(200).send('<h1>Ruta raiz</h1>')
-})
+app.use('/', welcomeRouter)
+app.use('/api/productos', productsRouter)
+app.use('/api/carts', cartsRouter)
+/* app.use('/api/carts', )
 
-app.get("/api/productos", async (req, res)=>{
+/* app.get("/api/productos", async (req, res)=>{
     try {
         const { limit } = req.query
         const products = await product.getProducts()        
@@ -30,9 +31,9 @@ app.get("/api/productos", async (req, res)=>{
     }catch (error){
         console.log(error)
     }
-})
+}) */
 
-app.get("/api/productos/:pid", async (req, res)=>{
+/* app.get("/api/productos/:pid", async (req, res)=>{
     try {
         const {pid}= req.params
 
@@ -46,9 +47,7 @@ app.get("/api/productos/:pid", async (req, res)=>{
         console.log(error)
     }
 })
+ */
+module.exports = app 
 
 
-
-app.listen(port, ()=>{
-    console.log(`Listen on port ... ${port}`)
-})

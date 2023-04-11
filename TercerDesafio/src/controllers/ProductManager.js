@@ -7,19 +7,19 @@ class ProductManager{
         this.products = productos
         this.path = path
     }
-    appendProduct = async (path) =>{
+    appendProduct = async () =>{
        const toJson = JSON.stringify(this.products, null, 3);
        await fs.promises.writeFile(this.path, toJson)
     }
 
     async addProduct(newProduct){
         //validations
-        if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.thumbnail || !newProduct.code || !newProduct.stock) 
-            return `All fields are required`
+        if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.code || !newProduct.stock|| !newProduct.status|| !newProduct.category ) 
+            throw new Error (`All fields are required`)
 
         let product = this.products.find(prod => prod.code === newProduct.code)
         if(product) 
-            return `The product with code ${product.code} has already been entered`
+            throw new Error (`The product with code ${product.code} has already been entered`)
 
         if(this.products.length === 0){
             this.products.push({id: 1, ...newProduct})
@@ -28,7 +28,7 @@ class ProductManager{
 
         }
         if(this.products.length !== 0){
-            this.products.push({ id: this.products[this.products.length - 1].id + 1, ...newProduct })
+            this.products.push({ id: this.products[this.products.length - 1].id + 1, ...newProduct})
             this.appendProduct()
             return "Prod oka"
         }
@@ -50,7 +50,6 @@ class ProductManager{
             const getFileProducts = await fs.promises.readFile(this.path, 'utf-8');
             const readToObject = JSON.parse(getFileProducts)
             const product = readToObject.find(prod => prod.id === id)
-            if(!product) return `Object not found`
             return product
         }catch(error){
             console.log(error);
@@ -96,51 +95,5 @@ class ProductManager{
 
 
 }
-// test update
-/* let testProduct = {
-    id: 9,
-    title: "Product test",
-    description: "This is a description",
-    price: 656,
-    thumbnail: "This is a link",
-    code: 99,
-    stock: 5
-}
- */
-const product = new ProductManager("./products.json")
-
-
-/* console.log(product.addProduct({
-    title: "Product 1",
-    description: "This is a description",
-    price: 123,
-    thumbnail: "This is a link",
-    code: 01,
-    stock: 9
-}))
-console.log(product.addProduct({
-    title: "Product 2",
-    description: "This is a description",
-    price: 321,
-    thumbnail: "This is a link",
-    code: 02,
-    stock: 10
-}))
-
-console.log(product.addProduct({
-    title: "Product 3",
-    description: "This is a description",
-    price: 589,
-    thumbnail: "This is a link",
-    code: 05,
-    stock: 10
-})) */
-
-
-//Test 
-/* console.log(product.getProducts()) 
-console.log(product.getProductById(1))
-console.log(product.updateProduct(1, testProduct))
- */
 
 module.exports = ProductManager;
