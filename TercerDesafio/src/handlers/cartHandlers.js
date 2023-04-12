@@ -1,66 +1,66 @@
-const {Router} = require ('express')
 const CartManager = require("../controllers/cartManager")
-const ProductManager = require("../controllers/ProductManager")
 
-const router = Router();
-const product = new ProductManager("../products.json")
 const carts = new CartManager("../cart.json")
 
-const getCarts = async (req, res) =>{
+
+const getCartsById = async (req, res) => {
+    const { cid } = req.params
     try {
-        const products = await carts.getCarts()
-        return res.status(200).send({
-            products
-        }) 
-    } catch (error) {
-        console.log(error)
+        const valueReturned = await carts.getCartsById(cid)
+        if (valueReturned.error) return res.status(200).send({ status: 'Sin carritos', valueReturned })
+
+        res.status(200).send({ status: 'Carrito', valueReturned })
     }
+    catch (err) {
+        res.status(400).send({ status: 'error router', err })
+    }
+
 }
 
-
-const getCartsById = async (req, res) =>{
-    
-    const {cid} = req.params
+const createCart = async (req, res) => {
     try {
-        const products = await carts.getCartsById(parseInt(cid))
-        if(!products){
-            throw new Error('object not found')
+        const cart = req.body
+
+        const campoVacio = Object.values(cart).find(value => value === '')
+        if (campoVacio) {
+            return res.status(400).send({ status: "error", message: "Falta completar algún campo" })
         }
-        res.status(200).send({products})
-    } catch (error) {
-        res.status(404).send({error: error.message})
+
+        if (cart.status === 'error') return res.status(400).send({ valueReturned })
+        await carts.addCart(cart)
+        res.status(200).send({ cart })
     }
+    catch (err) {
+        console.log(err);
+    }
+
 }
 
+const addProductById = async (req, res) => {
+    try {   
+        let { producto } = req.body
+        const { cid, pid } = req.params
 
-const createCart = async (req, res) =>{
+        producto['idProduct'] = Number(pid)
+
+        const carrito = await carts.getCartById(cid)
+        if (carrito.error) return res.status(400).send({ carrito })
+
+        let productoEncontrado = carrito.productos.findIndex(productos => productos.idProduct == pid)
+        if (productoEncontrado !== -1) {
+            carrito.productos[productoEncontrado].cantidad = Number(carrito.productos[productoEncontrado].cantidad) + Number(producto.cantidad)
+            await carts.updateCart(cid, carrito)
+            return res.status(200).send({ statusbar: 'success', message: 'producto agregado'});
+        }
+        carrito.productos.push(producto)
+        await carts.updateCart(cid, carrito)
+        res.status(200).send({status: 'success', message: 'producto agregado', carrito: carrito.productos})
     
-    const newCart= req.body
-    try {
-        const cartCreated = await carts.addCart(newCart)
-        console.log(cartCreated)
-        res.status(201).send({cartCreated})
-
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        return res.status(400).send({ status: "error", message: 'error de parametros' })
     }
+
 }
 
-const addProductById = async (req, res) =>{
-
-        const {cid, pid} = req.params
-        const product = await product.getProductById(parseInt(pid));
-        if (product) {
-          const cart = await carts.addToCart(parseInt(cid), parseInt(pid))
-          !cart ? res.status(404).send({ error: "Product not found" }) : res.status(200).send(cart)
-
-
-        } else {
-            res.status(404).send({ error: "Product not found" })
-          }
-        
-}
-
-
-
-module.exports = { getCartsById, createCart, addProductById, getCarts}
+ 
+module.exports = { getCartsById, createCart , addProductById }
