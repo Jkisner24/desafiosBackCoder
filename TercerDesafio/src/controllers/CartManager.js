@@ -9,12 +9,14 @@ class CartManager{
 
     readCartFile = async () =>{
         
-        try{
-            const data = await fs.promises.readFile(this.path, 'utf-8')
-            return JSON.parse(data)
-        }catch (error){
-            return []
-        }
+        const data = await fs.promises.readFile(this.path, 'utf-8')
+        return JSON.parse(data)
+    }
+
+    writeFile = async () =>{
+        const toJson = JSON.stringify(this.carts, null, 3);
+        await fs.promises.writeFile(this.path, toJson)
+
     }
 
     getCarts = async() => {
@@ -29,7 +31,6 @@ class CartManager{
     getCartsById = async (id) => {
         try {
             this.carts = await this.readCartFile()
-            console.table(this.carts)
             return this.carts.find(car => car.id === id)
         }catch (error){
             return new Error(error) 
@@ -38,7 +39,6 @@ class CartManager{
 
 
     addCart = async (newCart)=> {
-
         try {
             this.carts = await this.getCarts();
 
@@ -51,17 +51,13 @@ class CartManager{
             newCart.products = []
             this.carts.push(newCart)
           
-            const toJson = JSON.stringify(this.carts, null, 3);
-            await fs.promises.writeFile(this.path, toJson)
-          
+            this.writeFile()
             return 'cart created'
         }catch (error){
             return new Error(error)
         }
 	}
 	
-
-
     updateCart = async (id, updCart) => {
         try {
             const parseCarts = await this.readCartFile()

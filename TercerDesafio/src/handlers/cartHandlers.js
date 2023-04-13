@@ -15,7 +15,6 @@ const getCarts = async (req, res)=>{
     }
 }
 
-
 const getCartsById = async (req, res) => {
     const { cid } = req.params
     try {
@@ -28,7 +27,6 @@ const getCartsById = async (req, res) => {
     }catch(error){
         res.status(404).send({error: error.message})
     }
-
 }
 
 const createCart = async (req, res) => {
@@ -42,6 +40,7 @@ const createCart = async (req, res) => {
 const addProductById = async (req, res) => {
     const id = parseInt(req.params.cid)
     const prod = parseInt(req.params.pid)
+    
     const cart = await carrito.getCartsById(id)
     const arrayProductos =  await producto.getProducts()
 
@@ -49,7 +48,7 @@ const addProductById = async (req, res) => {
     if (productoEncontrado !== -1) {
         cart.products[productoEncontrado].quantity += 1 
         await carrito.updateCart(id, cart)
-        return res.status(200).send({ statusbar: 'success', message: 'producto added'});
+        return res.status(200).send({ statusbar: 'success', message: 'product added'});
     }else{
         let prodExiste = arrayProductos.find(pd => pd.id === prod)
         if (!prodExiste) return res.send({error: 'Product not found'})
@@ -58,7 +57,7 @@ const addProductById = async (req, res) => {
         producto.quantity = 1
         cart.products.push(producto)
         await carrito.updateCart(id, cart)
-        res.status(200).send({status: 'success', message: 'producto added', carrito: carrito.productos})
+        res.status(200).send({status: 'success', message: 'product added', carrito: carrito.productos})
     }
 }
 
