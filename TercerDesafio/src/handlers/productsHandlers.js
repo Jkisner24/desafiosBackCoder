@@ -2,7 +2,6 @@ const ProductManager = require("../controllers/ProductManager")
 
 const product = new ProductManager("../products.json")
 
-
 const getProducts = async (req, res) =>{
 
     try {
@@ -15,7 +14,6 @@ const getProducts = async (req, res) =>{
         }
         return res.status(200).send({
             products: products.slice(0, limit)
-
         })
     } catch (error) {
         console.log(error)
@@ -31,7 +29,6 @@ const getProductById = async (req, res) =>{
         if (!productDb) {
         throw new Error('object not found')
         }
-
         res.status(200).send({productDb})
     } catch (error) {
         res.status(404).send({error: error.message})
@@ -74,9 +71,7 @@ const deleteProduct= async (req, res) =>{
         
     } catch (error) {
         return res.status(404).send({error: error.message})        
-
     }
-
 }
 
 module.exports = {getProducts, getProductById, createProduct, updateProduct, deleteProduct }

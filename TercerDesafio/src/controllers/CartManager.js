@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-    
 class CartManager{
     constructor(path){
         this.carts = []
@@ -8,15 +7,21 @@ class CartManager{
     }
 
     readCartFile = async () =>{
-        
-        const data = await fs.promises.readFile(this.path, 'utf-8')
-        return JSON.parse(data)
+        try {
+            const data = await fs.promises.readFile(this.path, 'utf-8')
+            return JSON.parse(data)    
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     writeFile = async () =>{
-        const toJson = JSON.stringify(this.carts, null, 3);
-        await fs.promises.writeFile(this.path, toJson)
-
+        try {
+            const toJson = JSON.stringify(this.carts, null, 3);
+            await fs.promises.writeFile(this.path, toJson)   
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     getCarts = async() => {
