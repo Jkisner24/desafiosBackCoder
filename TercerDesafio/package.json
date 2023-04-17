@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Jkisner24/desafiosBackCoder#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "express-handlebars": "^7.0.6",
     "nodemon": "^2.0.22"
   }
 }
