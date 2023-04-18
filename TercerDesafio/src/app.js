@@ -3,9 +3,19 @@ const welcomeRouter = require("./routes/welcomeRouter")
 const productsRouter = require("./routes/productsRouter")
 const cartsRouter = require("./routes/cartsRouter")
 const viewRouter = require("./routes/viewRouter")
-
-
 const app = express();
+const { socketProduct } = require("./utlis/socketProducts")
+
+
+
+app.get('/chat', (req, res)=>{
+ res.render('chat', {})
+}) 
+
+app.get('/realtimeprod', (req, res)=>{
+    res.render('realtimeprod', {})
+})
+
 
 const handlebars = require('express-handlebars')
 app.engine('handlebars', handlebars.engine())
@@ -15,6 +25,8 @@ app.set('view engine', 'handlebars')
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use('/static', express.static(__dirname+'/public'))
+
 
 app.use('/', viewRouter)
 app.use('/', welcomeRouter)

@@ -44,7 +44,8 @@ let users = [
     let testUser = {
         user,
         isAdmin: user.role === 'admin',
-        food
+        food,
+        style: 'index.css'
     }
     res.render('index', testUser)
 }
