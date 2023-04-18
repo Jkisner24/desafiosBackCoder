@@ -1,6 +1,34 @@
-const getViews = async (req, res) =>{
+const ProductManager = require("../controllers/ProductManager")
 
-let food = [
+const producto = new ProductManager("../products.json")
+
+const viewProductStatic = async(req, res) =>{
+    
+    const prodList =  await producto.getProducts()
+
+    let datosProd = {
+        listaProductos: prodList,
+        style: 'index.css'
+    }
+    res.render('home', datosProd)
+}
+
+const viewProductLive =  async(req, res) =>{
+    
+    const prodList =  await producto.getProducts()
+
+    let datosProd = {
+        listaProductosLive: prodList
+    }
+    res.render('realtimeprod', datosProd)
+}
+
+
+module.exports = {viewProductStatic, viewProductLive}
+
+/* const getViews = async (req, res) =>{
+ */
+/* let food = [
     {   name: 'hambuguesa',
         price: 150
     },
@@ -48,6 +76,4 @@ let users = [
         style: 'index.css'
     }
     res.render('index', testUser)
-}
-
-module.exports = {getViews}
+} */

@@ -1,8 +1,10 @@
 const {Router} = require('express')
-const {getViews} = require('../handlers/viewHandlers')
+const {viewProductStatic, viewProductLive} = require('../handlers/viewHandlers')
 
 const viewRouter = Router()
 
-viewRouter.get('/vista', getViews)
+viewRouter.get('/home', viewProductStatic)
+viewRouter.get('/realtimeprod', viewProductLive)
+
 
 module.exports = viewRouter
