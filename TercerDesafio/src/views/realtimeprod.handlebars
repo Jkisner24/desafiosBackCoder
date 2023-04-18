@@ -3,32 +3,12 @@
         Realtime Products
     </h2>
     <hr>
-    <div>
-        <div id="listPruducts">
+        <ul id="listProducts">
 
-        </div>
-    </div>
+        </ul>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
-
-
-<script>
-    console.log('socket')
-    const socket = io() 
-
-    socket.on('productos', data => {
-        console.log(data)
-
-        let div = document.getElementById('listPruducts')
-        let productos= '';
-        data.forEach((product) => {
-            productos += `<div>${product.title}</div>`
-        })
-
-        div.innerHTML = productos
-    })
-
-</script>
+<script src="/static/js/realtimeprod.js"></script>
 
 

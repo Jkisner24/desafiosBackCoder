@@ -4,7 +4,6 @@ const productsRouter = require("./routes/productsRouter")
 const cartsRouter = require("./routes/cartsRouter")
 const viewRouter = require("./routes/viewRouter")
 const app = express();
-const { socketProduct } = require("./utlis/socketProducts")
 
 
 
