@@ -22,13 +22,11 @@ class ProductManager{
             throw new Error (`The product with code ${product.code} has already been entered`)
 
         if(this.products.length === 0){
-            this.products.push({id: 1, ...newProduct})
-            this.appendProduct()
+            newProduct.id = 1
+            this.products.push(newProduct)
             return "Prod ok"
-
-        }
-        if(this.products.length !== 0){
-            this.products.push({ id: this.products[this.products.length - 1].id + 1, ...newProduct})
+        }else{
+            this.products = [...this.products, {...newProduct, id: this.products[this.products.length - 1].id + 1 }]
             this.appendProduct()
             return "Prod oka"
         }

@@ -7,7 +7,7 @@ const viewProductStatic = async(req, res) =>{
     const prodList =  await producto.getProducts()
 
     let datosProd = {
-        listaProductos: prodList,
+        listProducts: prodList,
         style: 'index.css'
     }
     res.render('home', datosProd)
@@ -18,7 +18,7 @@ const viewProductLive =  async(req, res) =>{
     const prodList =  await producto.getProducts()
 
     let datosProd = {
-        listaProductosLive: prodList
+        listProdLive: prodList
     }
     res.render('realtimeprod', datosProd)
 }
