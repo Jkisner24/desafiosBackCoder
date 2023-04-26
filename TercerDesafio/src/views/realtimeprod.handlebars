@@ -2,7 +2,18 @@
     <h2 class="text-center">
         Realtime Products
     </h2>
-    <hr>
+    <form id="formProduct" class="form-group">
+        <input type="text" name="title" id="title" placeholder="title">
+        <input type="text" name="description" id="description" placeholder="description">
+        <input type="number" name="price" id="price" placeholder="price">
+        <input type="text" name="thumbnail" id="thumbnail" placeholder="thumbnail">
+        <input type="number" name="code" id="code" placeholder="code">
+        <input type="number" name="stock" id="stock" placeholder="stock">
+        <input type="text" name="status" id="status" placeholder="status">
+        <input type="text" name="category" id="category" placeholder="category">
+        <input type="submit" value="enviar">
+
+    </form>
         <ul id="listProducts" class="text-primary">
 
         </ul>
@@ -10,6 +21,4 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/realtimeprod.js"></script>
-
-
 

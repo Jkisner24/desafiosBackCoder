@@ -14,22 +14,30 @@ class ProductManager{
 
     async addProduct(newProduct){
         //validations
+        try{
         if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.code || !newProduct.stock|| !newProduct.status|| !newProduct.category ) 
             throw new Error (`All fields are required`)
 
         let product = this.products.find(prod => prod.code === newProduct.code)
         if(product) 
-            throw new Error (`The product with code ${product.code} has already been entered`)
+            throw new Error (`The product with code ${newProduct.code} has already been entered`)
 
         if(this.products.length === 0){
             newProduct.id = 1
             this.products.push(newProduct)
+            this.appendProduct()
             return "Prod ok"
         }else{
-            this.products = [...this.products, {...newProduct, id: this.products[this.products.length - 1].id + 1 }]
+            this.products = [...this.products, {id: this.products[this.products.length - 1].id + 1, ...newProduct}]
             this.appendProduct()
             return "Prod oka"
+
+        }   
+ 
+        }catch(error){
+            console.log(error)
         }
+
     }
     
     getProducts = async () => { 
