@@ -8,31 +8,39 @@ class ProductManager{
         this.path = path
     }
     appendProduct = async () =>{
-       const toJson = JSON.stringify(this.products, null, 3);
+       const toJson = JSON.stringify(this.products, 'utf-8', '\t');
        await fs.promises.writeFile(this.path, toJson)
+    }
+
+    readFile = async () =>{
+        try{
+            const data = await fs.promises.readFile(this.path, 'utf-8')
+            return JSON.parse(data)
+        }catch (error){
+            return []
+        }
     }
 
     async addProduct(newProduct){
         //validations
         try{
+            this.products = await this.getProducts()
         if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.code || !newProduct.stock|| !newProduct.status|| !newProduct.category ) 
             throw new Error (`All fields are required`)
 
-        let product = this.products.find(prod => prod.code === newProduct.code)
-        if(product) 
+        let codeProd = this.products.find(prod => prod.code === newProduct.code)
+        if(codeProd) 
             throw new Error (`The product with code ${newProduct.code} has already been entered`)
 
         if(this.products.length === 0){
             newProduct.id = 1
             this.products.push(newProduct)
-            this.appendProduct()
-            return "Prod ok"
         }else{
             this.products = [...this.products, {id: this.products[this.products.length - 1].id + 1, ...newProduct}]
+        }  
             this.appendProduct()
             return "Prod oka"
 
-        }   
  
         }catch(error){
             console.log(error)
@@ -42,9 +50,7 @@ class ProductManager{
     
     getProducts = async () => { 
         try{
-            const data = await fs.promises.readFile(this.path, 'utf-8')
-            const parseData = JSON.parse(data)
-            return parseData
+            return await this.readFile()
         }
         catch(error){
             console.log(error)
@@ -53,8 +59,7 @@ class ProductManager{
     } 
     getProductById = async (id) => {
         try{
-            const getFileProducts = await fs.promises.readFile(this.path, 'utf-8');
-            const readToObject = JSON.parse(getFileProducts)
+            this.products = await this.readFile()
             const product = readToObject.find(prod => prod.id === id)
             return product
         }catch(error){
@@ -98,7 +103,6 @@ class ProductManager{
             console.log(error)
         }
     } 
-
 
 }
 

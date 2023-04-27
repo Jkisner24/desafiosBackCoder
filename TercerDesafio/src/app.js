@@ -6,10 +6,10 @@ const viewRouter = require("./routes/viewRouter")
 const app = express();
 
 
-app.get('/chat', (req, res)=>{
+/* app.get('/chat', (req, res)=>{
  res.render('chat', {})
 }) 
-
+ */
 
 const handlebars = require('express-handlebars')
 app.engine('handlebars', handlebars.engine())

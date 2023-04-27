@@ -1,6 +1,5 @@
 const socket = io() 
 
-
 let form = document.querySelector('#formProduct')
 
 form.addEventListener("submit", evt =>{
@@ -26,16 +25,16 @@ form.addEventListener("submit", evt =>{
         })
     }
     form.reset()
-
+  
 })
 
-socket.on('productos', datosProd => {
-
-    let productos=''
+socket.on('productos', data => {
+    
     let div = document.getElementById('listProducts')
+    let prod=''
 
-    datosProd.forEach(product => {
-        productos += `<li> title: ${product.title}</li>
+    data.forEach(product => {
+        prod += `<li> title: ${product.title}</li>
                       <li> description: ${product.description}</li>
                       <li> price: ${product.price}</li>
                       <li> thumbnail: ${product.thumbnail}</li>
@@ -45,5 +44,5 @@ socket.on('productos', datosProd => {
                       <li> category: ${product.category}</li>`
                     });
 
-    div.innerHTML = productos
+    div.innerHTML = prod
 })

@@ -5,7 +5,7 @@ const producto = new ProductManager("../products.json")
 const viewProductStatic = async(req, res) =>{
     try{
         const prodList =  await producto.getProducts()
-
+        
         let datosProd = {
             listProducts: prodList,
             style: 'index.css'
@@ -19,7 +19,7 @@ const viewProductStatic = async(req, res) =>{
 const viewProductLive =  async(req, res) =>{
     try{
         const prodList =  await producto.getProducts()
-
+        
         let datosProd = {
             listProdLive: prodList
         }
@@ -27,8 +27,8 @@ const viewProductLive =  async(req, res) =>{
     }catch(error){
         console.log(error)
     }
-
-}
+    
+}    
 
 module.exports = {viewProductStatic, viewProductLive}
 
