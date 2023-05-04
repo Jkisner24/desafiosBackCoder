@@ -20,5 +20,27 @@
 		"stock": {},
 		"status": "true",
 		"category": "sdfjk"
+	},
+	{
+		"id": 3,
+		"title": "Producto 3",
+		"description": "asd",
+		"price": "1233",
+		"thumbnail": "asd",
+		"code": "3",
+		"stock": {},
+		"status": "true",
+		"category": "asd"
+	},
+	{
+		"id": 4,
+		"title": "producto 4",
+		"description": "prueba",
+		"price": 9,
+		"thumbnail": "prueba",
+		"code": 55,
+		"stock": 10,
+		"status": true,
+		"category": "asd"
 	}
 ]

@@ -1,4 +1,4 @@
-const ProductManager = require("../controllers/ProductManager")
+const ProductManager = require("../dao/ProductManager")
 
 const product = new ProductManager("../products.json")
 

@@ -1,5 +1,5 @@
-const CartManager = require("../controllers/CartManager")
-const ProductManager = require("../controllers/ProductManager")
+const CartManager = require("../dao/CartManager")
+const ProductManager = require("../dao/ProductManager")
 
 
 const carrito = new CartManager("../carrito.json")
