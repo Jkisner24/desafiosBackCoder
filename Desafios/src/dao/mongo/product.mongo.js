@@ -1,7 +1,7 @@
 const { productModel } = require ('./model/product.model')
 
-class ProductManagerMongo
-{
+class ProductManagerMongo{
+    
     async getProducts(){
         try {
             return await productModel.find({})
