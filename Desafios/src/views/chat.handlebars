@@ -1,16 +1,21 @@
 <div>
-    <header>
-        <h1>Chat with Socket.io</h1>
+    <header class="m-2">
+        <h2 class="ml-2 text-center bg-light text-dark">Chat with Socket.io</h1>
     </header>
-    <hr>
-    <div>
-        <input type="text" name="chatbox" id="chatbox">
+    <div class="form-group col-md-5 mb-3 text-center font-weight-bold">
+        <label class="text-secondary text-center" for="chatbox">
+            <h2>Write a message</h2>
+        </label>
+        <textarea class="form-control bg-light text-dark" id="chatbox" rows="3"></textarea>
     </div>
-    <div>
-        <ul id="messageLogs"></ul>
+    <div class="card col-md-5 mb-3 bg-light text-dark">
+        <h2 class="text-info ml-2 text-left">Messages</h2>
+        <ul class="card-text" id="messageLogs">
+        </ul>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/chat.js"></script>
+

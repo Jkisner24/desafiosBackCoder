@@ -6,13 +6,13 @@ const log = document.getElementById('messages');
 let user;
 let chatbox = document.getElementById("chatbox");
 
-//sweat alert para new user
+//Sweat alert for user
 swal.fire({
     title: "Identificate",
     input: "text",
-    text: "Ingresar nombre",
+    text: "Enter Name",
     inputValidator: (value) => {
-        return !value && "El nombre es obligatorio";
+        return !value && "The name is required";
     },
     allowOutsideClick: false
 }).then (result => {
@@ -32,11 +32,12 @@ chatbox.addEventListener('keyup', evt => {
     }
 });
 
+//listen in client
 socket.on("messageLogs", data => {
     let log = document.getElementById("messageLogs");
     let messages = "";
     data.forEach(({user, message}) => {
-        messages += `<li>${user} dice: ${message}</li>`
+        messages += `<li>${user} says: ${message}</li>`
     });
     log.innerHTML = messages;
 });
@@ -52,7 +53,7 @@ socket.on("newUserConnected", user => {
         position: "top-right",
         showConfirmButton: false,
         timer: 4000,
-        title: `${user} se ha unido al chat`,
+        title: `${user} is connect`,
         icon: "success"
     });
 });

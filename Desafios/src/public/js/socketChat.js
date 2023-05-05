@@ -5,7 +5,6 @@ let messages = []
 const socketChat = (io) =>{
     io.on('connection', socket=>{
         console.log("new client")
-        console.log(socket.id)
     
         socket.on("message", async (data)=>{
         messages.push(data)
