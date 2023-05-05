@@ -11,10 +11,6 @@ const app = express();
 
 connectDb()
 
-/* app.get('/chat', (req, res)=>{
- res.render('chat', {})
-}) 
- */
 
 const handlebars = require('express-handlebars')
 app.engine('handlebars', handlebars.engine())
@@ -34,6 +30,11 @@ app.use('/api/carts', cartsRouter)
 
 //new routes
 app.use(routerServer)
+
+app.get('/chat', (req, res)=>{
+ res.render('chat', {})
+}) 
+
 
 
 

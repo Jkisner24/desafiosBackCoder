@@ -1,6 +1,7 @@
 const app = require("./src/app")
 const { Server } = require("socket.io")
 const { socketProducts } = require("./src/public/js/socketProducts")
+const {socketChat} = require("./src/public/js/socketChat")
 
 const port = 8080
 
@@ -11,6 +12,7 @@ const httpServer = app.listen(port, ()=>{
 const io = new Server(httpServer)
 
 socketProducts(io)
+socketChat(io)
 
 
 /* 
