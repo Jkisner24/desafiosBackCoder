@@ -21,6 +21,25 @@ class ProductManager{
         }
     }
 
+    getProducts = async () => { 
+        try{
+            return await this.readFile()
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    } 
+    getProductById = async (id) => {
+        try{
+            this.products = await this.readFile()
+            const product = readToObject.find(prod => prod.id === id)
+            return product
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     async addProduct(newProduct){
         //validations
         try{
@@ -46,24 +65,6 @@ class ProductManager{
         }
     }
     
-    getProducts = async () => { 
-        try{
-            return await this.readFile()
-        }
-        catch(error){
-            console.log(error)
-        }
-
-    } 
-    getProductById = async (id) => {
-        try{
-            this.products = await this.readFile()
-            const product = readToObject.find(prod => prod.id === id)
-            return product
-        }catch(error){
-            console.log(error);
-        }
-    }
 
     updateProduct = async (id, newObject) => {
         try{

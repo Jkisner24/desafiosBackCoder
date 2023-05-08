@@ -1,21 +1,25 @@
-const ProductManager = require("../../dao/ProductManager")
-
-const productManager = new ProductManager("../products.json")
+const productManagerMongo =  require("../../dao/mongo/product.mongo")
 
 const socketProducts = async (io) =>{
-
-     const products = await productManager.getProducts()
-     io.on('connection', socket =>{
+   
+     io.on('connection', async socket =>{
+        try{
         console.log('cliente conectado')
         
-        socket.emit('productos', products)
+        let products = await productManagerMongo.getProducts()
 
-        socket.on('addProduct', data =>{
+        socket.emit('productosDB', products)
+
+        socket.on('addProduct', async (data) =>{
             console.log(data)
-            productManager.addProduct(data)
+            await productManagerMongo.createProduct(data)
+            products = await productManagerMongo.getProducts()
+            socket.emit('productosDB', products)
         })
-    })
-
+    } catch(error){
+        console.log(error)
+    }
+    });
 }
 
 module.exports = {

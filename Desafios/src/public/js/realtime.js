@@ -4,37 +4,30 @@ let form = document.querySelector('#formProduct')
 
 form.addEventListener("submit", evt =>{
     evt.preventDefault()
-    let title = form.elements.title.value
-    let description = form.elements.description.value
-    let price = form.elements.price.value
-    let thumbnail = form.elements.thumbnail.value
-    let code = form.elements.code.value
-    let status = form.elements.status.value
-    let category = form.elements.category.value
+    const [title, description, price, thumbnail, code, stock, status, category] = form
 
-    if(title !== ''){
-        socket.emit('addProduct', {
-            title,
-            description,
-            price, 
-            thumbnail,
-            code,
-            stock,
-            status,
-            category
-        })
-    }
+    socket.emit('addProduct', {
+        'title': title.value,
+        'description': description.value,
+        'price': price.value,
+        'thumbnail': thumbnail.value,
+        'code': code.value,
+        'stock': stock.value,
+        'status': status.value === 'on' ? status.value = true : status.value = false,
+        'category': category.value
+    })    
+    
     form.reset()
   
 })
 
-socket.on('productos', data => {
+socket.on('productosDB', data => {
+    console.log(data)
+    let products = document.querySelector('#productLive')
+    let renderProductos=''
     
-    let div = document.getElementById('listProducts')
-    let prod=''
-
     data.forEach(product => {
-        prod += `<li> title: ${product.title}</li>
+        renderProductos += `<li> title: ${product.title}</li>
                       <li> description: ${product.description}</li>
                       <li> price: ${product.price}</li>
                       <li> thumbnail: ${product.thumbnail}</li>
@@ -44,5 +37,6 @@ socket.on('productos', data => {
                       <li> category: ${product.category}</li>`
                     });
 
-    div.innerHTML = prod
+    products.innerHTML = renderProductos
 })
+

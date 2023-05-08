@@ -1,29 +1,20 @@
 const ProductManager = require("../dao/ProductManager")
 
-const producto = new ProductManager("../products.json")
+const productManager = new ProductManager("../products.json")
 
-const viewProductStatic = async(req, res) =>{
-    try{
-        const prodList =  await producto.getProducts()
+const viewProductLive = (req, res) =>{
         
-        let datosProd = {
-            listProducts: prodList,
-            style: 'index.css'
-        }
-        res.render('home', datosProd)
-    }catch(error){
-        console.log(error)
-    }
+        let viewProductLive = {
+            title: "Agregar productos",
+            script: "realtime.js",
+            style: "products.css"
+            }
+        res.render('realtimeprod', viewProductLive)
 }
 
-const viewProductLive =  async(req, res) =>{
+const viewProductStatic =  async(req, res) =>{
     try{
-        const prodList =  await producto.getProducts()
-        
-        let datosProd = {
-            listProdLive: prodList
-        }
-        res.render('realtimeprod', datosProd)
+        res.render('home')
     }catch(error){
         console.log(error)
     }
