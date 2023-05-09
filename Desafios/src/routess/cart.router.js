@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/', async (req, res)=>{
     try {
-        const carts = await CartManagerMongo.getCarts()
+        const carts = await CartManagerMongo.getCarts(req.query)
         res.status(200).send({
             status: 'success',
             payload: carts
@@ -26,12 +26,11 @@ router.get('/:cidd', async (req, res)=>{
     } catch (error) {
         console.log(error)
     }
-
 })
 
 router.post('/', async(req, res)=>{
     try {
-        let result = await CartManagerMongo.addCart()
+        let result = await CartManagerMongo.newCart(req.body)
         res.status(201).send({
             status: 'success',
             payload: result
@@ -43,7 +42,11 @@ router.post('/', async(req, res)=>{
 
 router.put('/:cidd/product/:pid', async(req,res)=>{
     try {
-       res.status(200).send('ruta put') 
+        const addProduct = await Manager.addProductInCart(req.params)
+        res.send({
+            status: 'success',
+            payload: addProduct
+        })   
     } catch (error) {
         console.log(error)
     }
@@ -51,7 +54,11 @@ router.put('/:cidd/product/:pid', async(req,res)=>{
 
 router.delete('/:cidd', async(req, res)=>{
     try {
-        res.status(200).send('ruta delete')
+        const delCart = await Manager.delCart(req.params)
+        res.send({
+            status: 'success',
+            payload: delCart
+        })
     } catch (error) {
         console.log(error)
     }

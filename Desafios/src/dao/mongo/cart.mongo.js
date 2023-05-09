@@ -2,7 +2,14 @@ const {cartModel} = require('./model/cart.model')
 
 class CartManagerMongo{
 
-    async getCarts(){
+    newCart = async (data) => {
+        try {
+            return await cartModel.create(data)
+        } catch (error) {
+            return new Error(error)
+        }
+    }
+    getCarts = async() =>{
         try {
             return await cartModel.find({})
         } catch (error) {
@@ -10,22 +17,33 @@ class CartManagerMongo{
         }
 
     }
-    async getCartById(cid){
+    getCartById = async (cid) =>{
         try {
             return await cartModel.findOne({_id:cid})
         } catch (error) {
             return new Error(error)
         }
     }
-    async addCart(){
+    addProductInCart = async (info) => {
         try {
-            return await cartModel.create({
-                status: 'created'
-            })
+            const { cid, pid } = info;
+
+            const cart = await cartModel.findOne({ _id: cid });
+
+            const productIndex = cart.products.findIndex(product => product.idProduct === pid);
+
+            if (productIndex === -1) {
+                return await cartModel.updateOne({ _id: cid }, { $push: { products: { idProduct: pid, qty: 1 } } });
+            }
+
+            return await cartModel.updateOne({ _id: cid, "products.idProduct": pid }, { $inc: { "products.$.qty": 1 } })
         } catch (error) {
-            console.error(error)
+            return new Error(error)
         }
     }
+
+
+
     async updateCart(cid, pid){
         try {
             let value = await cartModel.find({_id: cid, "products.id": pid},{"products.quantity":1, _id:0})
@@ -50,4 +68,4 @@ class CartManagerMongo{
     }
 }
 
-module.exports = new CartManagerMongo
+module.exports = new CartManagerMongo()
