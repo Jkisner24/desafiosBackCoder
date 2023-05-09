@@ -1,7 +1,9 @@
-<div>
-    <h1>Listado de Productos</h1>
+<header>
+    <h1 class="text-center">Listado de Productos</h1>
+</header>
+<main >
         {{#each products}}
-            <ul>
+            <ul class="d-flex flex-column align-items-center align-content-center">
                 <li>ID: {{this.id}}</li>
                 <li>Title: {{this.title}}</li>
                 <li>Description: {{this.description}}</li>
@@ -12,4 +14,4 @@
                 <hr>
             </ul>
         {{/each}}
-</div>
+</main>

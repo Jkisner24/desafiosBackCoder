@@ -4,16 +4,13 @@ const collection = 'carts'
 
 const cartSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
-        ref: 'usuarios',
-        index: true
+        type: Schema.ObjectId
     },
     products: [{
         idProduct: {
             type: Schema.Types.ObjectId,
-            ref: 'products'
         },
-        qty: {
+        quantity: {
             type: Number
         }
     }

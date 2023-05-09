@@ -33,32 +33,15 @@ class CartManagerMongo{
             const productIndex = cart.products.findIndex(product => product.idProduct === pid);
 
             if (productIndex === -1) {
-                return await cartModel.updateOne({ _id: cid }, { $push: { products: { idProduct: pid, qty: 1 } } });
+                return await cartModel.updateOne({ _id: cid }, { $push: { products: { idProduct: pid, quantity: 1 } } });
             }
 
-            return await cartModel.updateOne({ _id: cid, "products.idProduct": pid }, { $inc: { "products.$.qty": 1 } })
+            return await cartModel.updateOne({ _id: cid, "products.idProduct": pid }, { $inc: { "products.$.quantity": 1 } })
         } catch (error) {
             return new Error(error)
         }
     }
 
-
-
-    async updateCart(cid, pid){
-        try {
-            let value = await cartModel.find({_id: cid, "products.id": pid},{"products.quantity":1, _id:0})
-            console.log(`Valor del producto buscado: ${value}`)
-            if (value !== null) {
-                let newvalue = {...value} + 1
-                console.log(`Cantidad nueva: ${newvalue}`)
-                return await cartModel.findOneAndUpdate({_id: cid, "products.id": pid}, {$inc: {"products.$.quantity": 1}})
-            }else{
-                return await cartModel.updateOne({_id: cid}, {$push: { products:[{id: pid, quantity: 1}]}})
-            }
-        } catch (error) {
-            return new Error(error)
-        }
-    }
     async deleteCart(cid){
         try {
             return await cartModel.deleteOne({_id: cid})

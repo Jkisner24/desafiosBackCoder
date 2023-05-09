@@ -4,7 +4,7 @@ const productMongo = require('../dao/mongo/product.mongo')
 
 router.get('/', async(req,res)=>{
     try {  
-        const products = await mongoManager.getProduct()
+        const products = await productMongo.getProducts()
 
         const object = {
             products,
