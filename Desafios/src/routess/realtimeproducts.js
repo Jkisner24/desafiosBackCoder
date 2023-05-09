@@ -3,7 +3,7 @@ const router = Router()
 
 router.get('/', (req, res) => {
     const object = {
-        title: "Agregar productos",
+        title: "Add Products",
         script: "realtime.js"
     }
         
