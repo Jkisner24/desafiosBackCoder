@@ -29,6 +29,7 @@ router.get('/:pid', async (req,res)=>{
 })
 router.post('/', async (req,res)=>{
     try {
+        // hacer validaciones
         const newProduct = req.body
 
         let result = await productManager.addProduct(newProduct)
@@ -41,9 +42,11 @@ router.post('/', async (req,res)=>{
     }
 })
 router.put('/:pid', (req,res)=>{
+    //sumar rutas y validaciones
     res.status(200).send('Actualizar productos')
 })
 router.delete('/:pid', (req,res)=>{
+    //sumar rutas y validaciones 
     res.status(200).send('Borrar productos')
 })
 
