@@ -30,7 +30,7 @@ router.get('/:cidd', async (req, res)=>{
 
 router.post('/', async(req, res)=>{
     try {
-        let result = await CartManagerMongo.newCart(req.body)
+        let result = await CartManagerMongo.newCart()
         res.status(201).send({
             status: 'success',
             payload: result
@@ -42,7 +42,8 @@ router.post('/', async(req, res)=>{
 
 router.put('/:cidd/product/:pid', async(req,res)=>{
     try {
-        const addProduct = await Manager.addProductInCart(req.params)
+
+        const addProduct = await CartManagerMongo.addProductInCart(req.params, req.body)
         res.send({
             status: 'success',
             payload: addProduct
@@ -54,7 +55,7 @@ router.put('/:cidd/product/:pid', async(req,res)=>{
 
 router.delete('/:cidd', async(req, res)=>{
     try {
-        const delCart = await Manager.delCart(req.params)
+        const delCart = await CartManagerMongo.delCart(req.params)
         res.send({
             status: 'success',
             payload: delCart
