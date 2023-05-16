@@ -40,6 +40,19 @@ router.post('/', async(req, res)=>{
     }
 })
 
+router.post('/:cidd/product/:pid', async(req, res)=>{
+    try{
+        let result = await CartManagerMongo.updateCart(req.params)
+        res.status(201).send({
+            status: 'success',
+            payload: result
+        })
+
+    }catch(eror){
+        console.log(error)
+    }
+})
+
 router.put('/:cidd/product/:pid', async(req,res)=>{
     try {
 
@@ -53,12 +66,26 @@ router.put('/:cidd/product/:pid', async(req,res)=>{
     }
 })
 
-router.delete('/:cidd', async(req, res)=>{
+router.delete('/:cidd/product/:pid', async(req, res)=>{
     try {
-        const delCart = await CartManagerMongo.delCart(req.params)
+        await CartManagerMongo.deleteCartProd(req.params)
         res.send({
             status: 'success',
-            payload: delCart
+            payload: `Product with id: ${req.params.pid} delete from cart ${req.params.cidd}}`
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+router.delete('/:cidd', async(req, res)=>{
+    const {cidd} = req.params 
+    try {
+        await CartManagerMongo.deleteCartById(cidd)
+        res.send({
+            status: 'success',
+            payload: `Cart with id ${cidd} delete`
         })
     } catch (error) {
         console.log(error)

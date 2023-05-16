@@ -17,11 +17,25 @@ class CartManagerMongo{
         }
 
     }
-    getCartById = async (cid) =>{
+    getCartById = async (cidd) =>{
         try {
-            return await cartModel.findOne({_id:cid})
+            return await cartModel.findOne({_id:cidd})
         } catch (error) {
             return new Error(error)
+        }
+    }
+
+    updateCart = async (params)=>{
+        try {
+            const { cidd, pid } = params;
+            const cartFound = await cartModel.findOne({_id: cidd, "products.idProduct": pid})
+            if(cartFound){
+                return await cartModel.updateOne({_id: cidd, "products.idProduct": pid}, {$inc: { "products.$.quantity": 1}})          
+            }else{
+                return await cartModel.updateOne({_id: cidd}, {$push: { products: {idProduct: pid, quantity: 1}}})
+            }
+        } catch (error) {
+            
         }
     }
     addProductInCart = async (params, body) => {
@@ -32,19 +46,24 @@ class CartManagerMongo{
             const cartFound = await cartModel.findOne({_id: cidd, "products.idProduct": pid})
 
             if(cartFound){
-                return await cartModel.updateOne({ _id: cidd, "products.idProduct": pid }, {$inc: { "products.$.quantity": quantity } })
-            }else{
-                return await cartModel.updateOne({_id: cidd}, {$push: { products: {idProduct: pid, quantity: quantity}}})
-
-            }         
+                return await cartModel.findOne({ _id: cidd, "products.idProduct": pid }, {$set: { "products.$.quantity": quantity } })
+            }
         } catch (error) {
             return new Error(error)
         }
     }
+    deleteCartProd = async (params)=>{
+        try{
+            const { cidd, pid } = params;
+            return await cartModel.findOneAndUpdate({_id: cidd}, {$pull: {products: {idProduct: pid}}},{new: true} )
 
-    async deleteCart(cid){
+        }catch(error){
+            return new Error(error)
+        }
+    }
+    deleteCartById = async (cidd)=>{
         try {
-            return await cartModel.deleteOne({_id: cid})
+            return await cartModel.deleteOne({_id: cidd})
         } catch (error) {
             return new Error(error)
         }
