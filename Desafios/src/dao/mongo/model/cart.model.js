@@ -21,6 +21,7 @@ const cartSchema = new Schema({
     ]
 })
 
+//middleware.pre
 cartSchema.pre('findOne', function(){
 	this.populate('products.idProduct')
 }) 

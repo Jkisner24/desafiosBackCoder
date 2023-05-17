@@ -13,7 +13,7 @@ const socketProducts = async (io) =>{
         socket.on('addProduct', async (data) =>{
             console.log(data)
             await productManagerMongo.createProduct(data)
-            products = await productManagerMongo.getProducts()
+            let products = await productManagerMongo.getProducts()
             socket.emit('productosDB', products)
         })
     } catch(error){

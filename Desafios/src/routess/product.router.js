@@ -32,7 +32,7 @@ router.post('/', async (req,res)=>{
         // hacer validaciones
         const newProduct = req.body
 
-        let result = await productManager.addProduct(newProduct)
+        let result = await productManager.createProduct(newProduct)
         res.status(200).send({
             status: 'success',
             payload: result
@@ -41,13 +41,31 @@ router.post('/', async (req,res)=>{
         console.log(error)
     }
 })
-router.put('/:pid', (req,res)=>{
-    //sumar rutas y validaciones
-    res.status(200).send('Actualizar productos')
+router.put('/:pid',async (req,res)=>{
+
+    try{
+        const {pid} = req.params
+        const newProduct = req.body
+        let result = await productManager.updateProduct(pid, newProduct)
+        res.status(200).send({
+        status: 'success',
+        payload: result
+    })
+    }catch(error){
+        console.log(error)
+    }
 })
-router.delete('/:pid', (req,res)=>{
-    //sumar rutas y validaciones 
-    res.status(200).send('Borrar productos')
+router.delete('/:pid', async (req,res)=>{
+    try{
+    const {pid} = req.params
+    await productManager.deleteProduct(pid)
+    res.status(200).send({
+        status: 'success',
+        payload: `Product with id ${pid} deleted`
+    })
+    }catch(error){
+        console.log(error)
+    }
 })
 
 module.exports = router
