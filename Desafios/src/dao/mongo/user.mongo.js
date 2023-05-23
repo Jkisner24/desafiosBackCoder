@@ -25,28 +25,28 @@ class UserManager{
             return new Error(error)
         }
     }
-    addUser = async (user) => {
+    addUser = async (data) => {
         try {
-            const findUser = await userModel.findOne({ email: user.email})
+            const findUser = await userModel.findOne({email: data.email})
             if (findUser) {
                 throw new Error('User not available')
-            }else{
-                return await userModel.create(user)
             }
+            return await userModel.create(user)
+            
         } catch (error) {
             console.error(error.message)
         }
     }
-    loginUser = async (newUser) => {
+    loginUser = async (data) => {
         try {
-            const { email, password } = newUser
+            const { email, password } = data
 
             const findUser = await userModel.findOne({ email })
             if (!findUser) {
-                throw new Error('El correo no se encuentra en la base de datos')
+                throw new Error('Email not found in DB')
             }
             if (findUser.password !== password) {
-                throw new Error('La contraseña es incorrecta')
+                throw new Error('Password is wrong')
             }
             return findUser
         } catch (error) {

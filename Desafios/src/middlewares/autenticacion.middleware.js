@@ -1,6 +1,6 @@
 function auth(req, res, next) {
-    if(req.session?.user?.first_name === 'Juli' || !req.session?.user?.admin === 'admin'){
-        return res.status(401).send('Error de autenticación')
+    if (req.session.user && req.url == '/session/login') {
+        return res.redirect('/api/views/products')
     }
     next()
 }

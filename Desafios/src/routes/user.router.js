@@ -29,8 +29,7 @@ router.get('/uid', async(req,res)=>{
 
 router.post("/", async (req, res) => {
     try {
-        let user = req.body;
-        let result = await UserManager.addUser(user);
+        let result = await UserManager.addUser(req.body);
         res.status(201).send({
             status: "success",
             result

@@ -1,0 +1,11 @@
+<header>
+    <nav>
+        {{#if showLogin}}
+        <a href="/api/views/session/login">Login</a>
+        <a href="/api/views/session/register">Register</a>
+        {{else}}
+        <a href="/api/views/session/profile">Profile</a>
+        <a href="/api/views/session/logout">Log Out</a>
+        {{/if}}
+    </nav>
+</header>

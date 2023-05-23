@@ -4,10 +4,9 @@ const session = require('express-session')
 const FileStore = require('session-file-store')
 const {create} = require('connect-mongo')
 const handlebars = require('express-handlebars')
-const routerServer = require('./routess/index')
+const routerServer = require('./routes/index')
 const logger = require('morgan')
 const {connectDb} = require("./config/configServer")
-//new routes
 const app = express();
 
 connectDb()
@@ -56,8 +55,6 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 })) 
-
-
 
 
 //new routes
