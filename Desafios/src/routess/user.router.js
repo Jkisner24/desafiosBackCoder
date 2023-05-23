@@ -1,15 +1,26 @@
-const {Router} = require('express')
-const {userModel} = require('../dao/mongo/model/user.model')
+const {Router} = require('express');
+const UserManager = require('../dao/mongo/user.mongo');
 
 const router = Router()
 
 router.get('/', async(req,res)=>{
     try {
-        let users = await userModel.find();
-        console.log(users);
+        let users = await UserManager.getUsers()
         res.send ({
             status: "success",
             payload: users
+        });
+    } catch (error) {
+        console.log(error);
+    }
+})
+router.get('/uid', async(req,res)=>{
+    const {uid} = req.params
+    try {
+        let user = await UserManager.getUsersById(uid)
+        res.send ({
+            status: "success",
+            payload: user
         });
     } catch (error) {
         console.log(error);
@@ -19,42 +30,21 @@ router.get('/', async(req,res)=>{
 router.post("/", async (req, res) => {
     try {
         let user = req.body;
-
-        if(!user.nombre || !user.apellido) {
-            return res.status(400).send({status:"error", mensaje: "Todos los campos son obligatorios"});
-        }
-
-        const newUser = {
-            first_name: user.nombre,
-            last_name: user.apellido,
-            email: user.email
-        }
-
-        let result = await userModel.create(newUser);
-
-        res.status(200).send({result});
+        let result = await UserManager.addUser(user);
+        res.status(201).send({
+            status: "success",
+            result
+        });
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 })
 
 router.put("/:uid", async (req, res) => {
     try {
         const { uid } = req.params;
-        const user = req.body;
-
-        if(!user.nombre || !user.apellido) {
-            return res.status(400).send({status:"error", mensaje: "All fields are required"});
-        }
-
-        let userToReplace = {
-            first_name: user.nombre,
-            last_name: user.apellido,
-            email: user.email
-        }
-
-        let result = await userModel.updateOne({_id: uid}, userToReplace);
-
+        const changes = req.body;
+        let result = await UserManager.updateUser(uid, changes);
         res.send({
             status: "success",
             payload: result
@@ -66,13 +56,10 @@ router.put("/:uid", async (req, res) => {
 
 router.delete("/:uid", async (req, res) => {
     try {
-        const { uid } = req.params;
-
-        let result = await userModel.deleteOne({_id: uid});
-
+        const { uid } = req.params
+        await UserManager.deleteUser(uid);
         res.send({
             status: "success",
-            payload: result
         });
     } catch (error) {
         console.log(error);

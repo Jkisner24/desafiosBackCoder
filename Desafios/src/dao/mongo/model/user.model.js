@@ -1,4 +1,5 @@
 const {Schema, model} = require ('mongoose')
+
 const collection = 'users'
 
 const usersSchema = new Schema({
@@ -15,7 +16,10 @@ const usersSchema = new Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    password: {
+        type: String
+    },
 })
 
 const userModel = model(collection, usersSchema)

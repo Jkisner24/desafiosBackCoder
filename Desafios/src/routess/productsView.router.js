@@ -7,7 +7,6 @@ router.get('/products', async(req, res) =>{
   let page = parseInt(req.query.page)
   let limit = parseInt(req.query.limit)
   let sort = req.query.sort
-  //Validaciones del Query-------------
   if(!page) page = 1
   if(!limit) limit = 4
   if(!sort ) sort = "asc"
