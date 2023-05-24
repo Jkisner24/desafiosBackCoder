@@ -31,7 +31,7 @@ class UserManager{
             if (findUser) {
                 throw new Error('User not available')
             }
-            return await userModel.create(user)
+            return await userModel.create(data)
             
         } catch (error) {
             console.error(error.message)
