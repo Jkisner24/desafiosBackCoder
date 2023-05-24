@@ -4,7 +4,7 @@ const { productModel } = require("../dao/mongo/model/product.model")
 const {auth} = require('../middlewares/autenticacion.middleware')
 
 
-router.get('/products', async(req, res) =>{   
+router.get('/products', auth, async(req, res) =>{   
   try {
     if(!req.session.user){
         return res.redirect('/api/views/session/login')
@@ -37,6 +37,6 @@ router.get('/products', async(req, res) =>{
   } catch (error) {
       return res.status(500).send(error)
   }
-}, auth)
+})
 
 module.exports = router
