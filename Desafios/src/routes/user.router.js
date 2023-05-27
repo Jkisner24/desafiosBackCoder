@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/', async(req,res)=>{
     try {
-        let users = await UserManager.getUsers()
+        let users = await UserManager.getUsers(req.query)
         res.send ({
             status: "success",
             payload: users

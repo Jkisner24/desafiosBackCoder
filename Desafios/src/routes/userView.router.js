@@ -7,7 +7,6 @@ router.get('/session', auth, async(req,res)=>{
         const sessionObj = {
             pageTitle: 'Sessions',
             script: 'sessions.js',
-            style: 'sessions.css'
         }
         if (!req.session.user) {
             sessionObj.showLogin = true
@@ -30,7 +29,6 @@ router.get('/session/register', auth, (req, res) => {
     const renderRegisterObj = {
         title: 'registro',
         script: 'sessions.js',
-        style: 'sessions.css'
     }
     if (req.session.user) {
         renderRegisterObj.showForm = false
@@ -44,7 +42,6 @@ router.get('/session/login', auth, (req, res) => {
     const renderLoginObj = {
         title: 'Login',
         script: 'sessions.js',
-        style: 'sessions.css'
     }
     res.status(200).render('login', renderLoginObj)
 })
@@ -54,10 +51,8 @@ router.get('/session/profile', auth, (req, res) => {
     const renderProfileObj = {
         title: 'Perfil',
         script: 'sessions.js',
-        style: 'sessions.css',
         first_name,
         last_name,
-        
     }
     res.status(200).render('profile', renderProfileObj)
 })
@@ -66,7 +61,6 @@ router.get('/session/logout', auth, (req, res) => {
     const renderLoginObj = {
         title: 'Logout',
         script: 'sessions.js',
-        style: 'sessions.css'
     }
     res.status(200).render('login', renderLoginObj)
 })

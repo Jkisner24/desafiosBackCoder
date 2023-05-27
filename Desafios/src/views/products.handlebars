@@ -1,7 +1,23 @@
-{{#if isValid}}
+{{!-- <header>
+</header> --}}
 <header>
-    <h1 class="text-center bg-info shadow-lg p-3 mb-5 bg-body rounded">Listado de Productos</h1>
+    <h1 class="bg-primary text-center mb-2 p-3">Listado de Productos</h1>
+    <nav class="navbar d-flex flex-column mb-4">
+        <p class="font-weight-bold align-self-start">Welcome: {{first_name}}, {{last_name}}!</p>
+        <p class="font-weight-bold align-self-start">Role: {{role}}</p>
+        <div class="font-weight-bold text-decoration-none align-self-start">
+        <a href="/api/views/carts/64599d0b86bb5052731be6d2">Cart</a>
+        {{#if showLogin}}
+        <a href="/api/views/session/login">Login</a>
+        <a href="/api/views/session/register">Register</a>
+        {{else}}
+        <a href="/api/views/session/profile">Profile</a>
+        <a class="d-inline-block" href="/api/views/session/logout">Log Out</a>
+        {{/if}}
+        </div>
+    </nav>
 </header>
+{{#if isValid}}
 <div class="m-2 d-flex justify-content-between">
     {{#each docs}}
     <div class="card" style="width: 14rem;height: auto;">

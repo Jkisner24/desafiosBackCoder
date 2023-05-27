@@ -1,10 +1,10 @@
-const {userModel } = require('../mongo/model/user.model')
+const {userModel } = require('./model/user.model')
 
 class UserManager{
 
     getUsers = async ()=>{
         try {
-            let users = await userModel.find({})
+            let users = await userModel.find({}).lean()
             if(!users) {
                 throw new Error('Users not found')
             }
@@ -42,6 +42,7 @@ class UserManager{
             const { email, password } = data
 
             const findUser = await userModel.findOne({ email })
+            console.log(findUser)
             if (!findUser) {
                 throw new Error('Email not found in DB')
             }
@@ -50,7 +51,7 @@ class UserManager{
             }
             return findUser
         } catch (error) {
-            return new Error(error)
+            throw new Error(error.message);
         }
     }
     updateUser = async (uid, changes) => {
@@ -72,4 +73,4 @@ class UserManager{
 }
 
 
-module.exports = new UserManager()
+module.exports = new UserManager

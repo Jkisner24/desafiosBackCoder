@@ -18,22 +18,22 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res)=> {
     try {
         const userDB = await UserManager.loginUser(req.body)
-        req.session.user = {
+        if (!userDB) {
+            throw new Error('Error auth');
+          }
+            req.session.user = {
             first_name: userDB.first_name,
             last_name: userDB.last_name,
-        }
-        if(userDB){
-            if(userDB.email === 'adminCoder@coder.com'){
-                req.session.user.role = 'admin'
-                return res.redirect('/api/views/products')
             }
-            req.session.user.role = 'user'
-            return res.redirect('/api/views/products')
-        }
+        if (userDB.email === 'adminCoder@coder.com') {
+            req.session.user.role = 'admin';
+            return res.redirect('/api/views/products');
+          }
+        req.session.user.role = 'user';
+        return res.redirect('/api/views/products');
+      
     } catch (error) {
-        if(error){
-            res.redirect('api/views/session/login')
-        }
+        return res.redirect('/api/views/session/login');
     }
 })
 
