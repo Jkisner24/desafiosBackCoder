@@ -37,7 +37,7 @@ router.post('/login', async (req, res)=> {
     }
 })
 
-router.post('/logout', (req, res)=>{
+router.post('/logout', async (req, res)=>{
     try {
         req.session.destroy()
         res.redirect('/api/views/session/login')        
