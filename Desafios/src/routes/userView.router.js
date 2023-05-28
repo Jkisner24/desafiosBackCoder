@@ -2,29 +2,6 @@ const {Router} = require('express')
 const router = Router()
 const { auth } = require('../middlewares/autenticacion.middleware')
 
-router.get('/session', auth, async(req,res)=>{
-    try {  
-        const sessionObj = {
-            pageTitle: 'Sessions',
-            script: 'sessions.js',
-        }
-        if (!req.session.user) {
-            sessionObj.showLogin = true
-            return res.render('session', sessionObj)
-        }
-        sessionObj.showLogin = false
-        res.render('session', sessionObj)
-        
-    } catch (error) {
-        if (error) {
-            res.status(400).send({
-                status: 'Error',
-                payload: error
-            })
-        }
-    }
-})
-
 router.get('/session/register', auth, (req, res) => {
     const renderRegisterObj = {
         title: 'registro',

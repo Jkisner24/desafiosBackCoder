@@ -6,6 +6,7 @@ const {auth} = require('../middlewares/autenticacion.middleware')
 
 router.get('/products', auth, async(req, res) =>{   
   try {
+
     if(!req.session.user){
         return res.redirect('/api/views/session/login')
     }
@@ -13,6 +14,7 @@ router.get('/products', auth, async(req, res) =>{
     let page = parseInt(req.query.page)
     let limit = parseInt(req.query.limit)
     let sort = req.query.sort
+    
     if(!page) page = 1
     if(!limit) limit = 4
     if(!sort ) sort = "asc"
@@ -22,8 +24,8 @@ router.get('/products', auth, async(req, res) =>{
       limit,
       sort,
       lean:true,
-    }
-    )
+    })
+    result.showLogin = false;
     result.first_name = first_name;
     result.last_name = last_name;
     result.role = role;
@@ -32,6 +34,8 @@ router.get('/products', auth, async(req, res) =>{
     result.nextLink = result.hasNextPage?`http://localhost:8080/api/views/products?page=${result.nextPage}`:'';
     result.isValid= !(page<=0||page>result.totalPages)
     console.log(result)
+
+
     res.render('products', result)
 
     
