@@ -7,9 +7,13 @@ const handlebars = require('express-handlebars')
 const routerServer = require('./routes/index')
 const logger = require('morgan')
 const {connectDb} = require("./config/configServer")
+const { initPassport, initPassortGithub } = require("./config/passport.config")
 const app = express();
 
 connectDb()
+initPassport()
+initPassortGithub()
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 

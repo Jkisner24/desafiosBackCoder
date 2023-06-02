@@ -1,3 +1,4 @@
+const { createHash, isValidPassword } = require('../../utils/bcryptHash')
 const {userModel } = require('./model/user.model')
 
 class UserManager{
@@ -15,12 +16,14 @@ class UserManager{
 
     }
     getUserById = async(uid) => {
-        try {
-            let user = await userModel.findOne(uid)
-            if(!user) {
-                throw new Error('User not found')
-            }
-            return user
+        // try {
+        //     let user = await userModel.findOne(uid)
+        //     if(!user) {
+        //         throw new Error('User not found')
+        //     }
+        //     return user
+        try{
+            return await userModel.findById(uid)
         } catch (error) {
             return new Error(error)
         }
@@ -33,6 +36,29 @@ class UserManager{
             }
             return await userModel.create(data)
             
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+    addUserGithub = async (data) => {
+        try {
+            const { name, email } = data
+            console.log(data)
+
+            const findUser = await userModel.findOne({ email })
+            console.log(findUser)
+            const newUser = {
+                first_name: name,
+                last_name: name,
+                email,
+                password: createHash.toString((isValidPassword))
+            }
+            if (findUser) {
+                return newUser
+            }
+            await userModel.create(newUser)
+            return newUser
+
         } catch (error) {
             console.error(error.message)
         }

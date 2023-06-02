@@ -1,15 +1,19 @@
 <header>
-    <a href="/api/views/session/register">Register</a>
+  <a href="/api/views/session/register">Register</a>
 </header>
 <main>
-    <div id="login-container">
-        <h2>Log in</h2>
-        <form id="loginForm" method="post" action="/api/views/login">
-            <label for="email">Email:</label>
-                <input type="text" name="email" id="email">
-            <label for="password">Password:</label>
-                <input type="password" name="password" id="password">
-            <button>Log in</button>
-        </form>
-    </div>
+  <div id="login-container">
+    <h2>Log in</h2>
+    <form id="loginForm" method="post" action="/api/views/login">
+      <label for="email">Email:</label>
+      <input type="text" name="email" id="email" />
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" />
+      <button>Log in</button>
+    </form>
+  </div>
+  <div>
+    <a href="/api/views/github">Login with GitHub</a>
+  </div>
+
 </main>

@@ -1,6 +1,8 @@
 const {Router} = require('express')
 const { auth } = require('../middlewares/autenticacion.middleware')
 const UserManager = require('../dao/mongo/user.mongo')
+const passport = require('passport')
+
 
 const router = Router()
 
@@ -45,5 +47,21 @@ router.post('/logout', async (req, res)=>{
         return `Error: ${error}`
     }
 })
+
+//github
+router.get('/github', passport.authenticate('github', {
+    scope: ['user: email']
+}))
+router.get('/githubcallback', passport.authenticate('github', {
+    failureRedirect: '/api/views/session/login'
+}), async (req, res) => {
+    try {
+        req.session.user = req.user
+        res.redirect('/api/views/products')
+    } catch (error) {
+        if (error) return error
+    }
+})
+
 
 module.exports = router
