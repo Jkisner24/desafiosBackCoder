@@ -1,4 +1,4 @@
-const { createHash, isValidPassword } = require('../../utils/bcryptHash')
+const { createHash, password } = require('../../utils/bcryptHash')
 const {userModel } = require('./model/user.model')
 
 class UserManager{
@@ -51,7 +51,7 @@ class UserManager{
                 first_name: name,
                 last_name: name,
                 email,
-                password: createHash.toString((isValidPassword))
+                password: createHash.toString(password)
             }
             if (findUser) {
                 return newUser

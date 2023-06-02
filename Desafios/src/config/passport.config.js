@@ -2,6 +2,7 @@ const passport = require('passport')
 const local = require('passport-local')
 const GithubStrategy = require('passport-github2')
 const userManager = require('../dao/mongo/user.mongo')
+const { createHash } = require('../utils/bcryptHash')
 require('dotenv').config()
 
 
@@ -19,7 +20,7 @@ const initPassport = () => {
                 first_name,
                 last_name,
                 email: username,
-                password
+                password: createHash(password)
             }
             const addUser = await userManager.addUser(newUser)
             return done(null, addUser)
