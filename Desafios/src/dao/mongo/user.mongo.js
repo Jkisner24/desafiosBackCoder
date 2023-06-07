@@ -1,5 +1,6 @@
-const { createHash, password } = require('../../utils/bcryptHash')
+const { createHash, isValidPassword } = require('../../utils/bcryptHash')
 const {userModel } = require('./model/user.model')
+
 
 class UserManager{
 
@@ -65,21 +66,21 @@ class UserManager{
     }
     loginUser = async (data) => {
         try {
-            const { email, password } = data
-
-            const findUser = await userModel.findOne({ email })
-            console.log(findUser)
-            if (!findUser) {
-                throw new Error('Email not found in DB')
-            }
-            if (findUser.password !== password) {
-                throw new Error('Password is wrong')
-            }
-            return findUser
+          const { email, password } = data;
+          const findUser = await userModel.findOne({ email });
+          console.log(findUser);
+          if (!findUser) {
+            throw new Error('Email not found in DB');
+          }
+          const passwordMatch = isValidPassword(password, findUser);
+          if (!passwordMatch) {
+            throw new Error('Password is wrong');
+          }
+          return findUser;
         } catch (error) {
-            throw new Error(error.message);
+          throw new Error(error.message);
         }
-    }
+      };     
     updateUser = async (uid, changes) => {
         try {
             const userUpdated = await userModel.updateOne({ _id: uid }, { $set: changes })

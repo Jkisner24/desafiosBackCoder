@@ -20,6 +20,7 @@ const initPassport = () => {
                 first_name,
                 last_name,
                 email: username,
+                role: role,
                 password: createHash(password)
             }
             const addUser = await userManager.addUser(newUser)

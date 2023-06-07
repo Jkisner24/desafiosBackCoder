@@ -68,10 +68,10 @@ router.post("/login",
         email: req.user.email,
       };
       if (req.user.email === "adminCoder@coder.com") {
-        req.session.user.rol = "admin";
+        req.session.user.role = "admin";
         return res.redirect("/api/views/products");
       }
-      req.session.user.rol = "user";
+      req.session.user.role = "user";
       res.redirect("/api/views/products");
     } catch (error) {
       return `${error}`;
