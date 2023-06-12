@@ -1,3 +1,4 @@
+const { generateToken } = require('../../config/jwt')
 const { createHash, isValidPassword } = require('../../utils/bcryptHash')
 const {userModel } = require('./model/user.model')
 
@@ -17,12 +18,6 @@ class UserManager{
 
     }
     getUserById = async(uid) => {
-        // try {
-        //     let user = await userModel.findOne(uid)
-        //     if(!user) {
-        //         throw new Error('User not found')
-        //     }
-        //     return user
         try{
             return await userModel.findById(uid)
         } catch (error) {
@@ -31,28 +26,40 @@ class UserManager{
     }
     addUser = async (data) => {
         try {
+            const { first_name, last_name, email, password, date_of_birth } = data
+            if (!first_name || !last_name || !email || !password || !date_of_birth) throw new Error('Error to register the fields.')
+
             const findUser = await userModel.findOne({email: data.email})
-            if (findUser) {
-                throw new Error('User not available')
-            }
-            return await userModel.create(data)
+            if (findUser) throw new Error('User not available')
             
+            const newUser = {
+                first_name,
+                last_name,
+                email,
+                password: createHash(password),
+                date_of_birth: new Date(date_of_birth)
+            }
+            if (email === 'adminCoder@coder.com') {
+                newUser.role = 'admin'
+            }
+            return await userModel.create(newUser)          
+
         } catch (error) {
-            console.error(error.message)
+            return new Error(error)
         }
     }
     addUserGithub = async (data) => {
         try {
-            const { name, email } = data
+            const { email } = data
             console.log(data)
 
             const findUser = await userModel.findOne({ email })
             console.log(findUser)
             const newUser = {
-                first_name: name,
-                last_name: name,
-                email,
-                password: createHash.toString(password)
+                first_name: findUser.first_name,
+                last_name: findUser.last_name,
+                email: findUser.email,
+                password: "-"
             }
             if (findUser) {
                 return newUser
@@ -76,9 +83,10 @@ class UserManager{
           if (!passwordMatch) {
             throw new Error('Password is wrong');
           }
-          return findUser;
+          return generateToken(findUser);
+            
         } catch (error) {
-          throw new Error(error.message);
+            console.log(error);
         }
       };     
     updateUser = async (uid, changes) => {

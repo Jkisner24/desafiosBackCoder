@@ -5,8 +5,6 @@ const userManager = require('../dao/mongo/user.mongo')
 const { createHash } = require('../utils/bcryptHash')
 require('dotenv').config()
 
-
-
 const LocalStrategy = local.Strategy
 
 const initPassport = () => {

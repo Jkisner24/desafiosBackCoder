@@ -8,6 +8,8 @@ const routerServer = require('./routes/index')
 const logger = require('morgan')
 const {connectDb} = require("./config/configServer")
 const { initPassport, initPassortGithub } = require("./config/passport.config")
+const passport = require('passport')
+const { initializePassport } = require('./passport-JWT/passport.config.js')
 const app = express();
 
 connectDb()
@@ -25,6 +27,11 @@ app.set('view engine', 'handlebars')
 app.use('/static', express.static(`${__dirname}/public`))
 app.use(logger('dev'))
 app.use(cookieParse())
+
+initializePassport()
+passport.use(passport.initialize())
+passport.use(passport.session())
+
 
 /* app.use(session({
     secret: 'secretCoder',
@@ -60,8 +67,6 @@ app.use(session({
     saveUninitialized: false
 })) 
 
-
-//new routes
 app.use(routerServer)
 
 module.exports = app 

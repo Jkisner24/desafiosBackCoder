@@ -1,16 +1,14 @@
 const {Router} = require('express')
 const router = Router()
 const { productModel } = require("../dao/mongo/model/product.model")
-const {auth} = require('../middlewares/autenticacion.middleware')
+const passport = require('passport')
+const { passportAuth } = require('../passport-JWT/passportAuth')
 
 
-router.get('/products', auth, async(req, res) =>{   
+router.get('/products', passportAuth('jwt'), async(req, res) =>{   
   try {
+    const { first_name, last_name, role } = req.user
 
-    if(!req.session.user){
-        return res.redirect('/api/views/session/login')
-    }
-    const {first_name, last_name, role} = req.session.user
     let page = parseInt(req.query.page)
     let limit = parseInt(req.query.limit)
     let sort = req.query.sort

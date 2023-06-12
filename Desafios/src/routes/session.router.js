@@ -1,7 +1,10 @@
 const {Router} = require('express')
-const { auth } = require('../middlewares/autenticacion.middleware')
 const UserManager = require('../dao/mongo/user.mongo')
-const passport = require('passport')
+const passport = require('passport');
+const userMongo = require('../dao/mongo/user.mongo');
+const { passportAuth } = require('../passport-JWT/passportAuth');
+const { authToken, generateToken } = require('../config/jwt');
+const { authorization } = require('../passport-JWT/passportAuthorization');
 
 
 const router = Router()
@@ -18,7 +21,7 @@ const router = Router()
 }) */
 
 //register estrategia en passport.config 
-
+/* 
 router.post("/register",
   passport.authenticate('register', {
     failureRedirect: "/api/views/session/register",
@@ -35,7 +38,7 @@ router.post("/register",
     }
   }
 );
-
+ */
 /* router.post('/login', async (req, res)=> {
     try {
         const userDB = await UserManager.loginUser(req.body)
@@ -58,7 +61,10 @@ router.post("/register",
     }
 })
  */
-router.post("/login",
+
+// login with session 
+
+/* router.post("/login",
   passport.authenticate("login", { failureRedirect: "/api/views/session/login" }),
   async (req, res) => {
     try {
@@ -78,30 +84,104 @@ router.post("/login",
     }
   }
 );
+ */
+
+router.post('/login', async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (email === 'adminCoder@coder.com') {
+      req.body.role = "admin";
+      const token = generateToken(req.body);
+      return res.cookie('coderCookieToken', token, {
+        maxAge: 60 * 60 * 100,
+        httpOnly: true
+      }).redirect('/api/views/products'); 
+    }
+    const userDB = await userMongo.loginUser(req.body);
+      res.cookie('coderCookieToken', userDB, {
+      maxAge: 60 * 60 * 100,
+      httpOnly: true 
+    }).redirect('/api/views/products'); 
+  } catch (error) {
+    if (error) return res.status(401).send({
+      status: 'Error',
+      payload: error.message
+    });
+  }
+});
+
+router.post('/register', async (req, res) => {
+  try {
+      const { first_name, role, email, age } = await UserManager.addUser(req.body)
+      res.status(201).send({
+          status: 'success',
+          user: { first_name, role, email, age }
+      })
+  } catch (error) {
+      if (error) {
+          res.status(404).send({
+              status: 'Error',
+              payload: error.message
+          })
+      }
+  }
+})
+
+router.get('/pruebas', passportAuth('current') , async (req, res) => {
+  try {
+      res.send({
+          payload: "autorizado"
+      })
+  } catch (error) {
+      return error
+  }
+})
+
+//passportAuth to validate the user
+//authorization to authorize the role 
+
+router.get('/current', passportAuth('current') , authorization('user') , async (req, res) => {
+  try {
+      res.send(req.user)
+  } catch (error) {
+      return error
+  }
+})
 
 router.post('/logout', async (req, res)=>{
     try {
-        req.session.destroy()
+        res.clearCookie('coderCookieToken')
         res.redirect('/api/views/session/login')        
     } catch (error) {
         return `Error: ${error}`
     }
 })
 
+
 //github
 router.get('/github', passport.authenticate('github', {
     scope: ['user: email']
 }))
-router.get('/githubcallback', passport.authenticate('github', {
-    failureRedirect: '/api/views/session/login'
-}), async (req, res) => {
+
+router.get(
+  "/githubcallback",
+  passport.authenticate('github', {
+    failureRedirect: "/api/views/session/login",
+  }),
+  async (req, res) => {
     try {
-        req.session.user = req.user
-        res.redirect('/api/views/products')
+      const token = generateToken(req.user)
+      res
+        .cookie("coderCookieToken", token, {
+          maxAge: 60 * 60 * 100,
+          httpOnly: true,
+        })
+        .redirect("/api/views/products");
     } catch (error) {
-        if (error) return error
+      if (error) return error;
     }
-})
+  }
+);
 
 
 module.exports = router

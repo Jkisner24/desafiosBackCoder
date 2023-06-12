@@ -28,7 +28,6 @@ router.get('/:pid', async (req,res)=>{
 })
 router.post('/', async (req,res)=>{
     try {
-        // hacer validaciones
         const newProduct = req.body
 
         let result = await productManager.createProduct(newProduct)

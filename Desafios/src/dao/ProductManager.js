@@ -41,7 +41,6 @@ class ProductManager{
     }
 
     async addProduct(newProduct){
-        //validations
         try{
             this.products = await this.getProducts()
         if(!newProduct.title || !newProduct.description || !newProduct.price || !newProduct.code || !newProduct.stock|| !newProduct.status|| !newProduct.category ) 
