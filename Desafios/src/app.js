@@ -53,7 +53,7 @@ app.use(session({
 }))
  */
 
-app.use(session({
+/* app.use(session({
     store: create({
         mongoUrl: 'mongodb+srv://julikisner:X0BWaU02EHJdFIio@cluster0.jq6nt7n.mongodb.net/ecommerce?retryWrites=true&w=majority',
         mongoOptions: {
@@ -66,7 +66,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 })) 
-
+ */
 app.use(routerServer)
 
 module.exports = app 

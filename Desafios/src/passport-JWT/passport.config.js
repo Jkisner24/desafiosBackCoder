@@ -1,5 +1,7 @@
 const passport = require('passport')
 const jwt = require('passport-jwt')
+require('dotenv').config()
+
 
 const JWTStrategy = jwt.Strategy
 const ExtractJWT = jwt.ExtractJwt
@@ -16,7 +18,7 @@ const cookieExtractor = req => {
 const initializePassport = () => {
     passport.use('jwt', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
-        secretOrKey: "PalabraJWTSecreta"
+        secretOrKey: process.env.JWT_SECRET_KEY
     }, async (jwt_payload, done) => {
         try {
             return done(null, jwt_payload)
@@ -28,7 +30,7 @@ const initializePassport = () => {
     //strategy current
     passport.use('current', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
-        secretOrKey: "PalabraJWTSecreta"
+        secretOrKey: process.env.JWT_SECRET_KEY
     }, async (jwt_payload, done) => {
         try {
             return done(null, jwt_payload)

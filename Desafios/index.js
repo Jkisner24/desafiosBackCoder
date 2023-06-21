@@ -1,12 +1,15 @@
+const config = require('./src/config/config');
+const dotenv = require('dotenv');
 const app = require("./src/app")
 const { Server } = require("socket.io")
 const { socketProducts } = require("./src/public/js/socketProducts")
 const {socketChat} = require("./src/public/js/socketChat")
 
-const port = 8080
+dotenv.config();
 
-const httpServer = app.listen(port, ()=>{
-    console.log(`Listen on port ... ${port}`)
+const PORT = config.PORT;
+const httpServer = app.listen(PORT, ()=>{
+    console.log(`Listen on port ... ${PORT}`)
 })
 
 const io = new Server(httpServer)
