@@ -1,11 +1,12 @@
 const {Router} = require('express');
-const UserManager = require('../dao/mongo/user.mongo');
+const UserManager = require('../dao/mongo/user.mongo')
+const userManager = new UserManager()
 
 const router = Router()
 
 router.get('/', async(req,res)=>{
     try {
-        let users = await UserManager.getUsers(req.query)
+        let users = await userManager.getUsers(req.query)
         res.send ({
             status: "success",
             payload: users
@@ -17,7 +18,7 @@ router.get('/', async(req,res)=>{
 router.get('/uid', async(req,res)=>{
     const {uid} = req.params
     try {
-        let user = await UserManager.getUsersById(uid)
+        let user = await userManager.getUsersById(uid)
         res.send ({
             status: "success",
             payload: user
@@ -29,7 +30,7 @@ router.get('/uid', async(req,res)=>{
 
 router.post("/", async (req, res) => {
     try {
-        let result = await UserManager.addUser(req.body);
+        let result = await userManager.addUser(req.body);
         res.status(201).send({
             status: "success",
             result
@@ -43,7 +44,7 @@ router.put("/:uid", async (req, res) => {
     try {
         const { uid } = req.params;
         const changes = req.body;
-        let result = await UserManager.updateUser(uid, changes);
+        let result = await userManager.updateUser(uid, changes);
         res.send({
             status: "success",
             payload: result
@@ -56,7 +57,7 @@ router.put("/:uid", async (req, res) => {
 router.delete("/:uid", async (req, res) => {
     try {
         const { uid } = req.params
-        await UserManager.deleteUser(uid);
+        await userManager.deleteUser(uid);
         res.send({
             status: "success",
         });

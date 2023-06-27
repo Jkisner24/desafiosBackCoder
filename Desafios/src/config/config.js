@@ -8,9 +8,9 @@ dotenv.config({
 
 
 module.exports = {
-    SECRET_KEY: process.env.JWT_SECRET_KEY,
+    JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+    PORT: process.env.PORT,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-    GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL,
-    PORT: process.env.PORT
+    GITHUB_CALLBACK_URL: process.env.GITHUB_CALLBACK_URL
 }

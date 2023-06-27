@@ -1,7 +1,7 @@
 const {Router} = require('express')
-const UserManager = require('../dao/mongo/user.mongo')
 const passport = require('passport');
-const userMongo = require('../dao/mongo/user.mongo');
+const UserManager = require('../dao/mongo/user.mongo')
+const userManager = new UserManager()
 const { passportAuth } = require('../passport-JWT/passportAuth');
 const { authToken, generateToken } = require('../config/jwt');
 const { authorization } = require('../passport-JWT/passportAuthorization');
@@ -97,7 +97,7 @@ router.post('/login', async (req, res) => {
         httpOnly: true
       }).redirect('/api/views/products'); 
     }
-    const userDB = await userMongo.loginUser(req.body);
+    const userDB = await userManager.loginUser(req.body);
       res.cookie('coderCookieToken', userDB, {
       maxAge: 60 * 60 * 100,
       httpOnly: true 
@@ -112,7 +112,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-      const { first_name, role, email, age } = await UserManager.addUser(req.body)
+      const { first_name, role, email, age } = await userManager.addUser(req.body)
       res.status(201).send({
           status: 'success',
           user: { first_name, role, email, age }
@@ -159,10 +159,10 @@ router.post('/logout', async (req, res)=>{
 
 
 //github
-router.get('/github', passport.authenticate('github', {
+/* router.get('/github', passport.authenticate('github', {
     scope: ['user: email']
 }))
-
+ */
 router.get(
   "/githubcallback",
   passport.authenticate('github', {

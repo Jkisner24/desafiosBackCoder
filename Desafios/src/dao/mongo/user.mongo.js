@@ -3,7 +3,7 @@ const { createHash, isValidPassword } = require('../../utils/bcryptHash')
 const {userModel } = require('./model/user.model')
 
 
-class UserManager{
+class UserManager {
 
     getUsers = async ()=>{
         try {
@@ -88,7 +88,7 @@ class UserManager{
         } catch (error) {
             console.log(error);
         }
-      };     
+     };     
     updateUser = async (uid, changes) => {
         try {
             const userUpdated = await userModel.updateOne({ _id: uid }, { $set: changes })
@@ -108,4 +108,4 @@ class UserManager{
 }
 
 
-module.exports = new UserManager
+module.exports = UserManager
