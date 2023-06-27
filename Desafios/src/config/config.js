@@ -3,7 +3,7 @@ const {commander} = require('../process/commander.js')
 const { mode } = commander.opts()
 
 dotenv.config({
-    path: mode === 'development' ? './.development.env' : './.production.env'
+    path: mode === 'development' ? './../.development.env' : './../.production.env'
 })
 
 
