@@ -1,38 +1,38 @@
-const { cartService } = require('../services')
-const {productModel} = require('../dao/mongo/model/product.model')
+const { productService } = require('../services')
 
 
-class ViewsControllers{  
-    products = async (req, res) =>{
-    try {
+class ViewsControllers {
+    products = async (req, res) => {
+      try {
         const { first_name, last_name, role } = req.user || {};
   
-      let page = parseInt(req.query.page)
-      let limit = parseInt(req.query.limit)
-      let sort = req.query.sort
-      
-      if(!page) page = 1
-      if(!limit) limit = 4
-      if(!sort ) sort = "asc"
-      const result = await productModel.paginate({},
-        {
-        page,
-        limit,
-        sort,
-        lean:true,
-      })
-      result.showLogin = false;
-      result.first_name = first_name;
-      result.last_name = last_name;
-      result.role = role;
+        let page = parseInt(req.query.page);
+        let limit = parseInt(req.query.limit);
+        let sort = req.query.sort;
   
-      result.prevLink = result.hasPrevPage?`http://localhost:8080/api/views/products?page=${result.prevPage}`:'';
-      result.nextLink = result.hasNextPage?`http://localhost:8080/api/views/products?page=${result.nextPage}`:'';
-      result.isValid= !(page<=0||page>result.totalPages)
-      console.log(result)
-         
-      res.render('products', result)
+        if (!page) page = 1;
+        if (!limit) limit = 4;
+        if (!sort) sort = "asc";
   
+        const result = await productService.paginate({}, {
+          page,
+          limit,
+          sort,
+          lean: true,
+        });
+  
+        result.showLogin = false;
+        result.first_name = first_name;
+        result.last_name = last_name;
+        result.role = role;
+  
+        result.prevLink = result.hasPrevPage ? `http://localhost:8080/api/views/products?page=${result.prevPage}` : '';
+        result.nextLink = result.hasNextPage ? `http://localhost:8080/api/views/products?page=${result.nextPage}` : '';
+        result.isValid = !(page <= 0 || page > result.totalPages);
+        console.log(result);
+  
+        res.status(200).render('products', result);
+    
       
     } catch (error) {
         console.error(error)

@@ -14,10 +14,11 @@ const initPassport = () => {
         usernameField: 'email'
     }, async (req, username, password, done) => {
         try {
-            const { first_name, last_name } = req.body
+            const { first_name, last_name, date_of_birth} = req.body
             const newUser = {
                 first_name,
                 last_name,
+                date_of_birth,
                 email: username,
                 role: role,
                 password: createHash(password)

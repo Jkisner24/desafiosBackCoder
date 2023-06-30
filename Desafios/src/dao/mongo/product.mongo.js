@@ -2,14 +2,14 @@ const { productModel } = require ('./model/product.model')
 
 class ProductManagerMongo{
     
-    getProducts = async ()=>{
+    paginateProducts = async (query, options) => {
         try {
-            return await productModel.find({}).lean()
+          return await productModel.paginate(query, options);
         } catch (error) {
-            return new Error(error)
+          throw new Error(error);
         }
-    }
-    getProductById = async (pid) =>{
+      }
+        getProductById = async (pid) =>{
         try {
             return await productModel.findOne({_id:pid})
         } catch (error) {

@@ -55,7 +55,7 @@ app.use(session({
 
 app.use(session({
     store: create({
-        mongoUrl: 'mongodb+srv://julikisner:X0BWaU02EHJdFIio@cluster0.jq6nt7n.mongodb.net/ecommerce?retryWrites=true&w=majority',
+        mongoUrl: process.env.MONGO_URL,
         mongoOptions: {
             useNewUrlParser: true,
             useUnifiedTopology: true
