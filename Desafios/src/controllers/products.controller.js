@@ -3,7 +3,7 @@ const { productService } = require("../services")
 class ProductController {
   get = async (req, res) => {
     try {
-      const products = await productService.getProducts();
+      const products = await productService.get();
       res.status(200).send({
         status: "success",
         payload: products,
@@ -15,7 +15,7 @@ class ProductController {
   getById = async (req, res) => {
     try {
       const { pid } = req.params;
-      let product = await productService.getProductById(pid);
+      let product = await productService.getById(pid);
       res.status(200).send({
         status: "success",
         payload: product,

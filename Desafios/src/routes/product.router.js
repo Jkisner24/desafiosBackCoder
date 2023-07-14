@@ -5,7 +5,7 @@ const router =  Router()
 
 router.get('/', async (req,res)=>{
     try {
-        const products = await productManager.getProducts()
+        const products = await productManager.get()
         res.status(200).send({
             status: 'success',
             payload: products
@@ -17,7 +17,7 @@ router.get('/', async (req,res)=>{
 router.get('/:pid', async (req,res)=>{
     try {
         const {pid} = req.params
-        let product = await productManager.getProductById(pid)
+        let product = await productManager.getById(pid)
         res.status(200).send({
             status: 'success',
             payload: product
@@ -30,7 +30,7 @@ router.post('/', async (req,res)=>{
     try {
         const newProduct = req.body
 
-        let result = await productManager.createProduct(newProduct)
+        let result = await productManager.create(newProduct)
         res.status(200).send({
             status: 'success',
             payload: result
@@ -44,7 +44,7 @@ router.put('/:pid',async (req,res)=>{
     try{
         const {pid} = req.params
         const newProduct = req.body
-        let result = await productManager.updateProduct(pid, newProduct)
+        let result = await productManager.update(pid, newProduct)
         res.status(200).send({
         status: 'success',
         payload: result
@@ -56,7 +56,7 @@ router.put('/:pid',async (req,res)=>{
 router.delete('/:pid', async (req,res)=>{
     try{
     const {pid} = req.params
-    await productManager.deleteProduct(pid)
+    await productManager.delete(pid)
     res.status(200).send({
         status: 'success',
         payload: `Product with id ${pid} deleted`

@@ -1,6 +1,5 @@
 const passport = require('passport');
 const SessionController = require("../controllers/session.controller");
-const { passportAuth } = require("../passport-JWT/passportAuth");
 const { RouterClass } = require("./routerClass");
 
 const session = new SessionController()

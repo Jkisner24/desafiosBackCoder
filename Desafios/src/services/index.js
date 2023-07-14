@@ -15,8 +15,10 @@ module.exports = {
     cartService
 } */
 
+//llamo de factory
 const {ProductDao, UserDao, CartDao} = require('../dao/factory')
 
+//llamo de repository
 const ProductRepository = require('../repositories/product.repository')
 const UserRepository = require('../repositories/user.repository')
 const CartRepository = require('../repositories/cart.repository')

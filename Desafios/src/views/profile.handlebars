@@ -1,9 +1,12 @@
 <header class="d-flex flex-column">
-    <a href="/api/views/products">Return Home</a>
-    <a href="/api/views/session/logout">Log out</a>
+  <a href="/api/views/products">Return Home</a>
+  <form action="/api/views/session/logout" method="post">
+    <button>Log Out</button>
+  </form>
 </header>
 <main>
-    <p class="font-weight-bold align-self-start">Welcome: {{first_name}}, {{last_name}}!</p>
-    {{!-- aca tendria que renderizar el carrito o historial de compras--}}
+  <p class="font-weight-bold align-self-start">Welcome:
+    {{first_name}},
+    {{last_name}}!</p>
 
 </main>

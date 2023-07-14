@@ -1,5 +1,5 @@
-const { productService } = require('../services')
-
+const { cartModel } = require('../dao/mongo/model/cart.model');
+const { productService, cartService} = require('../services')
 
 class ViewsControllers {
     products = async (req, res) => {
@@ -63,19 +63,22 @@ class ViewsControllers {
 }
     profile = async (req, res) =>{
         try {
-            const {first_name, last_name} = req.user || {};
+            const { first_name, last_name, role } = req.user || {};
             const renderProfileObj = {
                 Title: 'Profile',
                 script: 'sessions.js',
-                first_name,
-                last_name
             }
+            renderProfileObj.first_name = first_name;
+            renderProfileObj.last_name = last_name;
+            renderProfileObj.role = role;
+    
+            console.log(renderProfileObj)
             res.status(200).render('profile', renderProfileObj)
 
         } catch (error) {
             res.status(500).sendServerError(error.message)
         }
-    }
+}
     logout = async (req, res) => {
         try {
             const { first_name, last_name } = req.user || {}
@@ -89,7 +92,22 @@ class ViewsControllers {
         } catch (error) {
             res.status(500).sendServerError(error.message) 
         }
-    }
+}
+    userCart = async (req, res) =>{
+        try {
+
+            const { cidd } = req.params
+
+            const cart = await cartModel.findById({_id:cidd})
+            console.log(cart)
+            const cartRender = {
+                cart: cart,
+            }
+            res.status(200).render('carts', cartRender)
+        } catch (error) {
+            res.status(500).sendServerError(error.message)
+        }
+}
 }
 
 module.exports = ViewsControllers

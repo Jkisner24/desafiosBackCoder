@@ -2,7 +2,8 @@
     <h1 class="text-center bg-info shadow-lg p-3 mb-5 bg-body rounded">Cart</h1>
 </header>
 <table class="table table-light">
-    {{#each products}}
+
+  <thead>
     <tr class="">
       <th scope="col">ID</th>
       <th scope="col">Product</th>
@@ -12,15 +13,48 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th class="align-middle" scope="row">{{this._id}}</th>
-      <td class="align-middle">{{idProduct.title}}</td>
-      <td class="align-middle">{{idProduct.description}}</td>
-      <td class="align-middle">{{idProduct.price}}</td>
-      <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src={{idProduct.thumbnail}}></img></td>
-    </tr>
+  {{#each products}}
+  <tr>
+    <th class="align-middle" scope="row">{{this.idProduct._id}}</th>
+    <td class="align-middle">{{this.idProduct.title}}</td>
+    <td class="align-middle">{{idProduct.description}}</td>
+    <td class="align-middle">{{this.idProduct.price}}</td>
+    <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></img></td>
+  </tr>
+{{/each}}
+{{#each cart.products}}
+  <tr>
+    <th class="align-middle" scope="row">{{idProduct._id}}</th>
+    <td class="align-middle">{{idProduct.title}}</td>
+    <td class="align-middle">{{this.idProduct.description}}</td>
+    <td class="align-middle">{{this.idProduct.price}}</td>
+    <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></img></td>
+  </tr>
+{{/each}}
+
+    {{#each cart.products}}
+      <tr>
+        <th class="align-middle" scope="row">{{this.idProduct._id}}</th>
+        <td class="align-middle">{{this.idProduct.title}}</td>
+        <td class="align-middle">{{this.idProduct.description}}</td>
+        <td class="align-middle">{{this.idProduct.price}}</td>
+        <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></td>
+      </tr>
+    {{/each}}
+        {{#each cart.products}}
+      <tr>
+        <th class="align-middle" scope="row">{{this.idProduct}}</th>
+        <td class="align-middle">{{this.idProduct.title}}</td>
+        <td class="align-middle">{{this.idProduct.description}}</td>
+        <td class="align-middle">{{this.idProduct.price}}</td>
+        <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></td>
+      </tr>
+    {{/each}}
+
+
+
+
+
+
   </tbody>
-   {{/each}} 
-
 </table>
-

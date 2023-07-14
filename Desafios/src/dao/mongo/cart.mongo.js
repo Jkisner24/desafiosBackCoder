@@ -1,15 +1,16 @@
 const {cartModel} = require('./model/cart.model')
+const {ticketModel} = require('./model/ticket.model')
 
 class CartManagerMongo{
 
-    newCart = async () => {
+    newCart = async (newCart) => {
         try {
-            return await cartModel.create({products: []})
+            return await cartModel.create(newCart)
         } catch (error) {
             return new Error(error)
         }
     }
-    getCarts = async() =>{
+    get = async() =>{
         try {
             return await cartModel.find({})
         } catch (error) {
@@ -17,46 +18,40 @@ class CartManagerMongo{
         }
 
     }
-    getCartById = async (cidd) =>{
+    getById = async (cidd) =>{
         try {
-            return await cartModel.findOne({_id:cidd})
+            return await cartModel.findOne({_id: cidd}).lean()
         } catch (error) {
             return new Error(error)
         }
     }
 
-    updateCart = async (params)=>{
+    update = async (cidd, newCart)=>{
         try {
-            const { cidd, pid } = params;
-            const cartFound = await cartModel.findOne({_id: cidd, "products.idProduct": pid})
-            if(cartFound){
-                return await cartModel.updateOne({_id: cidd, "products.idProduct": pid}, {$inc: { "products.$.quantity": 1}})          
-            }else{
-                return await cartModel.updateOne({_id: cidd}, {$push: { products: {idProduct: pid, quantity: 1}}})
-            }
-        } catch (error) {
-            
-        }
-    }
-    addProductInCart = async (params, body) => {
-        try {
-            const { cidd, pid } = params;
-            const { quantity } = body;
-            
-            const cartFound = await cartModel.findOne({_id: cidd, "products.idProduct": pid})
-
-            if(cartFound){
-                return await cartModel.findOne({ _id: cidd, "products.idProduct": pid }, {$set: { "products.$.quantity": quantity } })
-            }
+            return await cartModel.findOneAndUpdate(
+                {_id: cidd},
+                {$set: {product: newCart}},
+                {new: true})
         } catch (error) {
             return new Error(error)
         }
     }
-    deleteCartProd = async (params)=>{
+    addProduct = async (cidd, pid, quantity) => {
+        try {
+            return await cartModel.findOneAndUpdate(
+                {_id: cidd, "products.idProduct": pid},
+                {$set: {"products.$.quantity": quantity }},
+                {new: true})
+        } catch (error) {
+            return new Error(error)
+        }
+    }
+    deleteCartProd = async (cidd, pid)=>{
         try{
-            const { cidd, pid } = params;
-            return await cartModel.findOneAndUpdate({_id: cidd}, {$pull: {products: {idProduct: pid}}},{new: true} )
-
+            return await cartModel.findOneAndUpdate(
+                {_id: cidd}, 
+                {$pull: {products: {idProduct: pid}}},
+                {new: true})
         }catch(error){
             return new Error(error)
         }
@@ -64,6 +59,23 @@ class CartManagerMongo{
     deleteCartById = async (cidd)=>{
         try {
             return await cartModel.deleteOne({_id: cidd})
+        } catch (error) {
+            return new Error(error)
+        }
+    }
+    emptyCart = async(cidd)=>{
+        try {
+            return await cartModel.findOneAndUpdate(
+                {_id: cidd}, 
+                {$set: {products:[]}}, 
+                {new: true})
+        } catch (error) {
+            return new Error(error)
+        }
+    }
+    generateTicket = async(newTicket)=>{
+        try {
+            return await ticketModel.create(newTicket)
         } catch (error) {
             return new Error(error)
         }
