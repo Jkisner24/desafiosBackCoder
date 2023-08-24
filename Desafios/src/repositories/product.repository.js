@@ -5,9 +5,9 @@ class ProductRepository {
       this.dao = dao;
     }
   
-    paginate = async (query, options) => {
+    getProducts = async (data) => {
       try {
-        return await this.dao.get(query, options);
+        return await this.dao.get(data);
       } catch (error) {
         throw error;
       }
@@ -26,9 +26,9 @@ class ProductRepository {
         throw error;
       }
     }    
-    productUpdate = async (pid, newProduct) => {
+    updateProduct = async (pid, updateBody) => {
       try {
-        return await this.dao.update({_id: pid}, newProduct);
+        return await this.dao.update(pid, updateBody);
       } catch (error) {
         throw error;
       }

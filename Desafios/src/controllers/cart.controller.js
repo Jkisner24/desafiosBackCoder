@@ -1,14 +1,14 @@
-const {cartService, productService} = require('../services')
+const {cartService, productService, ticketService} = require('../services')
 const { v4: uuidv4 } = require('uuid')
-const { sendMail } = require("../utils/nodemailer")
-const { cartModel } = require('../dao/mongo/model/cart.model')
+const transport = require("../utils/nodeMailer")
+const { isValidObjectId } = require("mongoose")
+const config = require('../config/config')
 
 class CartController {
 
     createCart = async(req, res) =>{
         try {
             const result = await cartService.newCart()
-            console.log(result)
             res.status(201).send({ 
                 status: 'success',
                 payload: result
@@ -28,11 +28,14 @@ class CartController {
             res.status(500).sendServerError(error.message)
         }
     }
-    getById = async(req, res) =>{
+    getCart = async(req, res) =>{
         try {
            const {cidd} = req.params
-           const cart = await cartService.getById({_id:cidd})
-           console.log(cart)
+           if (!isValidObjectId(cidd)) {
+            return res.status(400).send({ message: `Invalid cart ID: ${cidd}` });
+          }
+            
+           const cart = await cartService.getById(cidd)
            if(!cart) return res.status(404).send({ message: `Cart with ID ${cidd} not found` })
            res.status(201).send({
             status: 'success',
@@ -42,7 +45,7 @@ class CartController {
             res.status(500).sendServerError(error.message)
         }
     }
-    update = async(req, res) =>{
+/*     update = async(req, res) =>{
         try {
             const { cidd } = req.params
             const newCart = req.body
@@ -53,26 +56,16 @@ class CartController {
             res.status(500).sendServerError(error.message)
         }
     }
-    updateProduct = async (req, res) => {
+ */    updateProduct = async (req, res) => {
         try {
           const { cidd, pid } = req.params;
           const { quantity } = req.body;
       
-          const cartFound = await cartModel.findOne({ _id: cidd });
+          const cartFound = await cartService.getById({ _id: cidd });
       
-          if (cartFound) {
-            const productIndex = cartFound.products.findIndex(product => product.idProduct === pid);
-            if (productIndex !== -1) {
-              // El producto ya existe en el carrito, actualiza la cantidad
-              cartFound.products[productIndex].quantity = quantity;
-            } else {
-              // El producto no existe en el carrito, añádelo
-              cartFound.products.push({ idProduct: pid, quantity: quantity });
-            }
-            await cartFound.save();
-          }
-      
-          const updatedCart = await cartModel.findById(cidd);
+          if(!cartFound) throw({ status:"Error", message:"The cart does not exist" })
+
+          const updatedCart = await cartService.update({ _id: cidd }, pid, quantity);
       
           return res.status(201).send({
             status: 'success',
@@ -111,60 +104,64 @@ class CartController {
             res.status(500).sendServerError(error.message)
         }
     }
-    generateTicket = async(req, res) =>{
+    purchase = async(req, res) =>{
         try {
             const {cidd} = req.params
-            const cart = await cartService.getById(cidd)
-            if(!cart) return res.status(404).send({ message: `Cart with ID ${cidd} not found` })
+            const cart = await cartService.getById(cidd) 
+            //console.log(cart)
+            const user = req?.user ?? null
+            //console.log(user)
 
-            const productsOutOfStock = []
+            const insufficientStock = []
+            const buyProducts = []
 
-            for(const item of cart.products){
-                let product = item.product
-                let quantity = item.quantity
-                let stock = item.product.stock
-                if(quantity > stock) productsOutOfStock.push(product)
-                else{
-                        await productService.productUpdate(
-                        product, 
-                        {quantity: stock - quantity}
-                )}
-            }
-            const productsPurchase = cart.products.filter(prod => 
-                !productsOutOfStock.includes(pro => pro.product._id === prod.product._id))
+            if(!cart) throw({status:"Error", message:"Cart not found"})
+            
+            cart.products.forEach(async item => {
+                const product = item.product
+                const quantity = item.quantity
+                const stock = item.product.stock
 
-            if(productsPurchase.length > 0){
-                const ticket = {
+                quantity > stock 
+                ? insufficientStock.push(product) 
+                : buyProducts.push({product, quantity}) 
+                    && await productService.updateProduct(product, {stock: stock - quantity}) 
+                    && await cartService.deleteCartProd(cart, product) 
+            });
+
+
+            const totalAmount = buyProducts.reduce((acc, item) => acc + item.quantity, 0)
+            const totalPrice = buyProducts.reduce((acc, item) => acc + item.product.price * item.quantity, 0 ).toFixed(3)
+            
+            if(!buyProducts.length){
+                throw({
+                    status:"Error", 
+                    message:"Insufficient stock in the products", 
+                    products: insufficientStock.map(prod => prod.title)
+                })
+            } 
+
+            if(buyProducts.length > 0){  
+                const ticket = await ticketService.createTicket({
                     code: uuidv4(),
-                    parchase_datetime: new Date(),
-                    amount: productsPurchase.reduce((total, prod)=> total + (prod.cantidad * prod.product.price), 0),
-                    purchaser: req.user.email
-                };
-                
-                const generateTicket = await cartService.generateTicket(ticket)
+                    amount: totalAmount,
+                    purchaser: user.email,
+                })
 
-                cart.products = productsOutOfStock;
-                await cartService.updateCart(cidd, productsOutOfStock)
+                await transport.sendMail({
+                    from: config.GMAIL_EMAIL_ADMIN,
+                    to: user.email,
+                    subject: "Thanks for your purchase",
+                    html:`<div>
+                                <h1>
+                                    Thanks for your purchase.
+                                    the total to pay is $${totalPrice}
+                                </h1>
+                          </div>`
+                })
 
-                if(productsOutOfStock.length > 0){
-                    await sendMail(ticket)
-                    res.status(201).send({
-                        message: 'Partially purchase',
-                        ticket: generateTicket})
-                }else{
-                    await sendMail(ticket)
-                    res.status(201).send({
-                        message: 'Successful purchase',
-                        ticket: generateTicket})
-                }
-
-            }else{
-                const productsOutOfStockId = productsOutOfStock.map(prod => prod.product._id)
-                res.status(200).send({
-                    message: 'Cannot completed purchase',
-                    payload: productsOutOfStockId});
+                res.send({status:"Success", message:"Successful purchase", toTicket: ticket})
             }
-
         } catch (error) {
             return res.status(500).sendServerError(error.message)
         }

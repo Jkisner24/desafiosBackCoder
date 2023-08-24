@@ -1,39 +1,40 @@
-const { cartModel } = require('../dao/mongo/model/cart.model');
 const { productService, cartService} = require('../services')
 
 class ViewsControllers {
     products = async (req, res) => {
-      try {
-        const { first_name, last_name, role } = req.user || {};
-  
-        let page = parseInt(req.query.page);
-        let limit = parseInt(req.query.limit);
-        let sort = req.query.sort;
-  
-        if (!page) page = 1;
-        if (!limit) limit = 4;
-        if (!sort) sort = "asc";
-  
-        const result = await productService.paginate({}, {
-          page,
-          limit,
-          sort,
-          lean: true,
-        });
-  
-        result.showLogin = false;
-        result.first_name = first_name;
-        result.last_name = last_name;
-        result.role = role;
-  
-        result.prevLink = result.hasPrevPage ? `http://localhost:8080/api/views/products?page=${result.prevPage}` : '';
-        result.nextLink = result.hasNextPage ? `http://localhost:8080/api/views/products?page=${result.nextPage}` : '';
-        result.isValid = !(page <= 0 || page > result.totalPages);
-        console.log(result);
-  
-        res.status(200).render('products', result);
+        try {
+            const {page = 1} = req.query
+            const { sort="asc" } = req.query
+            console.log(req.query.page)
+                
+            let products = await productService.getProducts(page, sort)
+            const{docs, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = products
+            
+            console.log(products)
+              if(page > totalPages || page < 1) throw({status: "Error", message: "Page not found"})
     
-      
+              if(!products) throw({status: "Error", message: "Documents not found"})
+          
+              const user = req?.user?.user ?? null
+              //console.log(user)
+
+            res.status(200).render("products", {
+                logged: user ? false : true,
+                products: docs,
+                hasPrevPage,
+                hasNextPage,
+                prevPage,
+                nextPage,
+                totalPages,
+                sort,
+                page,
+                role: user?.role ?? 'Invitado',
+                addProducts: user?.role == 'ADMIN',
+                first_name: user?.first_name,
+                last_name: user?.last_name,
+                cartId: user?.cartId,
+                })      
+                
     } catch (error) {
         console.error(error)
         return res.status(500).send(error)
@@ -41,11 +42,11 @@ class ViewsControllers {
 }
     login = async (req, res) => {
         try {
-            const renderLoginView = {
+            const loginView = {
                 title: "Iniciar sesion",
                 script: "login.js"
             }
-            res.status(200).render('login', renderLoginView)
+            res.status(200).render('login', loginView)
         } catch (error) {
             res.status(500).sendServerError(error.message)
         }
@@ -63,10 +64,12 @@ class ViewsControllers {
 }
     profile = async (req, res) =>{
         try {
-            const { first_name, last_name, role } = req.user || {};
+            const { first_name, last_name, role } = req.user.user || {};
+            console.log(req.user)
             const renderProfileObj = {
                 Title: 'Profile',
                 script: 'sessions.js',
+                first_name: first_name
             }
             renderProfileObj.first_name = first_name;
             renderProfileObj.last_name = last_name;
@@ -81,7 +84,7 @@ class ViewsControllers {
 }
     logout = async (req, res) => {
         try {
-            const { first_name, last_name } = req.user || {}
+            const { first_name, last_name } = req.user.user || {}
             const renderProfileObj = {
             title: 'Perfil',
             script: 'sessions.js',
@@ -96,12 +99,17 @@ class ViewsControllers {
     userCart = async (req, res) =>{
         try {
 
-            const { cidd } = req.params
-
-            const cart = await cartModel.findById({_id:cidd})
-            console.log(cart)
+            let { cidd } = req.params
+            const cart = await cartService.getById(cidd)
+            if (!cart) {
+                return res.status(404).send({ message: `Cart with ID ${cidd} not found` });
+              }
+          
+            //console.log(cart)
             const cartRender = {
-                cart: cart,
+                title: "Cart",
+                id: cart._id,
+                products : cart.products
             }
             res.status(200).render('carts', cartRender)
         } catch (error) {

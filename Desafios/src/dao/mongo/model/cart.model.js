@@ -1,29 +1,23 @@
 const { Schema, model } = require('mongoose')
 
-const collection = 'carts'
+const collection = "carts"
 
 const cartSchema = new Schema({
-   // user: {
-   //     type: Schema.Types.ObjectId,
-   //     ref: 'users',
-    //    index: true
-    //},
-    status: String,
     products: [{
-        idProduct: {
+        product: {
             type: Schema.Types.ObjectId,
-            ref: 'products'
+            ref: "products",
         },
         quantity: {
             type: Number
-        }
-    }
+        },
+    },
     ]
 })
 
 //middleware.pre
-cartSchema.pre('findOne', function(){
-	this.populate('products.idProduct')
+cartSchema.pre("findOne", function(){
+	this.populate("products.product")
 }) 
 
 const cartModel = model(collection, cartSchema)

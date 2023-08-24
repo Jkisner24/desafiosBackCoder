@@ -3,9 +3,9 @@ class CartRepository{
     constructor(dao){
         this.dao = dao
     }
-    newCart = async(newCart) =>{
+    newCart = async() =>{
         try {
-            return await this.dao.newCart(newCart)
+            return await this.dao.newCart()
         } catch (error) {
             throw error
         }
@@ -25,16 +25,16 @@ class CartRepository{
         }
     }
 
-    updateCarts = async(cidd, newCart) =>{
+/*     updateCarts = async(cidd, newCart) =>{
         try{
             return await this.dao.update(cidd, newCart)
         } catch (error) {
             throw error
         }
     }
-    update = async(cidd, pid, quantity) =>{
+ */    update = async(cidd, pid, quantity) =>{
         try{
-            return await this.dao.updateProduct(cidd, pid, quantity)
+            return await this.dao.addProduct(cidd, pid, quantity)
         } catch (error) {
             throw error
         }
@@ -60,9 +60,9 @@ class CartRepository{
             throw error
         }
     }
-    generateTicket = async(newTicket) =>{
+    purchase = async(newTicket) =>{
         try{
-            return await this.dao.generateTicket(newTicket)
+            return await this.dao.purchase(newTicket)
         } catch (error) {
             throw error
         }

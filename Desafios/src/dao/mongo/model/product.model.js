@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
-const paginate = require('mongoose-paginate-v2');
+const mongoosePaginate = require("mongoose-paginate-v2")
 
-const collection = 'products'
+const collection = "products"
 
 const productSchema = new Schema({
     title: {
@@ -34,10 +34,16 @@ const productSchema = new Schema({
     category: {
         type: String,
         required: true
-    }
+    },
+    owner: {
+        type: Schema.Types.String,
+        ref: 'users',
+        default: 'ADMIN'
+    },
+
 });
 
-productSchema.plugin(paginate);
+productSchema.plugin(mongoosePaginate);
 const productModel = model(collection, productSchema);
 
 module.exports = {

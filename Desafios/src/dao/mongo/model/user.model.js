@@ -26,6 +26,7 @@ const usersSchema = new Schema({
     },
     role: {
         type: String,
+        enum: ['user', 'admin', 'premium'],
         default: 'user'
     },
     date_of_birth: {
@@ -34,6 +35,7 @@ const usersSchema = new Schema({
     }
 })
 
+// Calculo de edad en funcion de fecha nac.
 usersSchema.virtual('age').get(function() {
     const currentDate = new Date();
     const birthDate = this.date_of_birth;
@@ -42,7 +44,7 @@ usersSchema.virtual('age').get(function() {
     return ageInYears;
 });
 
-// Configurar opción para incluir las propiedades virtuales al convertir a objeto JSON
+// Configura opción para incluir las propiedades virtuales al convertir a objeto JSON
 usersSchema.set('toJSON', { virtuals: true });
 
 

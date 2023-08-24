@@ -1,11 +1,11 @@
-function auth(req, res, next) {
-    if (req.session.user && req.url === '/session/login') {
-      return res.redirect('/api/views/products');
-    }
-    next();
-  }
+const auth = (req, res, next)=> {
+  const { user } = req ?? null
+
+  if (!user) return next()
+
+  res.redirect('/api/views/products')
+}
   
-  module.exports = {
-    auth
-  };
+  module.exports = auth
+  
   

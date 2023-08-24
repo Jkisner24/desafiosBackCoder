@@ -5,56 +5,21 @@
 
   <thead>
     <tr class="">
-      <th scope="col">ID</th>
-      <th scope="col">Product</th>
-      <th scope="col">Description</th>
+      <th scope="col">Title</th>
+      <th scope="col">Quantity</th>
       <th scope="col">Price</th>
       <th scope="col">Image</th>
     </tr>
   </thead>
   <tbody>
-  {{#each products}}
-  <tr>
-    <th class="align-middle" scope="row">{{this.idProduct._id}}</th>
-    <td class="align-middle">{{this.idProduct.title}}</td>
-    <td class="align-middle">{{idProduct.description}}</td>
-    <td class="align-middle">{{this.idProduct.price}}</td>
-    <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></img></td>
-  </tr>
-{{/each}}
-{{#each cart.products}}
-  <tr>
-    <th class="align-middle" scope="row">{{idProduct._id}}</th>
-    <td class="align-middle">{{idProduct.title}}</td>
-    <td class="align-middle">{{this.idProduct.description}}</td>
-    <td class="align-middle">{{this.idProduct.price}}</td>
-    <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></img></td>
-  </tr>
-{{/each}}
+ 
+   {{#each products}}
+    <tr>
+      
+      <td class="align-middle">{{product.title}}</td>
+      <td class="align-middle">{{this.quantity}}</td>
+      <td class="align-middle">{{product.price}}</td>
+      <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src={{product.thumbnail}}></img></td>
+    </tr>
+   {{/each}} 
 
-    {{#each cart.products}}
-      <tr>
-        <th class="align-middle" scope="row">{{this.idProduct._id}}</th>
-        <td class="align-middle">{{this.idProduct.title}}</td>
-        <td class="align-middle">{{this.idProduct.description}}</td>
-        <td class="align-middle">{{this.idProduct.price}}</td>
-        <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></td>
-      </tr>
-    {{/each}}
-        {{#each cart.products}}
-      <tr>
-        <th class="align-middle" scope="row">{{this.idProduct}}</th>
-        <td class="align-middle">{{this.idProduct.title}}</td>
-        <td class="align-middle">{{this.idProduct.description}}</td>
-        <td class="align-middle">{{this.idProduct.price}}</td>
-        <td><img class="rounded mx-auto d-block" style="width: 8rem; height:auto" src="{{this.idProduct.thumbnail}}"></td>
-      </tr>
-    {{/each}}
-
-
-
-
-
-
-  </tbody>
-</table>

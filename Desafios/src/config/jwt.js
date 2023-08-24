@@ -1,13 +1,13 @@
-require('dotenv').config()
 const jwt = require('jsonwebtoken')
-
+const {JWT_SECRET_KEY} = require('../config/config')
 
 const generateToken = (user) => {
-    const token = jwt.sign({ user }, process.env.JWT_SECRET_KEY, { expiresIn: '24h' })
+    const token = jwt.sign(user, JWT_SECRET_KEY, { expiresIn: '24h' })
     return token
+
 }
 
-const authToken = async (req, res, next) => {
+const authToken = (req, res, next) => {
     try {
         const authHeader = req.headers['authorization']; 
 
@@ -18,9 +18,9 @@ const authToken = async (req, res, next) => {
           });
         }
     
-        const token = authHeader.split(' ')[1]; // Extraer el token correctamente
+        const token = authHeader.split(' ')[1]; 
 
-        jwt.verify(token, process.env.JWT_SECRET_KEY, (error, credential) => {
+        jwt.verify(token, JWT_SECRET_KEY, (error, credential) => {
             if (error) return res.status(403).send({
                 status: 'error',
                 payload: 'Not authorized'
@@ -32,8 +32,27 @@ const authToken = async (req, res, next) => {
         return res.status(404).send({ status: 'error', error })
     }
 }
+const authHeaders = (req, _res, next) => {
+    const cookieHeader = req.headers.cookie ?? req.headers.authorization ?? null
+    if (!cookieHeader) return next()
+    if (cookieHeader.includes('=')) {
+        const token = cookieHeader.split('=')[1]
+        const { user } = jwt.verify(token, JWT_SECRET_KEY)
+        req.user = user
+        next()
+    }
+    if (cookieHeader.toLowerCase().includes('bearer')) {
+        const token = cookieHeader.split(' ')[1]
+        const { user } = jwt.verify(token, JWT_SECRET_KEY)
+        req.user = user
+        next()
+    }
+}
+
+
 
 module.exports = {
     generateToken,
-    authToken
+    authToken,
+    authHeaders,
 }

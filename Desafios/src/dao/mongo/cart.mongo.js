@@ -3,9 +3,9 @@ const {ticketModel} = require('./model/ticket.model')
 
 class CartManagerMongo{
 
-    newCart = async (newCart) => {
+    newCart = async () => {
         try {
-            return await cartModel.create(newCart)
+            return await cartModel.create({})
         } catch (error) {
             return new Error(error)
         }
@@ -18,15 +18,16 @@ class CartManagerMongo{
         }
 
     }
-    getById = async (cidd) =>{
+    getById = async(cidd) =>{
         try {
-            return await cartModel.findOne({_id: cidd}).lean()
+          const cart = await cartModel.findOne({_id: cidd}).lean();
+          return cart;
         } catch (error) {
-            return new Error(error)
+          console.error("Error al obtener el carrito:", error.message);
+          throw error; 
         }
-    }
-
-    update = async (cidd, newCart)=>{
+      }
+/*     update = async (cidd, newCart)=>{
         try {
             return await cartModel.findOneAndUpdate(
                 {_id: cidd},
@@ -36,16 +37,19 @@ class CartManagerMongo{
             return new Error(error)
         }
     }
-    addProduct = async (cidd, pid, quantity) => {
+ */    addProduct = async (cidd, pid, quantity) => {
         try {
             return await cartModel.findOneAndUpdate(
-                {_id: cidd, "products.idProduct": pid},
-                {$set: {"products.$.quantity": quantity }},
-                {new: true})
+                { _id: cidd },
+                { $push: { products: { product: pid, quantity: quantity } } },
+                {
+                returnDocument: 'after',
+                lean: true,})
         } catch (error) {
-            return new Error(error)
-        }
+                    throw error
+                }
     }
+
     deleteCartProd = async (cidd, pid)=>{
         try{
             return await cartModel.findOneAndUpdate(
@@ -73,7 +77,7 @@ class CartManagerMongo{
             return new Error(error)
         }
     }
-    generateTicket = async(newTicket)=>{
+    purchase = async(newTicket)=>{
         try {
             return await ticketModel.create(newTicket)
         } catch (error) {

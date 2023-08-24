@@ -1,0 +1,283 @@
+[31mfatal[39m: Unknown authentication strategy "github"
+[31mfatal[39m: Parse error on line 57:
+...   {{/if}}</div>{{else}}<h2>There 
+---------------------^
+Expecting 'EOF', got 'INVERSE'
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: Cannot read properties of undefined (reading 'email')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: email is not defined
+[31mfatal[39m: user is not defined
+[31mfatal[39m: user is not defined
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: jwt expired
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: jwt must be provided
+[31mfatal[39m: jwt must be provided
+[31mfatal[39m: jwt must be provided
+[31mfatal[39m: jwt must be provided
+[31mfatal[39m: Unexpected token } in JSON at position 51
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'role')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'userId')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: role is not defined
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: user is not defined
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Fatal error
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: info
+[31mfatal[39m: Fatal error
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: email is not defined
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Fatal error
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'toUpperCase')
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: info
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080

@@ -1,24 +1,17 @@
 const passport = require('passport')
 const jwt = require('passport-jwt')
-require('dotenv').config()
-
+const {JWT_SECRET_KEY} = require('../config/config')
 
 const JWTStrategy = jwt.Strategy
 const ExtractJWT = jwt.ExtractJwt
 
-//extract the cookie from the request
-const cookieExtractor = req => {
-    let token = null
-    if (req && req.cookies) {
-        token = req.cookies['coderCookieToken']
-    }
-    return token
-}
+const cookieExtractor = req => req?.cookies?.['coderCookieToken'] || null
+
 //decrypt and go to the next level
-const initializePassport = () => {
+const initPassport = () => {
     passport.use('jwt', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
-        secretOrKey: process.env.JWT_SECRET_KEY
+        secretOrKey: JWT_SECRET_KEY
     }, async (jwt_payload, done) => {
         try {
             return done(null, jwt_payload)
@@ -26,21 +19,9 @@ const initializePassport = () => {
             return done(error)
         }
     }))
-
-    //strategy current
-    passport.use('current', new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
-        secretOrKey: process.env.JWT_SECRET_KEY
-    }, async (jwt_payload, done) => {
-        try {
-            return done(null, jwt_payload)
-        } catch (error) {
-            return done(error)
-        }
-    }))
+  
 }
 
-
 module.exports = {
-    initializePassport
+    initPassport
 }

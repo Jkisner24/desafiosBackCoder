@@ -1,19 +1,25 @@
 <header>
     <h1 class="bg-primary text-center mb-2 p-3">Listado de Productos</h1>
     <nav class="navbar d-flex flex-column mb-4">
-        <p class="font-weight-bold align-self-start">Welcome: {{first_name}}, {{last_name}}!</p>
-        <p class="font-weight-bold align-self-start">Role: {{role}}</p>
         <div class="font-weight-bold text-decoration-none align-self-start">
-            {{#if showLogin}}
+            {{#if logged}}
             <a href="/api/views/session/login">
                 <button>Login</button>
             </a>
             <a href="/api/views/session/register">Register</a>
             {{else}}
+            <div class="me-auto mt-2 user-info">
+                <span class="navbar-brand">Welcome: 
+                    {{first_name}}
+                    {{last_name}}
+                    <br>
+                    Your rol is:
+                    {{role}}</span>
+                    </div>
             <a href="/api/views/session/profile">
                 <button>Profile</button>
             </a>
-            <a href="/api/views/carts/64ab2a30a83e2498e5a46498">
+            <a href="/api/views/carts/64ba95cefd68735d0a6d49ef">
                 <button>Cart</button>
             </a>
             <form action="/api/views/session/logout" method="post">
@@ -23,9 +29,8 @@
         </div>
     </nav>
 </header>
-{{#if isValid}}
 <div class="m-2 d-flex justify-content-between">
-    {{#each docs}}
+    {{#each products}}
     <div class="card" style="width: 14rem;height: auto;">
         <img src={{this.thumbnail}} class="card-img-top max-width: 100%" alt={{this.title}}>
         <div class="card-body">
@@ -39,16 +44,23 @@
     {{/each}}
 </div>
 <br />
-<div class="m-2">
-    {{#if hasPrevPage}}
-    <a href={{this.prevLink}}>
-        << Previous </a>
-            {{/if}}
-            {{this.page}}
-            {{#if hasNextPage}}
-            <a href={{this.nextLink}}>Next >></a>
-            {{/if}}
-</div>
-{{else}}
-<h2>There is not products</h2>
+<section class="container-fluid boxProducts">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+{{#if hasPrevPage}}
+    <li class="page-item">
+        <a class="page-link" href="/api/views/products?page={{prevPage}}&sort={{sort}}"> Prev Page </a>
+    </li>
 {{/if}}
+{{#if totalPages}}
+    <li class="page-item"><a class="page-link" href="/api/views/products?page={{page}}&sort={{sort}}"> {{page}} </a></li>
+{{/if}}
+{{#if hasNextPage}}
+    <li class="page-item">
+        <a class="page-link" href="/api/views/products?page={{nextPage}}&sort={{sort}}"> Next </a>
+    </li>
+{{/if}}
+        </ul>
+    </nav>
+</section>
+<script src="/static/js/index.js"></script>

@@ -1,9 +1,9 @@
 const { PERSISTENCE } = require("../config/config");
-const configServer = require("../config/configServer");
+const configServer = require("../config/dbconfig");
 let ProductDao
 let UserDao
 let CartDao
-
+let TicketDao
 
 switch(PERSISTENCE){
     case 'MONGO': 
@@ -11,10 +11,12 @@ switch(PERSISTENCE){
         const ProductDaoMongo = require('../dao/mongo/product.mongo')
         const UserDaoMongo = require('../dao/mongo/user.mongo')
         const CartDaoMongo = require('../dao/mongo/cart.mongo')
+        const TicketDaoMongo = require('../dao/mongo/ticket.mongo')
 
         ProductDao = ProductDaoMongo
         UserDao = UserDaoMongo
         CartDao = CartDaoMongo
+        TicketDao = TicketDaoMongo
         break;
     case 'FILE':
         const ProductDaoFile = require('../dao/fileSystem/ProductManager')
@@ -31,5 +33,6 @@ switch(PERSISTENCE){
 module.exports ={
     ProductDao,
     UserDao,
-    CartDao
+    CartDao,
+    TicketDao
 }

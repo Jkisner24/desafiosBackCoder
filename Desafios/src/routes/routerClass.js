@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
-require('dotenv').config()
-
+const {JWT_SECRET_KEY} = require('../config/config')
 
 class RouterClass {
     constructor() {
@@ -15,19 +14,27 @@ class RouterClass {
 
     handlePolicies = policies => (req, res, next) => {
         if (policies[0] === 'PUBLIC') return next()
-        const authHeader = req.headers.authorization
-
+    
+        const authHeader = req.headers.cookie ?? req.headers.authorization ?? null
+    
         if (!authHeader) return res.send({ status: 'error', error: 'Unauthorized' })
-        const token = authHeader.split(' ')[1]
-        const { user } = jwt.verify(token, process.env.JWT_SECRET_KEY)
-
-        if (!policies.includes(user.role.toUpperCase())) return res.status(403).send({ status: 'error', payload: 'No permission' })
-
-        req.user = user
-        console.log(user)
+    
+        let token;
+    
+        if (authHeader.toLowerCase().includes('bearer')) {
+            token = authHeader.split(' ')[1]
+        } else {
+            token = authHeader.split('=')[1]
+        }
+        
+    
+        const { role, userId, first_name, email} = jwt.verify(token, JWT_SECRET_KEY);
+        if (!policies.includes(role.toUpperCase())) return res.status(403).send({ status: 'error', payload: 'No permission' })
+        req.user = { role, userId, first_name, email}
+        console.log(req.user)
         next()
     }
-
+    
     generateCustomResponse = async (_req, res, next) => {
         try {
             res.sendSuccess = payload => res.send({ status: 'success', payload })

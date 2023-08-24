@@ -1,59 +1,39 @@
 const express = require ("express")
+const handlebars = require('express-handlebars')
 const cookieParse = require('cookie-parser')
 const session = require('express-session') 
-// const FileStore = require('session-file-store')
 const {create} = require('connect-mongo')
-const handlebars = require('express-handlebars')
-const routerServer = require('./routes/index')
-const logger = require('morgan')
-const {connectDb} = require("./config/configServer")
-const { initPassport, initPassortGithub } = require("./config/passport.config")
 const passport = require('passport')
-const { initializePassport } = require('./passport-JWT/passport.config.js')
+const cors = require('cors')
+const routerServer = require('./routes/index')
+const {initPassport} = require('./passport-JWT/passport.config')
+const errorMiddleware = require('./middlewares/errors/indexError')
+const addLogger = require('./middlewares/logger.midd.js')
+const { initPassportGithub } = require("./passport-JWT/passport.config2")
 const app = express();
+require("dotenv")
 
-connectDb()
-initPassport()
-initPassortGithub()
 
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({extended: true}))
 
 app.engine('handlebars', handlebars.engine())
 app.set('views', `${__dirname}/views`)
 app.set('view engine', 'handlebars')
 
-
 app.use('/static', express.static(`${__dirname}/public`))
-app.use(logger('dev'))
-app.use(cookieParse())
-
-initializePassport()
-passport.use(passport.initialize())
-passport.use(passport.session())
+app.use(cookieParse("S1gn3d Co0k13"))
 
 
+app.use(addLogger)
+
+initPassport()
+/* initPassportGithub()
+ */passport.use(passport.initialize())
+/* passport.use(passport.session())
+ */
 /* app.use(session({
-    secret: 'secretCoder',
-    resave: true, 
-    saveUninitialized: true
-}))
-
- */
-/* const fileStore = FileStore(session)
-app.use(session({
-    store: new fileStore({
-        ttl: 100000*60,
-        path: '/session',
-        retries: 0
-    }),
-    secret: 'secretCoder',
-    resave: true,
-    saveUninitialized: true
-}))
- */
-
-app.use(session({
     store: create({
         mongoUrl: process.env.MONGO_URL,
         mongoOptions: {
@@ -66,8 +46,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 })) 
- 
+ */
+
 app.use(routerServer)
+app.use(errorMiddleware)
 
 module.exports = app 
 

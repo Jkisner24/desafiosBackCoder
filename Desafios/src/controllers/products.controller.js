@@ -1,41 +1,66 @@
 const { productService } = require("../services")
+const {CustomErrors} = require("../services/errors/CustomErrors");
+const logger = require('../config/logger.js')
+const productEnumError = require("../services/errors/enumError")
 
 class ProductController {
   get = async (req, res) => {
     try {
-      const products = await productService.get();
-      res.status(200).send({
-        status: "success",
-        payload: products,
-      });
+      const products = await productService.getProducts();
+      res.status(200).sendSuccess({products});
     } catch (error) {
-      console.log(error);
+      logger.error(error)
+      res.status(400).sendServerError(error.message)
     }
   };
   getById = async (req, res) => {
     try {
       const { pid } = req.params;
       let product = await productService.getById(pid);
-      res.status(200).send({
-        status: "success",
-        payload: product,
-      });
+      res.status(200).sendSuccess({product});
     } catch (error) {
-      console.log(error);
+      logger.error(error)
+      res.status(400).sendServerError(error.message)
     }
   };
 
-  post = async (req, res) => {
+  post = async (req, res, next) => {
     try {
-      const newProduct = req.body;
+      const {title, description, price, code, stock, category, thumbnail} = req.body
 
-      let result = await productService.createProduct(newProduct);
-      res.status(200).send({
-        status: "success",
-        payload: result,
+      if (!title.trim() || !description || !price || !code || !stock || !category ||thumbnail )
+        CustomErrors.productError({
+          name: "Product Creation Error",
+          code: productEnumError.UNDEFINED_OR_NULL_VALUES,
+          cause: nullOrEmptyValues(req.body),
+          message: 'Error trying to create a new product.'
+      })
+
+      const findProduct = await productService.getById({code})
+        if(!findProduct){
+          CustomErrors.productError({
+            name: 'Product Creation Error',
+            code: productEnumError.REPETED_PRODUCT,
+            cause: repetedProductError(req.body),
+            message: 'Error trying to create a new product.'
+        })
+        }
+        const newProduct = {
+          title, 
+          description,
+          price, 
+          code, 
+          stock, 
+          category,
+          thumbnail
+        }
+      let result = await productService.productCreate(newProduct)
+      res.status(200).sendSuccess({
+        message: "success",
+        result,
       });
     } catch (error) {
-      console.log(error);
+      next(error)
     }
   };
   put = async (req, res) => {
@@ -43,9 +68,17 @@ class ProductController {
       const { pid } = req.params;
       const newProduct = req.body;
       let result = await productService.updateProduct(pid, newProduct);
-      res.status(200).send({
+      if(!result) {
+        CustomErrors.productError({
+        name: "Can't update product",
+        code: productEnumError.UNDEFINED_OR_NULL_VALUES,
+        cause: nullOrEmptyValues(product),
+        message: "Can't modify product because product doesn't exists"
+      })
+      }
+      res.status(200).sendSuccess({
         status: "success",
-        payload: result,
+        message: result,
       });
     } catch (error) {
       console.log(error);
@@ -55,12 +88,12 @@ class ProductController {
     try {
       const { pid } = req.params;
       let deleteProduct = await productService.deleteProduct(pid);
-      res.status(200).send({
+      res.status(200).sendSuccess({
         deleteProduct,
-        payload: `Product with id ${pid} deleted`,
+        message: 'Product deleted successfully'
       });
     } catch (error) {
-      console.log(error);
+      res.status(500).sendServerError(error.message)
     }
   };
 }

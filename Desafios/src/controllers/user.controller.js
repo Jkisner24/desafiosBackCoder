@@ -1,21 +1,22 @@
+const { generateToken } = require("../config/jwt")
 const { userService, cartService } = require("../services")
+const { createHash } = require("../utils/bcryptHash")
 
 class UserController {
     get = async (req, res) => {
         try {
-            const searchUser = await userService.getUsers()
-
+            const searchUser = await userService.get()
             res.status(200).sendSuccess(searchUser)
         } catch (error) {
             res.status(500).sendServerError(error.message)
         }
     }
-
     getById = async (req, res) => {
         try {
             const { uid } = req.params
-
-            const user = await userService.findUser(uid)
+            const user = await userService.getById({_id: uid})
+            console.log(user)
+            if(!user) return res.send({status:"error", message: "User not available"})
 
             res.status(200).sendSuccess(user)
         } catch (error) {
@@ -25,21 +26,48 @@ class UserController {
 
     post = async (req, res) => {
         try {
-            const createdUser = await userService.addUser(newUser)
+            const { first_name, last_name, email, password, date_of_birth } = req.body
 
-            res.status(200).sendSuccess('user register successfully', createdUser)
+            if (!first_name || !last_name || !email || !password || !date_of_birth)
+            return res.status(401).sendServerError('Empty Values')
+
+            const userExists = await userService.getById({email})
+            if (userExists) return res.status(401).sendServerError('User already exists')
+
+            const {_id} = await cartService.newCart()
+
+            const createdUser = await userService.addUser({
+                userId,
+                first_name,
+                last_name,
+                email,
+                cartId: _id,
+                date_of_birth,
+                password: await createHash(password),
+                role: email == "adminCoder@coder.com" ? "ADMIN" : "user" 
+            })
+
+            const token = generateToken(createdUser.userId,createdUser.first_name, createdUser.last_name, createdUser.email, createdUser.role )
+
+            res.status(200).sendSuccess( {message: 'user register successfully', token})
         } catch (error) {
-            res.status(500).sendServerError(error.message)
+            next(error)
         }
     }
 
     put = async (req, res) => {
         try {
-            const { uid, changes } = req.params
+            const { uid, body } = req.params
 
-            const newUser = await userService.updateUser(uid, changes)
+            const {cartId, role, email, userId} = await userService.updateUser(uid, body)
 
-            res.status(200).sendSuccess('User updated', newUser)
+            const token = generateToken({ user: { cartId, role, email, userId } })
+
+            res.status(200).cookie('coderCookieToken', token, {
+                httpOnly: true,
+                maxAge: 60 * 60 * 100
+            }).sendSuccess('User updated')
+            
         } catch (error) {
             res.status(500).sendServerError(error.message)
         }
@@ -48,7 +76,7 @@ class UserController {
     delete = async (req, res) => {
         try {
             const { uid } = req.params
-            const userDeleted = await cartService.deleteCart(uid)
+            const userDeleted = await cartService.deleteCartById(uid)
 
             res.status(200).sendSuccess('User deleted successfully', userDeleted)
         } catch (error) {
