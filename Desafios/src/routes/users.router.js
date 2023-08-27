@@ -11,7 +11,7 @@ class UsersRouter extends RouterClass {
         this.get('/:uid', ['PUBLIC'], user.getById)
         this.post('/', ['PUBLIC'] , user.post)
         this.put('/:uid', ['PUBLIC'], user.put)
-        this.delete('/:uid', ['PUBLIC'], user.delete)
+        this.delete('/:uid', ['ADMIN'], user.delete)
     }
 }
 module.exports = UsersRouter

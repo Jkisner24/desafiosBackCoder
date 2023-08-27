@@ -20,8 +20,7 @@ class SessionController {
       req.user.role
       console.log("aca pasa");
       console.log(token);
-
-
+      
       res
         .status(200)
         .cookie("coderCookieToken", token, {

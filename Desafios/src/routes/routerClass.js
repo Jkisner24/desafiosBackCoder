@@ -28,9 +28,9 @@ class RouterClass {
         }
         
     
-        const { role, userId, first_name, email} = jwt.verify(token, JWT_SECRET_KEY);
+        const { cartId, role, userId, first_name, email} = jwt.verify(token, JWT_SECRET_KEY);
         if (!policies.includes(role.toUpperCase())) return res.status(403).send({ status: 'error', payload: 'No permission' })
-        req.user = { role, userId, first_name, email}
+        req.user = { cartId, role, userId, first_name, email}
         console.log(req.user)
         next()
     }

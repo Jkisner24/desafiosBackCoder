@@ -281,3 +281,44 @@ Expecting 'EOF', got 'INVERSE'
 [34minfo[39m: Listen on port ... 8080
 [34minfo[39m: Database connected
 [34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unexpected string in JSON at position 16
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Empty Values
+[31mfatal[39m: Empty Values
+[31mfatal[39m: Empty Values
+[31mfatal[39m: Empty Values
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: userId is not defined
+[31mfatal[39m: userId is not defined
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Cannot read properties of undefined (reading 'getById')
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: invalid expiresIn option for string payload
+[31mfatal[39m: invalid expiresIn option for string payload
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: invalid expiresIn option for string payload
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: invalid expiresIn option for string payload
+[31mfatal[39m: invalid expiresIn option for string payload
+[31mfatal[39m: invalid expiresIn option for string payload
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: invalid expiresIn option for string payload
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080

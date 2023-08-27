@@ -24,33 +24,31 @@ class UserController {
         }
     }
 
-    post = async (req, res) => {
-        try {
-            const { first_name, last_name, email, password, date_of_birth } = req.body
+    post = async (req, res, next) => {
+            try {
+                const { first_name, last_name, email, password, date_of_birth } = req.body
+    
+                if (!first_name || !last_name || !email || !password || !date_of_birth)
+                return res.status(401).sendServerError('Empty Values')
+    
+                const userExists = await userService.getById({email})
+                if (userExists) return res.status(401).sendServerError('User already exists')
+    
+                const {_id} = await cartService.newCart()
+    
+                const createdUser = await userService.addUser({
+                    first_name,
+                    last_name,
+                    email,
+                    cartId: _id,
+                    date_of_birth,
+                    password: await createHash(password),
+                    role: email == "adminCoder@coder.com" ? "ADMIN" : "user" 
+                })
+                const token = generateToken(createdUser)
+                res.status(200).sendSuccess( `User register successfully', ${token}`)
 
-            if (!first_name || !last_name || !email || !password || !date_of_birth)
-            return res.status(401).sendServerError('Empty Values')
-
-            const userExists = await userService.getById({email})
-            if (userExists) return res.status(401).sendServerError('User already exists')
-
-            const {_id} = await cartService.newCart()
-
-            const createdUser = await userService.addUser({
-                userId,
-                first_name,
-                last_name,
-                email,
-                cartId: _id,
-                date_of_birth,
-                password: await createHash(password),
-                role: email == "adminCoder@coder.com" ? "ADMIN" : "user" 
-            })
-
-            const token = generateToken(createdUser.userId,createdUser.first_name, createdUser.last_name, createdUser.email, createdUser.role )
-
-            res.status(200).sendSuccess( {message: 'user register successfully', token})
-        } catch (error) {
+            } catch (error) {
             next(error)
         }
     }
