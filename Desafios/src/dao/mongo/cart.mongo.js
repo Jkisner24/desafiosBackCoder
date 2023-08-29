@@ -12,7 +12,7 @@ class CartManagerMongo{
     }
     get = async() =>{
         try {
-            return await cartModel.find({})
+            return await cartModel.find({}).lean()
         } catch (error) {
             return new Error(error)
         }
@@ -22,6 +22,7 @@ class CartManagerMongo{
         try {
           const cart = await cartModel.findOne({_id: cidd}).lean();
           return cart;
+          console.log(cart)
         } catch (error) {
           console.error("Error al obtener el carrito:", error.message);
           throw error; 

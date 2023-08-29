@@ -1,4 +1,5 @@
 const express = require ("express")
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const handlebars = require('express-handlebars')
 const cookieParse = require('cookie-parser')
 const session = require('express-session') 
@@ -12,7 +13,6 @@ const addLogger = require('./middlewares/logger.midd.js')
 const { initPassportGithub } = require("./passport-JWT/passport.config2")
 const app = express();
 require("dotenv")
-
 
 app.use(express.json())
 app.use(cors())
