@@ -25,6 +25,13 @@ class ProductManagerMongo{
         }
 
     }
+    getProductByCode = async (code) => {
+        try {
+            return await productModel.findOne({ code: code })
+        } catch (error) {
+            throw error
+        }
+    }
     create = async (newProduct) =>{
         try {
             return await productModel.create(newProduct)

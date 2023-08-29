@@ -19,6 +19,13 @@ class ProductRepository {
         throw error;
       }
     }    
+    getByCode = async (pCode) => {
+      try {
+        return await this.dao.getProductByCode(pCode)
+      } catch (error) {
+        throw error;
+      }
+    }    
     productCreate = async (newProduct) => {
       try {
         return await this.dao.create(newProduct);

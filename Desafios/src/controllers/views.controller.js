@@ -37,9 +37,32 @@ class ViewsControllers {
                 
     } catch (error) {
         console.error(error)
-        return res.status(500).send(error)
+        res.status(500).sendServerError(error.message)
     }
 }
+    productsById = async(req, res) =>{
+        try {
+            const {pid} = req.params
+            const product = await productService.getById(pid)
+            const user = req?.user?.user ?? null
+
+            const productView = {
+                logged: user ? false : true,
+                role: user?.role ?? 'Invitado',
+                addProducts: user?.role == 'ADMIN',
+                first_name: user?.first_name,
+                last_name: user?.last_name,
+                cartId: user?.cartId,
+                product,
+                script: "viewProduct.js"
+            }
+            res.status(200).render('productViews', productView)
+        } catch (error) {
+            res.status(500).sendServerError(error.message)
+
+        }
+    }
+
     login = async (req, res) => {
         try {
             const loginView = {

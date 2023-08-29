@@ -11,6 +11,7 @@ class ViewsRouter extends RouterClass {
 
     init() {
         this.get('/products', ['PUBLIC'], passportAuth('jwt') , views.products)
+        this.get('/products/:pid', ['PUBLIC'], passportAuth('jwt') , views.productsById)
         this.get('/session/login', ['PUBLIC'], views.login)
         this.get('/session/logout', ['PUBLIC'], views.logout)
         this.get('/session/register', ['PUBLIC'], views.register)

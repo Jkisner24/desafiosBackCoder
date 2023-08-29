@@ -2,6 +2,7 @@ const { productService } = require("../services")
 const {CustomErrors} = require("../services/errors/CustomErrors");
 const logger = require('../config/logger.js')
 const productEnumError = require("../services/errors/enumError")
+const { nullOrEmptyValues, repetedProductError } = require("../services/errors/productsErrorMessage")
 
 class ProductController {
   get = async (req, res) => {
@@ -26,9 +27,9 @@ class ProductController {
 
   post = async (req, res, next) => {
     try {
-      const {title, description, price, code, stock, category, thumbnail} = req.body
+      const { title, description, price, code, stock, category, thumbnail } = req.body
 
-      if (!title.trim() || !description || !price || !code || !stock || !category ||thumbnail )
+      if (!title.trim() || !description || !price || !code || !stock || !category || !thumbnail )
         CustomErrors.productError({
           name: "Product Creation Error",
           code: productEnumError.UNDEFINED_OR_NULL_VALUES,
@@ -36,8 +37,8 @@ class ProductController {
           message: 'Error trying to create a new product.'
       })
 
-      const findProduct = await productService.getById({code})
-        if(!findProduct){
+      const findProduct = await productService.getByCode(code)
+        if(findProduct){
           CustomErrors.productError({
             name: 'Product Creation Error',
             code: productEnumError.REPETED_PRODUCT,

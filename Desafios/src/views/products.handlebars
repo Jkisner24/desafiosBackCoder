@@ -19,7 +19,7 @@
             <a href="/api/views/session/profile">
                 <button>Profile</button>
             </a>
-            <a href="/api/views/carts/64ba95cefd68735d0a6d49ef">
+            <a href="/api/views/carts/{{this.idCart}}">
                 <button>Cart</button>
             </a>
             <form action="/api/views/session/logout" method="post">
@@ -34,11 +34,13 @@
     <div class="card" style="width: 14rem;height: auto;">
         <img src={{this.thumbnail}} class="card-img-top max-width: 100%" alt={{this.title}}>
         <div class="card-body">
-            <h5 class="card-title">{{this.title}}</h5>
+            <p class="card-text">{{this.title}}</p>
+            <a href="/api/views/products/{{this._id}}">Details</a></h5>
             <p class="card-text">{{this.description}}</p>
-            <p class="card-text">{{this.stock}}</p>
-            <p class="card-text">{{this.price}}</p>
-            <a href="#" class="btn btn-primary">Add to car</a>
+            <p class="card-text">Stock: {{this.stock}}</p>
+            <p class="card-text">Price: {{this.price}}</p>
+            <a href="/api/views/products/{{this._id}}" class="btn btn-primary">Buy!
+            </a>
         </div>
     </div>
     {{/each}}
