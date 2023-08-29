@@ -403,3 +403,5 @@ Expecting 'EOF', got 'INVERSE'
 [31mfatal[39m: Error trying to create a new product.
 [31mfatal[39m: Error trying to create a new product.
 [31mfatal[39m: Error trying to create a new product.
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
