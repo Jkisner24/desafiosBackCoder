@@ -17,13 +17,13 @@
                     {{role}}</span>
                     </div>
             <a href="/api/views/session/profile">
-                <button>Profile</button>
+                <button type="button" class="btn btn-secondary mb-2">Profile</button>
             </a>
-            <a href="/api/views/carts/{{this.idCart}}">
-                <button>Cart</button>
+            <a href="/api/views/carts/{{cartId}}">
+                <button type="button" class="btn btn-secondary mb-2">Cart</button>
             </a>
             <form action="/api/views/session/logout" method="post">
-                <button>Log Out</button>
+                <button type="button" class="btn btn-secondary">Log Out</button>
             </form>
             {{/if}}
         </div>

@@ -21,8 +21,8 @@ class CartManagerMongo{
     getById = async(cidd) =>{
         try {
           const cart = await cartModel.findOne({_id: cidd}).lean();
+          //console.log(cart)
           return cart;
-          console.log(cart)
         } catch (error) {
           console.error("Error al obtener el carrito:", error.message);
           throw error; 

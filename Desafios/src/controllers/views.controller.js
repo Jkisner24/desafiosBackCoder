@@ -123,16 +123,17 @@ class ViewsControllers {
         try {
 
             let { cidd } = req.params
-            const cart = await cartService.getById(cidd)
-            if (!cart) {
-                return res.status(404).send({ message: `Cart with ID ${cidd} not found` });
-              }
-          
-            //console.log(cart)
+            const { products, quantity } = await cartService.getById(cidd)
+
+            const total = products.map(item => item.product.price * item.quantity).reduce((acc, curr) => acc + curr, 0)
+            console.log(total)
+
             const cartRender = {
+                emptyCart: products.length < 1 ? true : false,
+                products,
+                quantity,
+                total: total,
                 title: "Cart",
-                id: cart._id,
-                products : cart.products
             }
             res.status(200).render('carts', cartRender)
         } catch (error) {

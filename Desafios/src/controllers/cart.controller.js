@@ -45,18 +45,7 @@ class CartController {
             res.status(500).sendServerError(error.message)
         }
     }
-/*     update = async(req, res) =>{
-        try {
-            const { cidd } = req.params
-            const newCart = req.body
-            let response = await cartService.updateCart(cidd, newCart)
-            if(!response) return res.status(400).send({message: 'We cant updated the cart'})
-            res.status(200).send({message: 'Cart updated', payload: response})
-        } catch (error) {
-            res.status(500).sendServerError(error.message)
-        }
-    }
- */    updateProduct = async (req, res) => {
+    updateProduct = async (req, res) => {
         try {
           const { cidd, pid } = req.params;
           const { quantity } = req.body;
@@ -77,8 +66,8 @@ class CartController {
             message: 'Internal server error'
           });
         }
-      };
-          deleteProd = async(req, res) =>{
+      }
+    deleteProd = async(req, res) =>{
         try {
             const {cidd, pid} = req.params
             let response = await cartService.deleteCartProd(cidd, pid)

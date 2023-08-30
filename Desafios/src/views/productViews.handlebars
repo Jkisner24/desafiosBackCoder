@@ -1,5 +1,5 @@
 <header>
-    <h1 class="bg-primary text-center mb-2 p-3">Listado de Productos</h1>
+    <h1 class="bg-primary text-center mb-2 p-3">Details of products</h1>
     <nav class="navbar d-flex flex-column mb-4">
           <div class="font-weight-bold text-decoration-none align-self-start">
             {{#if logged}}
@@ -19,7 +19,7 @@
             <a href="/api/views/session/profile">
                 <button>Profile</button>
             </a>
-            <a href="/api/views/carts/64ba95cefd68735d0a6d49ef">
+            <a href="/api/views/carts/{{cartId}}">
                 <button>Cart</button>
             </a>
             <form action="/api/views/session/logout" method="post">

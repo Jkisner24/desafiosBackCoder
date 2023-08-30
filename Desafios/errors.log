@@ -415,3 +415,72 @@ Expecting 'EOF', got 'INVERSE'
 [34minfo[39m: Listen on port ... 8080
 [34minfo[39m: Database connected
 [34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Parse error on line 26:
+... </tr>   {{/each}}
+----------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[31mfatal[39m: Parse error on line 25:
+...  {{/each}}</main>
+----------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Parse error on line 25:
+...  {{/each}}</main>
+----------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Parse error on line 26:
+...  {{/each}}</main>
+----------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[31mfatal[39m: Parse error on line 26:
+...</table>  </main>
+---------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Parse error on line 26:
+...</table>  </main>
+---------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[31mfatal[39m: Parse error on line 26:
+...</table>  </main>
+---------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Parse error on line 26:
+...</table>  </main>
+---------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[31mfatal[39m: Parse error on line 26:
+...</table>  </main>
+---------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[31mfatal[39m: Parse error on line 26:
+...</table>  </main>
+---------------------^
+Expecting 'OPEN_ENDBLOCK', got 'EOF'
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unknown authentication strategy "github"
