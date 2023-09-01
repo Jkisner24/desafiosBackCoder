@@ -40,46 +40,39 @@ class SessionController {
       res.status(500).sendServerError(error.message);
     }
   };
-  githubcallback = async (req, res) => {
-    try {
-      const userGitHub = await userService.getById(req.user.email);
+  githubcallback = async (req, res, next) => {
+    let token = generateToken(req.user)
+    res.status(200).cookie("coderCookieToken", token,{maxAge: 60*60*100, httpOnly: true}).redirect("/api/views/products")
 
-      if (!userGitHub) {
-        const { _id: cartId } = await cartService.newCart();
+    // try {
+    //   const userGitHub = await userService.getById(req.user.email);
+    //   console.log(userGitHub)
 
-        const newUser = {
-          first_name: req.user.name.split(" ")[0],
-          last_name: req.user.name.split(" ")[1],
-          email: req.user.email,
-          password: req.user.password,
-          cartId: cartId.toString(),
-        };
+    //   if (!userGitHub) {
+    //     const { _id } = await cartService.newCart();
 
-        const { _id } = await userService.addUser(newUser);
-        const token = generateToken({ user: _id.toString() });
+    //     const newUser = {
+    //       first_name: req.user.name.split(" ")[0],
+    //       last_name: req.user.name.split(" ")[1],
+    //       email: req.user.email,
+    //       password: req.user.password,
+    //       cartId: _id,
+    //     };
 
-        return res
-          .status(200)
-          .cookie("coderCookieToken", token, {
-            maxAge: 60 * 60 * 100,
-            httpOnly: true,
-          })
-          .sendSuccess(`user created ${token}`);
-      }
-
-      const { nonSensitiveUser: { userId, cartId, role, email, first_name, last_name } } = userGitHub//Separamos sus datos
-      const token = generateToken({ user: { userId, cartId, role, email, first_name, last_name } })
-
-      return res
-        .status(200)
-        .cookie("coderCookieToken", token, {
-          httpOnly: true,
-          maxAge: 60 * 60 * 1000,
-        })
-        .redirect("/api/views/products");
-    } catch (error) {
-      if (error) return error;
-    }
+    //     const userCreated = await userService.addUser(newUser);
+    //     const token = generateToken(userCreated);
+    //     return res
+    //       .status(200)
+    //       .cookie("coderCookieToken", token, {
+    //         maxAge: 60 * 60 * 100,
+    //         httpOnly: true,
+    //       })
+    //       //.sendSuccess(`user created ${token}`)
+    //       .redirect('/api/views/products')
+    //   }
+    // } catch (error) {
+    //   next(error);
+    // }
   }
   currentSession = async (req, res) => {
     try {

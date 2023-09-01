@@ -11,15 +11,17 @@ const initPassportGithub = () => {
     }, async(accessToken, refreshToken, profile, done) => {
         try {
             let user = await userService.getById({email: profile._json.email})
-            
-            if(!user.email){
+            console.log('Profile', profile)
+            if(!user){
                 let result = await userService.addUser({
-                    firtsName: profile._json.name, lastName: profile.username,
-                    userName: profile._json.login , email: profile._json.email,
-                    date_of_birth: profile._json.created_at, password: " ",
+                    first_name: profile.username, 
+                    last_name: profile.username,
+                    email: profile._json.email,
+                    date_of_birth: profile._json.created_at,
+                    password: " ",
                 })
-                console.log(result);
-                return done(null,result)
+                //console.log(result);
+                return done(null, result)
             }
             
             return done(null, user)
@@ -29,7 +31,8 @@ const initPassportGithub = () => {
     }))
 
     passport.serializeUser((user, done) => {
-        done(null, user._id)
+        const serializedUser = JSON.stringify(user);
+        done(null, serializedUser);
     })
     passport.deserializeUser((async (id, done) => {
         let user = await userService.getById({_id: id})

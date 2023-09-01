@@ -1,5 +1,4 @@
 const express = require ("express")
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const handlebars = require('express-handlebars')
 const cookieParse = require('cookie-parser')
 const session = require('express-session') 
@@ -13,6 +12,7 @@ const addLogger = require('./middlewares/logger.midd.js')
 const { initPassportGithub } = require("./passport-JWT/passport.config2")
 const app = express();
 require("dotenv")
+
 
 app.use(express.json())
 app.use(cors())
@@ -29,11 +29,10 @@ app.use(cookieParse("S1gn3d Co0k13"))
 app.use(addLogger)
 
 initPassport()
-/* initPassportGithub()
- */passport.use(passport.initialize())
-/* passport.use(passport.session())
- */
-/* app.use(session({
+initPassportGithub()
+passport.use(passport.initialize())
+passport.use(passport.session())
+app.use(session({
     store: create({
         mongoUrl: process.env.MONGO_URL,
         mongoOptions: {
@@ -46,7 +45,7 @@ initPassport()
     resave: false,
     saveUninitialized: false
 })) 
- */
+
 
 app.use(routerServer)
 app.use(errorMiddleware)

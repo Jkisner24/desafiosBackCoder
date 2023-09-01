@@ -484,3 +484,122 @@ Expecting 'OPEN_ENDBLOCK', got 'EOF'
 [34minfo[39m: Database connected
 [34minfo[39m: Listen on port ... 8080
 [31mfatal[39m: Unknown authentication strategy "github"
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unknown authentication strategy "github"
+[31mfatal[39m: Unknown authentication strategy "github"
+[31mfatal[39m: Unknown authentication strategy "github"
+[31mfatal[39m: Unknown authentication strategy "github"
+[31mfatal[39m: Unknown authentication strategy "github"
+[31mfatal[39m: Unknown authentication strategy "github"
+[31mfatal[39m: Unknown authentication strategy "github"
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to obtain access token
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to obtain access token
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to obtain access token
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to obtain access token
+[31mfatal[39m: Failed to serialize user into session
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Login sessions require session support. Did you forget to use `express-session` middleware?
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Login sessions require session support. Did you forget to use `express-session` middleware?
+[31mfatal[39m: Login sessions require session support. Did you forget to use `express-session` middleware?
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Login sessions require session support. Did you forget to use `express-session` middleware?
+[31mfatal[39m: Login sessions require session support. Did you forget to use `express-session` middleware?
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to obtain access token
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to obtain access token
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to obtain access token
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Failed to serialize user into session
+[31mfatal[39m: Failed to serialize user into session
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
