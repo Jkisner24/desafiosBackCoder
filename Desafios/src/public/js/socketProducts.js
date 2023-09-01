@@ -1,4 +1,5 @@
 const productManagerMongo =  require("../../dao/mongo/product.mongo")
+const productManagerMongoInstance = new productManagerMongo();
 
 const socketProducts = async (io) =>{
    
@@ -6,14 +7,14 @@ const socketProducts = async (io) =>{
         try{
         console.log('cliente conectado')
         
-        let products = await productManagerMongo.getProducts()
+        let products = await productManagerMongoInstance.get()
 
         socket.emit('productosDB', products)
 
         socket.on('addProduct', async (data) =>{
             console.log(data)
-            await productManagerMongo.createProduct(data)
-            let products = await productManagerMongo.getProducts()
+            await productManagerMongoInstance.create(data)
+            let products = await productManagerMongoInstance.get()
             socket.emit('productosDB', products)
         })
     } catch(error){

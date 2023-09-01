@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const compression = require('express-compression')
+const {serve} = require('swagger-ui-express')
 
 const Views = require('./views.router.js')
 const views = new Views()
@@ -23,6 +24,7 @@ const mockingUsers = new MockingUsers()
 
 
 router.use(compression({ brotli: { enabled: true, zlib: {} } }))
+router.use('/api/views/docs', serve)
 router.use('/api/views', views.getRouter())
 router.use('/api/views/products', products.getRouter())
 router.use('/api/views/users', users.getRouter())

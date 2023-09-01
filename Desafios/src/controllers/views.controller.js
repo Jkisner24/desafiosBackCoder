@@ -140,6 +140,18 @@ class ViewsControllers {
             res.status(500).sendServerError(error.message)
         }
 }
+    chat = async(req, res) =>{
+        try {
+            const chatView = {
+                title: "Chat",
+                script: "chat.js",
+            }
+            res.status(200).render('chat', chatView)
+        } catch (error) {
+            res.status(500).sendServerError(error.message)
+
+        }
+    }
 }
 
 module.exports = ViewsControllers
