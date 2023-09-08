@@ -1,0 +1,151 @@
+paths:
+  /api/products:
+    get:
+      summary: Get all products
+      tags:
+        - Products
+      responses:
+        "200":
+          description: List of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Create a new product.
+      tags: 
+        - Products
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: '#/components/requestBodies/Product'
+      responses:
+        "201":
+          description: New Product created
+  /api/products/{pid}:
+    get:
+      summary: Get a product
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Product's id.
+        schema:
+          $type: String  
+      responses:
+        "200":
+          description: The product getting
+          content:
+            application/json:
+              schema: 
+                $ref: '#components/schemas/Product'  
+    put:
+      summary: Update product
+      tags:
+        - Products
+      parameters:
+      - name: pid
+        in: path
+        required: true
+        description: Id of the product to be updated 
+        schema: 
+          type: string
+      requestBody:
+        required: true
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/Product'
+      responses:
+        "200":
+          description: Product updated
+          
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: ObjectId
+        title:
+          type: string
+          description: Title of product
+        description:
+          type: string
+          description: Description of product
+        price:
+          type: number
+          description: Price of product
+        thumbnail:
+          type: string
+          description: Path to image
+        code:
+          type: string
+          description: Unique code of product
+        stock:
+          type: number
+          description: Available products
+        category:
+          type: string
+          description: Category of products  
+        owner:
+          type: string
+          format: email              
+      example:
+        _id: 64ee476542233de2d1f156c0
+        title: Product 10
+        description: Description 10
+        price: 100
+        thumbnail: ''
+        code: 'abc123'
+        stock: 1500
+        category: 'Category 1'
+        owner: 'User'
+        __v: 0
+  requestBodies:
+    Product:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of product
+        description:
+          type: string
+          description: Description of product
+        price:
+          type: number
+          description: Price of product
+        thumbnail:
+          type: string
+          description: Path to image
+        code:
+          type: string
+          description: Unique code of product
+        stock:
+          type: number
+          description: Available products
+        category:
+          type: string
+          description: Category of products  
+        owner:
+          type: string
+          format: 'User'              
+      example:
+        title: Product 11
+        description: Description 11
+        price: 100
+        thumbnail: ''
+        code: 'abc321'
+        stock: 1500
+        category: 'Category 1'
+        owner: 'User'
+
+
+

@@ -5,18 +5,18 @@ class ViewsControllers {
         try {
             const {page = 1} = req.query
             const { sort="asc" } = req.query
-            console.log(req.query.page)
+            //console.log(req.query.page)
                 
             let products = await productService.getProducts(page, sort)
             const{docs, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = products
             
             console.log(products)
-              if(page > totalPages || page < 1) throw({status: "Error", message: "Page not found"})
+            if(page > totalPages || page < 1) throw({status: "Error", message: "Page not found"})
     
-              if(!products) throw({status: "Error", message: "Documents not found"})
+            if(!products) throw({status: "Error", message: "Documents not found"})
           
-              const user = req?.user?.user ?? null
-              //console.log(user)
+            const user = req?.user?.user ?? null
+            console.log(user)
 
             res.status(200).render("products", {
                 logged: user ? false : true,
@@ -45,15 +45,15 @@ class ViewsControllers {
             const {pid} = req.params
             const product = await productService.getById(pid)
             const user = req?.user?.user ?? null
-
+            console.log(user)
             const productView = {
                 logged: user ? false : true,
+                product,
                 role: user?.role ?? 'Invitado',
                 addProducts: user?.role == 'ADMIN',
                 first_name: user?.first_name,
                 last_name: user?.last_name,
                 cartId: user?.cartId,
-                product,
                 script: "viewProduct.js"
             }
             res.status(200).render('productViews', productView)
@@ -133,6 +133,7 @@ class ViewsControllers {
                 products,
                 quantity,
                 total: total,
+                cartId: `${cidd}`,
                 title: "Cart",
             }
             res.status(200).render('carts', cartRender)

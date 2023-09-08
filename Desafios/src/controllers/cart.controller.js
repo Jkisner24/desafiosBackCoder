@@ -51,17 +51,14 @@ class CartController {
           const { quantity } = req.body;
       
           const cartFound = await cartService.getById({ _id: cidd });
-      
+         console.log(cartFound)
           if(!cartFound) throw({ status:"Error", message:"The cart does not exist" })
 
           const updatedCart = await cartService.update({ _id: cidd }, pid, quantity);
-      
-          return res.status(201).send({
-            status: 'success',
-            payload: updatedCart
-          });
+            
+          res.sendSuccess(updatedCart);
         } catch (error) {
-          return res.status(500).send({
+          res.sendSuccess({
             status: 'error',
             message: 'Internal server error'
           });

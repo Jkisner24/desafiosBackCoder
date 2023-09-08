@@ -9,7 +9,7 @@ class ProductRouter extends RouterClass {
         this.get('/', ['PUBLIC'], /* passportAuth("jwt"), */ product.get)
         this.get('/:pid', ['PUBLIC'], product.getById)
         this.post('/', ['PUBLIC'], /* passportAuth("jwt"), */ product.post)
-        this.put('/:pid', ['PUBLIC'], product.put)
+        this.put('/:pid', ['PUBLIC'], product.update)
         this.delete('/:pid', ['PUBLIC'], product.delete)
     }
 }

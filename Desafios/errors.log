@@ -623,3 +623,245 @@ Expecting 'OPEN_ENDBLOCK', got 'EOF'
 [34minfo[39m: Listen on port ... 8080
 [34minfo[39m: Database connected
 [34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[33merror[39m: undefined
+[33merror[39m: undefined
+[33merror[39m: undefined
+[33merror[39m: undefined
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[33merror[39m: undefined
+[33merror[39m: undefined
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[33merror[39m: undefined
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unexpected token t in JSON at position 12
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unexpected token t in JSON at position 12
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unexpected token } in JSON at position 172
+[31mfatal[39m: Error trying to create a new product.
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unexpected token } in JSON at position 184
+[31mfatal[39m: Error trying to create a new product.
+[31mfatal[39m: Error trying to create a new product.
+[31mfatal[39m: Error trying to create a new product.
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Unexpected token } in JSON at position 162
+[31mfatal[39m: Error trying to create a new product.
+[31mfatal[39m: Error trying to create a new product.
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Error trying to create a new product.
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Error trying to create a new product.
+[31mfatal[39m: Error trying to create a new product.
+[31mfatal[39m: Error trying to create a new product.
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[31mfatal[39m: Invalid path: docs.this - 38:54
+[31mfatal[39m: Invalid path: docs.this - 38:54
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080
+[34minfo[39m: Database connected
+[34minfo[39m: Listen on port ... 8080

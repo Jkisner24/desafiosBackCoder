@@ -2,7 +2,7 @@ const { productModel } = require ('./model/product.model')
 
 class ProductManagerMongo{
     
-    get = async (sort, page) => {
+    get = async (page, sort) => {
         try {
             let sortOpt = {}
 
@@ -12,7 +12,7 @@ class ProductManagerMongo{
                 sortOpt = {price : -1}
             }
 
-            return await productModel.paginate({}, {limit: 6, page: page , lean: true, sort: sortOpt})
+            return await productModel.paginate({}, {limit: 4, page: page , lean: true, sort: sortOpt})
         } catch (error) {
               throw new Error(error);
         }
@@ -41,7 +41,7 @@ class ProductManagerMongo{
     }
     update = async(pid, changes) =>{
         try {
-            return await productModel.updateOne({_id: pid}, {$set: changes})
+            return await productModel.findByIdAndUpdate({_id: pid}, {$set: changes})
         } catch (error) {
             return new Error(error)
         }

@@ -18,7 +18,8 @@ class SessionController {
       req.token = token
       req.user = user
       req.user.role
-      console.log("aca pasa");
+      req.user.cartId
+      //console.log("aca pasa");
       console.log(token);
       
       res

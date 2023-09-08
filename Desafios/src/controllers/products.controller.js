@@ -7,8 +7,9 @@ const { nullOrEmptyValues, repetedProductError } = require("../services/errors/p
 class ProductController {
   get = async (req, res) => {
     try {
-      const products = await productService.getProducts();
-      res.status(200).sendSuccess({products});
+      const productsInDb = await productService.getProducts()
+      const products = productsInDb.docs
+      res.status(200).sendSuccess(products)
     } catch (error) {
       logger.error(error)
       res.status(400).sendServerError(error.message)
@@ -17,8 +18,8 @@ class ProductController {
   getById = async (req, res) => {
     try {
       const { pid } = req.params;
-      let product = await productService.getById(pid);
-      res.status(200).sendSuccess({product});
+      const productInDb = await productService.getById(pid)
+      res.status(200).sendSuccess(productInDb)
     } catch (error) {
       logger.error(error)
       res.status(400).sendServerError(error.message)
@@ -28,6 +29,7 @@ class ProductController {
   post = async (req, res, next) => {
     try {
       const { title, description, price, code, stock, category, thumbnail } = req.body
+      const owner = req.user.user.email
 
       if (!title.trim() || !description || !price || !code || !stock || !category || !thumbnail )
         CustomErrors.productError({
@@ -53,7 +55,8 @@ class ProductController {
           code, 
           stock, 
           category,
-          thumbnail
+          thumbnail,
+          owner
         }
       let result = await productService.productCreate(newProduct)
       res.status(200).sendSuccess({
@@ -64,11 +67,12 @@ class ProductController {
       next(error)
     }
   };
-  put = async (req, res) => {
+  update = async (req, res, next) => {
     try {
-      const { pid } = req.params;
-      const newProduct = req.body;
-      let result = await productService.updateProduct(pid, newProduct);
+      const { pid } = req.params
+      const newProduct = req.body
+      let result = await productService.updateProduct(pid, newProduct)
+      console.log(result)
       if(!result) {
         CustomErrors.productError({
         name: "Can't update product",
@@ -78,11 +82,11 @@ class ProductController {
       })
       }
       res.status(200).sendSuccess({
-        status: "success",
-        message: result,
+        result,
+        message: 'Product update success'
       });
     } catch (error) {
-      console.log(error);
+      next(error)
     }
   };
   delete = async (req, res) => {

@@ -28,14 +28,14 @@ class ProductRepository {
     }    
     productCreate = async (newProduct) => {
       try {
-        return await this.dao.create(newProduct);
+        return await this.dao.create(newProduct)
       } catch (error) {
         throw error;
       }
     }    
     updateProduct = async (pid, updateBody) => {
       try {
-        return await this.dao.update(pid, updateBody);
+        return await this.dao.update(pid, updateBody)
       } catch (error) {
         throw error;
       }
