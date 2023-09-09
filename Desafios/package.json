@@ -4,9 +4,11 @@
   "description": "Carpeta entregable con los desafios resueltos en cada solicitud",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/supertest.test.js",
+    "test:chai": "mocha test/chai.test.js",
     "start": "node index.js --mode production",
     "dev": "nodemon index.js --mode development"
+
   },
   "repository": {
     "type": "git",
