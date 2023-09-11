@@ -1,24 +1,28 @@
-const addButtons = document.querySelectorAll('#addButton');
-const cantidadInputs = document.querySelectorAll('#quantity');
-const productIDElements = document.querySelectorAll('#productId');
+const addButtons = document.querySelectorAll('#addButton')
+const cantidadInputs = document.querySelectorAll('#quantity')
+const productIDElements = document.querySelectorAll('#productId')
 
 addButtons.forEach((addButton, index) => {
   addButton.addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const idCart = addButton.value; 
-    const quantity = cantidadInputs[index].value; 
-    const idProduct = productIDElements[index].innerText.split(" ")[1]; 
+    const idCart = addButton.value
+    const quantity = cantidadInputs[index].value;
+    const idProduct = productIDElements[index].innerText.split(" ")[1]
 
-    fetch(`/api/views/carts/${idCart}/product/${idProduct}`, {
-      method: "PUT",
+    const url = `/api/views/carts/${idCart}/product/${idProduct}`
+
+    const data = JSON.stringify({ quantity });
+
+    fetch(url, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify([{ product: idProduct, quantity }], null)
+      body: data
     })
       .then(res => res.json())
       .then(res => console.log(res))
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   })
 })

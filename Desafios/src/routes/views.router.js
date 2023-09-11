@@ -20,7 +20,7 @@ class ViewsRouter extends RouterClass {
         this.get('/session/logout', ['PUBLIC'], views.logout)
         this.get('/session/register', ['PUBLIC'], views.register)
         this.get('/session/profile', ['PUBLIC'], passportAuth('jwt'), views.profile)
-        this.get('/carts/:cidd', ['PUBLIC'], views.userCart)
+        this.get('/carts/:cidd', ['PUBLIC'], passportAuth('jwt'), views.userCart)
         this.get('/chat', ['PUBLIC'], views.chat)
 
     }

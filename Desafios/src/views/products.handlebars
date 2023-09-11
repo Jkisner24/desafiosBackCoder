@@ -40,7 +40,7 @@
             <p class="card-text font-weight-normal">{{this.description}}</p>
             <p class="card-text font-weight-normal">Stock: {{this.stock}}</p>
             <p class="card-text font-weight-normal">Price: {{this.price}}</p>
-            <p class="card-text font-weight-normal">cartID: {{this.cartId}}</p>
+            <p class="card-text font-weight-normal">cartID: {{../cartId}}</p>
         <div class="input-group mt-2 p-4">
         <input class="form-control d-inline-block " 
             type="number"
@@ -49,7 +49,7 @@
             value="1"
             min="1"
             max="{{this.stock}}"
-        />
+            />
           <button type="button" class="btn btn-outline-info" id="addButton" value={{../cartId}} data-product-id="{{this._id}}">
             <svg
               xmlns="http://www.w3.org/2000/svg"

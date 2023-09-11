@@ -21,7 +21,7 @@ class CartManagerMongo{
     getById = async(cidd) =>{
         try {
           const cart = await cartModel.findOne({_id: cidd}).lean();
-          //console.log(cart)
+          console.log(cart)
           return cart;
         } catch (error) {
           console.error("Error al obtener el carrito:", error.message);
@@ -38,17 +38,16 @@ class CartManagerMongo{
             return new Error(error)
         }
     }
- */    addProduct = async (cidd, pid, quantity) => {
+ */   
+     addProduct = async (cidd, pid, quantity) => {
         try {
             return await cartModel.findOneAndUpdate(
-                { _id: cidd },
+                { _id: cidd }, 
                 { $push: { products: { product: pid, quantity: quantity } } },
-                {
-                returnDocument: 'after',
-                lean: true,})
+                {new: true})
         } catch (error) {
-                    throw error
-                }
+                 return new Error(error)
+        }
     }
 
     deleteCartProd = async (cidd, pid)=>{

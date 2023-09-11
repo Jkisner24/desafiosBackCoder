@@ -9,9 +9,9 @@ class CartController {
     createCart = async(req, res) =>{
         try {
             const result = await cartService.newCart()
-            res.status(201).send({ 
-                status: 'success',
-                payload: result
+            res.status(200).sendSuccess({ 
+                message: 'Carts create succefully',
+                result
             })
         } catch (error) {
             res.status(500).sendServerError("Cart not generated")
@@ -20,9 +20,9 @@ class CartController {
     get = async(req, res) =>{
         try {
             const carts = await cartService.getCarts()
-            res.status(201).send({
-                status: 'success',
-                payload: carts
+            res.status(200).sendSuccess({
+                message: 'Carts get succefully',
+                carts           
             })
         } catch (error) {
             res.status(500).sendServerError(error.message)
@@ -35,12 +35,11 @@ class CartController {
             return res.status(400).send({ message: `Invalid cart ID: ${cidd}` });
           }
             
-           const cart = await cartService.getById(cidd)
+           const cart = await cartService.getById(cidd)           
            if(!cart) return res.status(404).send({ message: `Cart with ID ${cidd} not found` })
-           res.status(201).send({
-            status: 'success',
-            payload: cart
-        })
+
+           res.status(200).sendSuccess({ cart })
+
         } catch (error) {
             res.status(500).sendServerError(error.message)
         }
@@ -51,17 +50,15 @@ class CartController {
           const { quantity } = req.body;
       
           const cartFound = await cartService.getById({ _id: cidd });
-         console.log(cartFound)
+          console.log(cartFound)
           if(!cartFound) throw({ status:"Error", message:"The cart does not exist" })
 
-          const updatedCart = await cartService.update({ _id: cidd }, pid, quantity);
+          const updatedCart = await cartService.update(cidd, pid, quantity);
+          console.log(updatedCart)
             
           res.sendSuccess(updatedCart);
         } catch (error) {
-          res.sendSuccess({
-            status: 'error',
-            message: 'Internal server error'
-          });
+            res.status(500).sendServerError(error.message)
         }
       }
     deleteProd = async(req, res) =>{
@@ -69,9 +66,9 @@ class CartController {
             const {cidd, pid} = req.params
             let response = await cartService.deleteCartProd(cidd, pid)
             if(!response) return res.status(400).send({message: 'Cannot deleted products in cart'})
-            res.status(200).send({
-                status: 'success',
-                payload: response
+            res.sendSuccess(200)({
+                message: 'Product in cart deleted',
+                response
             })
         } catch (error) {
             res.status(500).sendServerError(error.message)
@@ -82,9 +79,9 @@ class CartController {
             const {cidd} = req.params
             let response = await cartService.deleteCartById(cidd)
             if(!response) return res.status(400).send({message: 'Cannot deleted cart'})
-            res.status(200).send({
-                status: 'success',
-                payload: response
+            res.sendSuccess(200)({
+                message: 'Cart deleted',
+                response
             })
         } catch (error) {
             res.status(500).sendServerError(error.message)
@@ -95,7 +92,7 @@ class CartController {
             const {cidd} = req.params
             const cart = await cartService.getById(cidd) 
             //console.log(cart)
-            const user = req?.user ?? null
+            const user = req?.user?.user ?? null
             //console.log(user)
 
             const insufficientStock = []
@@ -146,7 +143,9 @@ class CartController {
                           </div>`
                 })
 
-                res.send({status:"Success", message:"Successful purchase", toTicket: ticket})
+                res.status(200).sendSuccess({
+                    message:"Successful purchase",
+                    toTicket: ticket})
             }
         } catch (error) {
             return res.status(500).sendServerError(error.message)

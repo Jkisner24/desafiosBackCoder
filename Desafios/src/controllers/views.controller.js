@@ -1,4 +1,4 @@
-const { productService, cartService} = require('../services')
+const { productService, cartService, userService} = require('../services')
 
 class ViewsControllers {
     products = async (req, res) => {
@@ -121,21 +121,27 @@ class ViewsControllers {
 }
     userCart = async (req, res) =>{
         try {
-
             let { cidd } = req.params
-            const { products, quantity } = await cartService.getById(cidd)
-
+            const { products } = await cartService.getById(cidd)
+            console.log(products)
+            const { first_name, last_name, role, cartId, email} = req.user.user || {};
+            console.log({first_name, last_name, role, cartId, email})
             const total = products.map(item => item.product.price * item.quantity).reduce((acc, curr) => acc + curr, 0)
             console.log(total)
 
             const cartRender = {
                 emptyCart: products.length < 1 ? true : false,
                 products,
-                quantity,
                 total: total,
-                cartId: `${cidd}`,
+                cartId,
                 title: "Cart",
             }
+            cartRender.first_name = first_name
+            cartRender.last_name = last_name
+            cartRender.role = role
+            cartRender.cartId = cartId
+            cartRender.email = email
+            
             res.status(200).render('carts', cartRender)
         } catch (error) {
             res.status(500).sendServerError(error.message)
