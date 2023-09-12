@@ -1,33 +1,48 @@
 <header>
-    <nav class="navbar navbar-light" style="background-color: #2b6ca9;">
-        <div class="font-weight-bold text-decoration-none align-self-start">
-            {{#if logged}}
-            <a href="/api/views/session/login">
-                <button>Login</button>
-            </a>
-            <a href="/api/views/session/register">Register</a>
-            {{else}}
-            <div class="me-auto mt-2 user-info">
-                <span class="navbar-brand">
-                    User: {{first_name}}
-                    {{last_name}}
-                    Your rol is:
-                    {{role}}
-                </span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 .show" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav w-100 d-flex justify-content-between">
+                {{#if logged}}
+                <li class="nav-item active">
+                    <a class="nav-link text-left" href="/api/views/session/login">Iniciar sesión</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-left" href="/api/views/session/register">Registrarse</a>
+                </li>
+                {{else}}
+                <div class="w-100 d-flex ">
+                <li class="nav-item active">
+                    <div class="user-info d-flex align-items-center">
+                        <span class="navbar-brand">
+                            <p class="fs-4 text-info">Usuario: {{first_name}} {{last_name}}<br>Tu rol es: {{role}}</p>
+                        </span>
                     </div>
-            <a href="/api/views/session/profile">
-                <button type="button" class="btn btn-secondary mb-2">Profile</button>
-            </a>
-            <a href="/api/views/carts/{{cartId}}">
-                <button type="button" class="btn btn-secondary mb-2">Cart</button>
-            </a>
-            <form action="/api/views/session/logout" method="post">
-                <button class="btn btn-secondary">Log Out</button>
-            </form>
-            {{/if}}
+                </li>
+                </div>
+                <div class="ml-auto d-flex">
+                    <li class="nav-item active">
+                        <a class="nav-link text-right" href="/api/views/session/profile">
+                            <button class="btn btn-outline-info my-2 my-sm-0">Profile</button>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-right" href="/api/views/carts/{{cartId}}">
+                            <button class="btn btn-outline-info my-2 my-sm-0">Cart</button>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <form class="nav-link text-right" action="/api/views/session/logout" method="post">
+                            <button class="btn btn-outline-info my-2 my-sm-0">Cerrar sesión</button>
+                        </form>
+                    </li>
+                </div>
+                {{/if}}
+            </ul>
         </div>
     </nav>
-    <hr>
 </header>
 <main class="container" style="background-color: #ffffff">
     <div class="m-2 d-flex justify-content-between">

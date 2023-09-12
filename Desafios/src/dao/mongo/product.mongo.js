@@ -41,7 +41,7 @@ class ProductManagerMongo{
     }
     update = async(pid, changes) =>{
         try {
-            return await productModel.findByIdAndUpdate({_id: pid}, {$set: changes})
+            return await productModel.updateOne({_id: pid}, changes)
         } catch (error) {
             return new Error(error)
         }

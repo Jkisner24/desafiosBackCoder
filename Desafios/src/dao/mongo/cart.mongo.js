@@ -54,7 +54,7 @@ class CartManagerMongo{
         try{
             return await cartModel.findOneAndUpdate(
                 {_id: cidd}, 
-                {$pull: {products: {idProduct: pid}}},
+                {$pull: {products: {product: pid}}},
                 {new: true})
         }catch(error){
             return new Error(error)
