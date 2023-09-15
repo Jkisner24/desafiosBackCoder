@@ -31,11 +31,11 @@ class UserRepository{
             throw error
         }
     }
-    updateUser = async(uid, body) =>{
+    updateUser = async(uid, changes) =>{
         try {
-            const updatedUser = await this.dao.update(uid, body)
+            const updatedUser = await this.dao.update(uid, changes)
             const { password, ...user } = new UserDto(updatedUser)
-            return user
+            return {password, user}
         } catch (error) {
             throw error
         }
@@ -47,6 +47,7 @@ class UserRepository{
             throw error
         }
     }
+
 }
 
 module.exports = UserRepository

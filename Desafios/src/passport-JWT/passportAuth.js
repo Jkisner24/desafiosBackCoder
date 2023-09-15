@@ -1,7 +1,7 @@
 const passport = require('passport')
 
 //function to validate the route
- const passportAuth = strategy => {
+const passportAuth = strategy => {
     return async (req, res, next) => {
         passport.authenticate(strategy, function(err, user, info) {
             if(err) return next(err)
@@ -13,7 +13,20 @@ const passport = require('passport')
 } 
 
 
+const passportCallUrl = (strategy) => {
+    return async (req, res, next) => {
+        passport.authenticate(strategy, function (err, user, info) {
+            if(err) return next(err)
+            if(!user) return res.redirect("/api/views/session/restore")
+            req.user = user
+            next()
+        })(req, res, next)
+    }
+}
+  
+
 
 module.exports = {
-    passportAuth
+    passportAuth,
+    passportCallUrl
 }

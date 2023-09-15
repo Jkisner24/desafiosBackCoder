@@ -19,7 +19,17 @@ const initPassport = () => {
             return done(error)
         }
     }))
-  
+    passport.use("urlJwt", new JWTStrategy({
+        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
+        secretOrKey: JWT_SECRET_KEY
+    }, async(jwt_payload,done) => {
+        try {
+            return done(null, jwt_payload)
+        } catch (error) {
+            return done(error)
+        }
+    }))
+ 
 }
 
 module.exports = {

@@ -33,7 +33,7 @@ class UserManager {
     }
     update = async (uid, body) => {
         try {
-            return await userModel.findOneAndUpdate({ _id: uid }, { $set: body }, { returnDocument: "after" })
+            return await userModel.updateOne({ _id: uid }, { $set: body })
         } catch (error) {
             throw error
         }

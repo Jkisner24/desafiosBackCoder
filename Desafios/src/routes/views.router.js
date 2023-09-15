@@ -1,7 +1,7 @@
 const { authHeaders } = require("../config/jwt");
 const ViewsController = require("../controllers/views.controller");
 const { RouterClass } = require("./routerClass");
-const { passportAuth } = require('../passport-JWT/passportAuth');
+const { passportAuth, middlewareToken, passportCallUrl } = require('../passport-JWT/passportAuth');
 const auth = require("../middlewares/autenticacion.middleware");
 const passport = require("passport");
 const swagger = require('swagger-ui-express')
@@ -20,6 +20,8 @@ class ViewsRouter extends RouterClass {
         this.get('/session/logout', ['PUBLIC'], views.logout)
         this.get('/session/register', ['PUBLIC'], views.register)
         this.get('/session/profile', ['PUBLIC'], passportAuth('jwt'), views.profile)
+        this.get('/session/restore', ['PUBLIC'], views.restorePassword)
+        this.get('/session/new-password', ['PUBLIC'], passportCallUrl('jwt'), views.newPassword)
         this.get('/carts/:cidd', ['PUBLIC'], passportAuth('jwt'), views.userCart)
         this.get('/chat', ['PUBLIC'], views.chat)
 

@@ -7,6 +7,13 @@ const generateToken = (user) => {
 
 }
 
+const generateTemporaryToken = (user) => {
+    const token = jwt.sign(user, JWT_SECRET_KEY, { expiresIn: '1h' })
+    return token
+
+}
+
+
 const authToken = (req, res, next) => {
     try {
         const authHeader = req.headers['authorization']; 
@@ -53,6 +60,7 @@ const authHeaders = (req, _res, next) => {
 
 module.exports = {
     generateToken,
+    generateTemporaryToken,
     authToken,
-    authHeaders,
+    authHeaders
 }

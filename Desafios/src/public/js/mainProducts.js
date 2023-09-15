@@ -15,7 +15,7 @@ addButtons.forEach((addButton, index) => {
     const data = JSON.stringify({ quantity });
 
     fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },

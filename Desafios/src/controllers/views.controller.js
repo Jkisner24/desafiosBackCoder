@@ -78,13 +78,40 @@ class ViewsControllers {
         try {
             const renderRegisterView = {
                 title: "Register",
-                script: "register.js"
+                script: "register.js",
             }
             res.status(200).render("register", renderRegisterView)
         } catch (error) {
             res.status(500).sendServerError(error.message)
         }
+    }
+    restorePassword = async (req, res) =>{
+        try {
+            const restorePasswordView = {
+                Title: 'Restore',
+                script: 'restore.js',
+            }    
+            console.log(restorePasswordView)
+            res.status(200).render('restore', restorePasswordView)
+
+        } catch (error) {
+            res.status(500).sendServerError(error.message)
+        }
 }
+    newPassword = async (req, res) =>{
+            //console.log(req)
+        try {
+            const linkRestoreView = {
+                Title: 'Link restore',
+                script: 'linkRestore.js',
+            }
+            console.log(linkRestoreView)
+            res.status(200).render('newPassword', linkRestoreView)
+        } catch (error) {
+            res.status(500).sendServerError(error.message)
+        }
+    }
+
     profile = async (req, res) =>{
         try {
             const { first_name, last_name, role } = req.user.user || {};
@@ -123,11 +150,11 @@ class ViewsControllers {
         try {
             let { cidd } = req.params
             const { products } = await cartService.getById(cidd)
-            console.log(products)
+            //console.log(products)
             const { first_name, last_name, role, cartId, email} = req.user.user || {};
-            console.log({first_name, last_name, role, cartId, email})
+            //console.log({first_name, last_name, role, cartId, email})
             const total = products.map(item => item.product.price * item.quantity).reduce((acc, curr) => acc + curr, 0)
-            console.log(total)
+            //console.log(total)
 
             const cartRender = {
                 emptyCart: products.length < 1 ? true : false,

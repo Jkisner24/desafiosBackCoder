@@ -24,17 +24,21 @@ regButton.addEventListener('click', async (e) => {
         })
         .then(res => {
             if (res.status === 200) {
-                return res.json()
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'User created succesfully',
+                    showConfirmButton: false,
+                    timer: 5000
+                 })
+                return res.json()                  
             }
             throw new Error("Cannot registered")
         })
         .then(_ => {
             return window.location.href = '/api/views/session/login'
         })
-        .catch(err => alert(err.message))
-
-
-        
+        .catch(err => alert(err.message))        
 });
 
 
