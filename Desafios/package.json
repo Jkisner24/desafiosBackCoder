@@ -8,7 +8,6 @@
     "test:chai": "mocha test/chai.test.js",
     "start": "node index.js --mode production",
     "dev": "nodemon index.js --mode development"
-
   },
   "repository": {
     "type": "git",

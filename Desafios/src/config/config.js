@@ -8,6 +8,7 @@ dotenv.config({
 
 
 module.exports = {
+    PORT: process.env.PORT,
     PERSISTENCE: process.env.PERSISTENCE,
     JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
