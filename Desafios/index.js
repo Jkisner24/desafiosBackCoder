@@ -6,7 +6,7 @@ const { socketProducts } = require("./src/public/js/socketProducts")
 const {socketChat} = require("./src/public/js/socketChat");
 const logger = require('./src/config/logger.js')
 
-dotenv.config();
+//dotenv.config();
 
 const PORT = config.PORT || 8080;
 const httpServer = app.listen(PORT, (err)=>{
