@@ -1,5 +1,5 @@
 const config = require('./src/config/config');
-const dotenv = require('dotenv');
+//const dotenv = require('dotenv');
 const app = require("./src/app")
 const { Server } = require("socket.io")
 const { socketProducts } = require("./src/public/js/socketProducts")
