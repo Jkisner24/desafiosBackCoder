@@ -1,7 +1,7 @@
-const nodeMailer = require("nodemailer")
+const mailer = require("nodemailer")
 const config = require('../config/config')
 
-const transport = nodeMailer.createTransport({
+const transport = mailer.createTransport({
     service: 'gmail',
     port: 587,
     auth:{

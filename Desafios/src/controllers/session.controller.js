@@ -1,7 +1,7 @@
 const { generateToken, generateTemporaryToken } = require('../config/jwt')
 const { userService } = require("../services");
 const { isValidPassword, createHash } = require('../utils/bcryptHash');
-const transport = require('../utils/nodeMailer');
+const transport = require('../utils/mailer');
 const config = require('../config/config')
 
 

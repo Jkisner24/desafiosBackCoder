@@ -1,7 +1,7 @@
 const { httpServer } = require("./Desafios/index");
-const cluster = require('cluster')
-const { cpus } = require('os')
-const logger = require('./src/config/logger.js')
+//const cluster = require('cluster')
+//const { cpus } = require('os')
+//const logger = require('./src/config/logger.js')
 
 /* if (cluster.isPrimary) {
     for (let i = 0; i < cpus().length; i++) {
