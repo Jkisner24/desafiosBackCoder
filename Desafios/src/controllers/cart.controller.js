@@ -1,6 +1,6 @@
 const {cartService, productService, ticketService} = require('../services')
 const { v4: uuidv4 } = require('uuid')
-const transport = require("../utils/nodeMailer")
+const { transport } = require("../utils/nodeMailer")
 const { isValidObjectId } = require("mongoose")
 const config = require('../config/config')
 
