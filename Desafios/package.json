@@ -14,7 +14,7 @@
     "url": "git+https://github.com/Jkisner24/desafiosBackCoder.git"
   },
   "engines": {
-    "node": ">=14 <15"
+    "node": ">=14"
   },
   "keywords": [],
   "author": "",
