@@ -2,7 +2,7 @@
 class ProductRepository {
   //este dao ya está instanciado en index.js de services 
     constructor(dao) {
-      this.dao = dao;
+      this.dao = dao
     }
   
     getProducts = async (data) => {

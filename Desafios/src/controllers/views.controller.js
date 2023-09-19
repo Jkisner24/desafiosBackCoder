@@ -1,4 +1,4 @@
-const { productService, cartService, userService} = require('../services')
+const { productService, cartService} = require('../services')
 
 class ViewsControllers {
     products = async (req, res) => {
