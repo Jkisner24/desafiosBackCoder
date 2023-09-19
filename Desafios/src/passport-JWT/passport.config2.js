@@ -1,7 +1,7 @@
 const passport         = require("passport")
 const GitHubStrategy   = require("passport-github2")
 const { userService } = require("../services")
-//require("dotenv").config()
+require("dotenv").config()
 
 const initPassportGithub = () => {
     passport.use("github", new GitHubStrategy({

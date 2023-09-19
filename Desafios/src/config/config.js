@@ -1,12 +1,9 @@
-//*Para localHost descomentar las lineas de abajo*
-
-// const dotenv = require('dotenv')
-// const {commander} = require('../process/commander.js')
-// const { mode } = commander.opts()
-
-// dotenv.config({
-//     path: mode === 'development' ? './.development.env' : './.production.env'
-// })
+const dotenv = require('dotenv')
+const {commander} = require('../process/commander.js')
+const { mode } = commander.opts()
+dotenv.config({
+    path: mode === 'development' ? './.development.env' : './.production.env'
+})
 
 
 module.exports = {

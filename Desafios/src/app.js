@@ -11,7 +11,7 @@ const errorMiddleware = require('./middlewares/errors/indexError')
 const addLogger = require('./middlewares/logger.midd.js')
 const { initPassportGithub } = require("./passport-JWT/passport.config2")
 const app = express();
-//require("dotenv")
+require("dotenv")
 
 
 app.use(express.json())

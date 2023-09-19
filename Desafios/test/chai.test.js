@@ -3,7 +3,7 @@ const ProductDao = require("../src/dao/mongo/product.mongo")
 const chai = require("chai")
 const expect = chai.expect
 
-//require("dotenv").config()
+require("dotenv").config()
 
 mongoose.connect(process.env.MONGO_URL)
 
