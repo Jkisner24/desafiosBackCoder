@@ -13,9 +13,6 @@
     "type": "git",
     "url": "git+https://github.com/Jkisner24/desafiosBackCoder.git"
   },
-  "engines": {
-    "node": "16.14.0"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
