@@ -1,9 +1,9 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 .show" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02">
+    <nav class="navbar navbar-expand-lg bg-dark bg-gradient w-100 .show" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
             <ul class="navbar-nav w-100 d-flex justify-content-between">
                 {{#if logged}}
                 <li class="nav-item active">
@@ -43,8 +43,9 @@
             </ul>
         </div>
     </nav>
+    <hr>
 </header>
-<main class="container" style="background-color: #ffffff">
+<main class="container mt-4">
     <div class="m-2 d-flex justify-content-between">
     {{#each products}}
     <div class="card text-center" style="width: 14rem">
@@ -110,7 +111,7 @@
 
 </main>
 <hr>
-<footer class="container">
-      <p>© Company E-commerce Coder</p>
+<footer class="bg-dark bg-gradient" style="height:5rem;">
+      <p class="fs-4 text-info text-center">© Company E-commerce Coder</p>
 </footer>
 <script src="/static/js/mainProducts.js"></script>
