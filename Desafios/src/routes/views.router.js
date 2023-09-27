@@ -1,9 +1,6 @@
-const { authHeaders } = require("../config/jwt");
 const ViewsController = require("../controllers/views.controller");
 const { RouterClass } = require("./routerClass");
-const { passportAuth, middlewareToken, passportCallUrl } = require('../passport-JWT/passportAuth');
-const auth = require("../middlewares/autenticacion.middleware");
-const passport = require("passport");
+const { passportAuth, passportCallUrl } = require('../passport-JWT/passportAuth');
 const swagger = require('swagger-ui-express')
 const swaggerJSOption = require('../config/config.swagger')
 

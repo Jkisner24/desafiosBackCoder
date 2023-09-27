@@ -7,7 +7,10 @@ class RouterClass {
         this.router = Router()
         this.init()
     }
-
+    redirectToLogin(req, res, next) {
+        res.redirect('/api/views/session/login');
+      }
+    
     getRouter = () => {
         return this.router
     }

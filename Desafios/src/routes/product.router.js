@@ -1,5 +1,4 @@
 const ProductController = require("../controllers/products.controller");
-const { passportAuth } = require("../passport-JWT/passportAuth");
 const { RouterClass } = require("./routerClass");
 
 const product = new ProductController()
