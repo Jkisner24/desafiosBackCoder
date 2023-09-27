@@ -50,11 +50,9 @@ class CartController {
           const { quantity } = req.body;
       
           const cartFound = await cartService.getById({ _id: cidd });
-          //console.log(cartFound)
           if(!cartFound) throw({ status:"Error", message:"The cart does not exist" })
 
           const updatedCart = await cartService.update(cidd, pid, quantity);
-          //console.log(updatedCart)
             
           res.sendSuccess(updatedCart);
         } catch (error) {
@@ -93,8 +91,6 @@ class CartController {
             const cart = await cartService.getById(cidd) 
             console.log(cart)
             const user = req?.user?.user ?? null
-            //console.log(user)
-
             const insufficientStock = []
             const buyProducts = []
 

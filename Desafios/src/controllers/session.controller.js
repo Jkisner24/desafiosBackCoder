@@ -24,8 +24,6 @@ class SessionController {
       req.user = user;
       req.user.role;
       req.user.cartId;
-      //console.log("aca pasa");
-      console.log(token);
 
       res
         .status(200)
@@ -55,36 +53,6 @@ class SessionController {
         httpOnly: true,
       })
       .redirect("/api/views/products");
-
-    // try {
-    //   const userGitHub = await userService.getById(req.user.email);
-    //   console.log(userGitHub)
-
-    //   if (!userGitHub) {
-    //     const { _id } = await cartService.newCart();
-
-    //     const newUser = {
-    //       first_name: req.user.name.split(" ")[0],
-    //       last_name: req.user.name.split(" ")[1],
-    //       email: req.user.email,
-    //       password: req.user.password,
-    //       cartId: _id,
-    //     };
-
-    //     const userCreated = await userService.addUser(newUser);
-    //     const token = generateToken(userCreated);
-    //     return res
-    //       .status(200)
-    //       .cookie("coderCookieToken", token, {
-    //         maxAge: 60 * 60 * 100,
-    //         httpOnly: true,
-    //       })
-    //       //.sendSuccess(`user created ${token}`)
-    //       .redirect('/api/views/products')
-    //   }
-    // } catch (error) {
-    //   next(error);
-    // }
   };
   currentSession = async (req, res) => {
     try {
@@ -106,9 +74,7 @@ class SessionController {
   restore = async (req, res, next) => {
     try {
       const { email } = req.body;
-      //console.log({ email });
       const user = await userService.getById({ email });
-      //console.log(user);
       if (!user) {
         return res.status(404).sendUserError("Error changing password");
       }

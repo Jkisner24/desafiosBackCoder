@@ -24,15 +24,6 @@ class CartRepository{
             throw error
         }
     }
-
-/*     updateCarts = async(cidd, newCart) =>{
-        try{
-            return await this.dao.update(cidd, newCart)
-        } catch (error) {
-            throw error
-        }
-    }
- */  
     update = async(cidd, pid, quantity) =>{
         try{
             return await this.dao.addProduct(cidd, pid, quantity)

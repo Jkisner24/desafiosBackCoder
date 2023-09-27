@@ -20,7 +20,6 @@ const initPassportGithub = () => {
                     date_of_birth: profile._json.created_at,
                     password: " ",
                 })
-                //console.log(result);
                 return done(null, result)
             }
             

@@ -5,7 +5,6 @@ class ViewsControllers {
         try {
             const {page = 1} = req.query
             const { sort="asc" } = req.query
-            //console.log(req.query.page)
                 
             let products = await productService.getProducts(page, sort)
             const{docs, hasPrevPage, hasNextPage, prevPage, nextPage, totalPages} = products
@@ -99,7 +98,6 @@ class ViewsControllers {
         }
 }
     newPassword = async (req, res) =>{
-            //console.log(req)
         try {
             const linkRestoreView = {
                 Title: 'Link restore',
@@ -150,11 +148,8 @@ class ViewsControllers {
         try {
             let { cidd } = req.params
             const { products } = await cartService.getById(cidd)
-            //console.log(products)
             const { first_name, last_name, role, cartId, email} = req.user.user || {};
-            //console.log({first_name, last_name, role, cartId, email})
             const total = products.map(item => item.product.price * item.quantity).reduce((acc, curr) => acc + curr, 0)
-            //console.log(total)
 
             const cartRender = {
                 emptyCart: products.length < 1 ? true : false,

@@ -7,8 +7,8 @@ const ticket = new TicketController()
 
 class TicketRouter extends RouterClass {
     init() {
-        this.get('/', ['PUBLIC'], /* passportAuth('jwt'), */ ticket.getTickets )
-        this.get('/:tid', ['PUBLIC'], /* passportAuth('jwt'), */ ticket.getTicket)
+        this.get('/', ['PUBLIC'], ticket.getTickets )
+        this.get('/:tid', ['PUBLIC'], ticket.getTicket)
     }
 }
 module.exports = TicketRouter

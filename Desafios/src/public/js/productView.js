@@ -4,9 +4,9 @@ const productID = document.querySelector('#productID')
 
 addProduct.addEventListener('click', (e) => {
   e.preventDefault()
-  const idCart = addProduct.value//el del carrito
-  const quantity = cantidad.value//cantidad a agregar
-  const idProduct = productID.innerText.split(" ")[1]//id del producto
+  const idCart = addProduct.value
+  const quantity = cantidad.value
+  const idProduct = productID.innerText.split(" ")[1]
 
   fetch(`/api/carts/${idCart}`, {
     method: "PUT",

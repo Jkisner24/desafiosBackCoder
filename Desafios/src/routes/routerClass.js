@@ -28,12 +28,16 @@ class RouterClass {
         }
         
     
-        const { cartId, role, userId, first_name, email} = jwt.verify(token, JWT_SECRET_KEY);
-        if (!policies.includes(role.toUpperCase())) return res.status(403).send({ status: 'error', payload: 'No permission' })
-        req.user = { cartId, role, userId, first_name, email}
-        console.log(req.user)
-        next()
-    }
+        try {
+            const { user } = jwt.verify(token, JWT_SECRET_KEY)
+            if (!policies.includes(user.role.toUpperCase())) return res.status(403).send({ status: 'error', payload: 'No permission' });
+            req.user = user
+            console.log(req.user);
+            next();
+        } catch (error) {
+            return res.status(403).send({ status: 'error', payload: 'Invalid token' });
+        }
+        }
     
     generateCustomResponse = async (_req, res, next) => {
         try {

@@ -28,18 +28,7 @@ class CartManagerMongo{
           throw error; 
         }
       }
-/*     update = async (cidd, newCart)=>{
-        try {
-            return await cartModel.findOneAndUpdate(
-                {_id: cidd},
-                {$set: {product: newCart}},
-                {new: true})
-        } catch (error) {
-            return new Error(error)
-        }
-    }
- */   
-     addProduct = async (cidd, pid, quantity) => {
+    addProduct = async (cidd, pid, quantity) => {
         try {
             return await cartModel.findOneAndUpdate(
                 { _id: cidd }, 

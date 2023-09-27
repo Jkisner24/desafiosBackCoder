@@ -6,9 +6,9 @@ const product = new ProductController()
 
 class ProductRouter extends RouterClass {
     init() {
-        this.get('/', ['PUBLIC'], /* passportAuth("jwt"), */ product.get)
+        this.get('/', ['PUBLIC'], product.get)
         this.get('/:pid', ['PUBLIC'], product.getById)
-        this.post('/', ['PUBLIC'], /* passportAuth("jwt"), */ product.post)
+        this.post('/', ['PUBLIC'], product.post)
         this.put('/:pid', ['PUBLIC'], product.update)
         this.delete('/:pid', ['PUBLIC'], product.delete)
     }
