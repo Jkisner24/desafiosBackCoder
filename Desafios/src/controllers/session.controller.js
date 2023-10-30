@@ -80,7 +80,7 @@ class SessionController {
       }
       let tokenTemporary = generateTemporaryToken(user);
       req.user = user
-      const URL = `http://localhost:8080/api/views/session/new-password`
+      const URL = `https://desafiosbackcoder.onrender.com/api/views/session/new-password`
 
       console.log(tokenTemporary)
       await transport.sendMail({

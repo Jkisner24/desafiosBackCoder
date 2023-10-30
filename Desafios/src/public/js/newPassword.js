@@ -6,7 +6,7 @@ passBtn.addEventListener('click', (e) => {
 
     const [password] = newPassForm
 
-        fetch(`http://localhost:8080/api/views/session/new-password`, {
+        fetch(`https://desafiosbackcoder.onrender.com/api/views/session/new-password`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
