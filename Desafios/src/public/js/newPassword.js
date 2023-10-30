@@ -4,7 +4,9 @@ const passBtn = document.querySelector('#passwordButton')
 passBtn.addEventListener('click', (e) => {
     e.preventDefault()
 
-    const [password] = newPassForm
+    const passwordInput = document.querySelector('#password')
+    const password = passwordInput.value; 
+
 
         fetch(`https://desafiosbackcoder.onrender.com/api/views/session/new-password`, {
             method: 'POST',
