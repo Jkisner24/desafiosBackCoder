@@ -7,17 +7,17 @@
             <ul class="navbar-nav w-100 d-flex justify-content-between">
                 {{#if logged}}
                 <li class="nav-item active">
-                    <a class="nav-link text-left" href="/api/views/session/login">Iniciar sesión</a>
+                    <a class="nav-link text-left" href="/api/views/session/login">Log in</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link text-left" href="/api/views/session/register">Registrarse</a>
+                    <a class="nav-link text-left" href="/api/views/session/register">Register</a>
                 </li>
                 {{else}}
                 <div class="w-100 d-flex ">
                 <li class="nav-item active">
                     <div class="user-info d-flex align-items-center">
                         <span class="navbar-brand">
-                            <p class="fs-4 text-info">Usuario: {{first_name}} {{last_name}}<br>Tu rol es: {{role}}</p>
+                            <p class="fs-4 text-info">User: {{first_name}} {{last_name}}<br>Your rol is: {{role}}</p>
                         </span>
                     </div>
                 </li>
@@ -35,7 +35,7 @@
                     </li>
                     <li class="nav-item active">
                         <form class="nav-link text-right" action="/api/views/session/logout" method="post">
-                            <button class="btn btn-outline-info my-2 my-sm-0">Cerrar sesión</button>
+                            <button class="btn btn-outline-info my-2 my-sm-0">Log Out</button>
                         </form>
                     </li>
                 </div>
@@ -52,11 +52,11 @@
         <img src={{this.thumbnail}} class="card-img-top max-width: 100%" alt={{this.title}}>
         <div class="card-body">
             <p class="card-text font-weight-normal">{{this.title}}</p>
-            <p class="card-text" id="productId">ID: {{this._id}}</p>
+            {{!-- <p class="card-text" id="productId">ID: {{this._id}}</p> --}}
             <p class="card-text font-weight-normal">{{this.description}}</p>
             <p class="card-text font-weight-normal">Stock: {{this.stock}}</p>
             <p class="card-text font-weight-normal">Price: {{this.price}}</p>
-            <p class="card-text font-weight-normal">cartID: {{../cartId}}</p>
+            {{!-- <p class="card-text font-weight-normal">cartID: {{../cartId}}</p> --}}
         <div class="input-group mt-2 p-4">
         <input class="form-control d-inline-block " 
             type="number"
