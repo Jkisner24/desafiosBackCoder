@@ -14,7 +14,7 @@ class UserController {
     getById = async (req, res) => {
         try {
             const { uid } = req.params
-            const user = await userService.getById(uid)
+            const user = await userService.getById({_id: uid})
             console.log(user)
             if(!user) return res.send({status:"error", message: "User not available"})
 
