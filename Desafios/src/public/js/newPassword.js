@@ -13,10 +13,18 @@ passBtn.addEventListener('click', (e) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ password: password.value })
+            body: JSON.stringify({ password: password })
         })
             .then(res => res.json())
-            .then(info => console.log(info))
+            .then(info =>{
+                if (info.success) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Password changed successfully!',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                }})
             .catch(err => console.log(err))
 
         newPassForm.reset()
